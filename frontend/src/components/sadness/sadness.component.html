@@ -1,0 +1,116 @@
+<div class="bg-white p-5">
+  <h4 class="my-3" style="font-weight: bolder">RESÍDUOS</h4>
+  <hr />
+  <c-container class="pb-4">
+    <c-row class="align-items-center my-2 w-103">
+
+      <c-col xs="12" class="d-flex justify-content-end">
+        <button cButton color="secondary" class="text-white" size="sm" shape="rounded-0">
+          <svg cIcon name="cilHistory"></svg> Recarregar
+        </button>
+        <button cButton color="success" class="text-white" size="sm" shape="rounded-0">
+          <svg cIcon name="cilPlus"></svg> Registar
+        </button>
+      </c-col>
+    </c-row>
+  </c-container>
+  <c-container>
+    <table *ngIf="loading == false" class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Telefone</th>
+          <th scope="col">Telefone</th>
+          <th>Acção</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>mdo</td>
+          <td>mdo</td>
+          <td>
+            <c-dropdown direction="dropend">
+              <button cButton cDropdownToggle color="secondary" shape="rounded-0" size="sm" class="text-white">
+                Opções
+              </button>
+              <ul cDropdownMenu>
+                <li>
+                  <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
+                    <svg cIcon name="cilPenAlt"></svg>
+                  </a>
+                </li>
+
+              </ul>
+            </c-dropdown>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>fat</td>
+          <td>fat</td>
+          <td>
+            <c-dropdown direction="dropend">
+              <button cButton cDropdownToggle color="secondary" shape="rounded-0" size="sm" class="text-white">
+                Opções
+              </button>
+              <ul cDropdownMenu>
+                <li>
+                  <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
+                    <svg cIcon name="cilPenAlt"></svg>
+                  </a>
+                </li>
+
+              </ul>
+            </c-dropdown>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td colspan="2">Larry the Bird</td>
+          <td>twitter</td>
+          <td>twitter</td>
+          <td>
+            <c-dropdown direction="dropend">
+              <button cButton cDropdownToggle color="secondary" shape="rounded-0" size="sm" class="text-white">
+                Opções
+              </button>
+              <ul cDropdownMenu>
+                <li>
+                  <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
+                    <svg cIcon name="cilPenAlt"></svg>
+                  </a>
+                </li>
+
+              </ul>
+            </c-dropdown>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </c-container>
+</div>
+<c-container cPlaceholderAnimation="glow" class="bg-white p-5" *ngIf="loading == true">
+  <c-row>
+    <c-col [md]="1">
+      <span cCol="12" cPlaceholder></span>
+    </c-col>
+    <c-col [md]="11"></c-col>
+    <c-col [md]="12"> <span cCol="12" cPlaceholder></span></c-col>
+    <c-col [md]="10"></c-col>
+    <c-col [md]="2" class="mt-4"> <span cCol="12" cPlaceholder></span></c-col>
+    <c-col [md]="2"> <span cCol="12" cPlaceholder></span></c-col>
+    <c-col [md]="10"></c-col>
+  </c-row>
+  <span cCol="12" cPlaceholder></span>
+  <span cCol="12" cPlaceholder></span>
+  <span cCol="12" cPlaceholder></span>
+  <span cCol="12" cPlaceholder></span>
+  <span cCol="12" cPlaceholder></span>
+</c-container>
