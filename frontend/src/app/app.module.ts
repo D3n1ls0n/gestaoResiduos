@@ -53,7 +53,8 @@ import {
   ModalModule,
 } from '@coreui/angular';
 
-import { NgxSmartModalModule } from 'ngx-smart-modal';
+
+import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { ClientsComponent } from '@docs-components/clients/clients.component';
@@ -62,6 +63,7 @@ import { SadnessComponent } from '@docs-components/sadness/sadness.component';
 import { CompanyComponent } from '@docs-components/configurations/company/company.component';
 import { RewardsComponent } from '@docs-components/configurations/rewards/rewards.component';
 import { Utilities } from '../app/utilities/utilities';
+import { CreateClientsComponent } from '@docs-components/clients/create-clients/create-clients.component';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -75,6 +77,7 @@ const COMPONENTS = [
   SadnessComponent,
   CompanyComponent,
   RewardsComponent,
+  CreateClientsComponent
 ];
 
 @NgModule({
@@ -121,8 +124,11 @@ const COMPONENTS = [
     IconSetService,
     Title,
     Utilities,
+    NgxSmartModalService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule {}
+export class AppModule {
+
+}

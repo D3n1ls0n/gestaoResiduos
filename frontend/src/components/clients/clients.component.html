@@ -8,7 +8,7 @@
         <button cButton color="secondary" class="text-white" size="sm" shape="rounded-0">
           <svg cIcon name="cilHistory"></svg> Recarregar
         </button>
-        <button cButton color="success" class="text-white" size="sm" shape="rounded-0">
+        <button cButton color="success" class="text-white" size="sm" shape="rounded-0" (click)="abrirModal('createClientModal')">
           <svg cIcon name="cilPlus"></svg> Registar
         </button>
       </c-col>
@@ -95,6 +95,9 @@
       </tbody>
     </table>
   </c-container>
+  <ngx-smart-modal identifier="createClientModal">
+    <app-create-clients></app-create-clients>
+  </ngx-smart-modal>
 </div>
 <c-container cPlaceholderAnimation="glow" class="bg-white p-5" *ngIf="loading == true">
   <c-row>

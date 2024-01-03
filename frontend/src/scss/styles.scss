@@ -21,3 +21,6 @@ $enable-rtl: true;
 
 // If you want to add something do it here
 @import "custom";
+
+@import "../../node_modules/ngx-smart-modal/styles/ngx-smart-modal.scss";
+@import "../../node_modules/ngx-smart-modal/styles/ngx-smart-modal.css";
