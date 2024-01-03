@@ -69,6 +69,7 @@ import { CompanyComponent } from '@docs-components/configurations/company/compan
 import { RewardsComponent } from '@docs-components/configurations/rewards/rewards.component';
 import { Utilities } from '../app/utilities/utilities';
 import { CreateClientsComponent } from '@docs-components/clients/create-clients/create-clients.component';
+import { EditClientsComponent } from '@docs-components/clients/edit-clients/edit-clients.component';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -82,7 +83,8 @@ const COMPONENTS = [
   SadnessComponent,
   CompanyComponent,
   RewardsComponent,
-  CreateClientsComponent
+  CreateClientsComponent,
+  EditClientsComponent
 ];
 
 @NgModule({

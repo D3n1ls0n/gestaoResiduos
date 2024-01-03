@@ -1,5 +1,5 @@
 <c-container *ngIf="loading == false">
-  <h5><svg cIcon name="cilPeople"></svg> Registar Cliente</h5>
+  <h5><svg cIcon name="cilPeople"></svg> Editar Cliente</h5>
   <hr />
   <form cForm class="row g-3" (ngSubmit)="submit()" [validated]="validateForm">
     <c-col class="position-relative" [md]="4">
@@ -45,7 +45,7 @@
         <svg cIcon name="cilXCircle"></svg> Cancelar
       </button>
       <button cButton class="me-1 text-white" shape="rounded-0" color="success" size="sm" type="submit">
-        <svg cIcon name="cilPlus"></svg> Registar
+        <svg cIcon name="cilPlus"></svg> Actualizar
       </button>
     </c-container>
   </form>

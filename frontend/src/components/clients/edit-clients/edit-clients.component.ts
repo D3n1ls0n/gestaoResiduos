@@ -2,25 +2,21 @@ import { Component } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 
 @Component({
-  selector: 'app-create-clients',
-  templateUrl: './create-clients.component.html',
-  styleUrl: './create-clients.component.scss',
+  selector: 'app-edit-clients',
+  templateUrl: './edit-clients.component.html',
+  styleUrl: './edit-clients.component.scss',
 })
-export class CreateClientsComponent {
+export class EditClientsComponent {
   constructor(public modal: NgxSmartModalService) {}
-
   public loading: boolean = false;
   public validateForm: boolean = false;
-  public neighborHood: any;
+
 
 
   cancel(modalId: any) {
     this.modal.getModal(modalId).close();
   }
 
+  submit(){}
 
-
-  selectNeighborHood(evt: any) {}
-  submit() {}
-  ngOnInit() {}
 }

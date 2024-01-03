@@ -15,24 +15,20 @@ export class ClientsComponent {
   public loading: boolean = false;
   constructor(
     private utils: Utilities,
-    public ngxSmartModalService: NgxSmartModalService
+    public modal: NgxSmartModalService
   ) {
     //private iconSetService: IconSetService - Isso vai dentro () do construtor
     //console.log(IconSubset);
     //this.iconSetService.icons = { ...IconSubset }
   }
+
   abrirModal(modalId: string): void {
-    this.ngxSmartModalService.getModal(modalId).open();
+    this.modal.getModal(modalId).open();
   }
 
-  openModal() {
-    this.utils.modal.open(
-      CreateClientsComponent,
-      {},
-      {
-        size: 'md',
-      }
-    );
+
+  openEditClient(modalId: string): void {
+    this.modal.getModal(modalId).open();
   }
 
   ngOnInit() {}

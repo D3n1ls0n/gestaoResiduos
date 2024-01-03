@@ -40,7 +40,7 @@
                 Opções
               </button>
               <ul cDropdownMenu>
-                <li>
+                <li (click)="abrirModal('editClientModal')">
                   <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
                     <svg cIcon name="cilPenAlt"></svg>
                   </a>
@@ -111,6 +111,10 @@
   </c-container>
   <ngx-smart-modal identifier="createClientModal" customClass="md">
     <app-create-clients></app-create-clients>
+  </ngx-smart-modal>
+
+  <ngx-smart-modal identifier="editClientModal" customClass="md">
+    <app-edit-clients></app-edit-clients>
   </ngx-smart-modal>
 </div>
 <c-container cPlaceholderAnimation="glow" class="bg-white p-5" *ngIf="loading == true">
