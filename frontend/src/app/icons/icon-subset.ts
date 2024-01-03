@@ -94,7 +94,12 @@ import {
   cilGem,
   cilHistory,
   cilPlus,
-  cilPenAlt
+  cilPenAlt,
+  cilCheckAlt,
+  cilXCircle,
+  cilScreenSmartphone,
+  cilRoom,
+  cilAt
 } from '@coreui/icons';
 
 export const iconSubset = {
@@ -193,7 +198,12 @@ export const iconSubset = {
   cilGem,
   cilHistory,
   cilPlus,
-  cilPenAlt
+  cilPenAlt,
+  cilCheckAlt,
+  cilXCircle,
+  cilScreenSmartphone,
+  cilRoom,
+  cilAt
 };
 
 export enum IconSubset {
@@ -292,5 +302,10 @@ export enum IconSubset {
   cilGem = 'cilGem',
   cilHistory='cilHistory',
   cilPlus='cilPlus',
-  cilPenAlt='cilPenAlt'
+  cilPenAlt='cilPenAlt',
+  cilCheckAlt='cilCheckAlt',
+  cilXCircle='cilXCircle',
+  cilScreenSmartphone='cilScreenSmartphone',
+  cilRoon='cilRoom',
+  cilAt='cilAt'
 }

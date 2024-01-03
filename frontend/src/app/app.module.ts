@@ -19,6 +19,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 // Import app component
 import { AppComponent } from './app.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+
+
 
 // Import containers
 import {
@@ -55,6 +58,8 @@ import {
 
 
 import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
+import { FormsModule } from '@angular/forms';
+
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { ClientsComponent } from '@docs-components/clients/clients.component';
@@ -115,6 +120,8 @@ const COMPONENTS = [
     PlaceholderModule,
     ModalModule,
     NgxSmartModalModule.forRoot(),
+    NgSelectModule,
+    FormsModule
   ],
   providers: [
     {

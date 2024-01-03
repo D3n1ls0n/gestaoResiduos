@@ -1,14 +1,15 @@
 <div class="bg-white p-5">
   <h4 class="my-3" style="font-weight: bolder">CLIENTES</h4>
   <hr />
-  <c-container class="pb-4">
+  <c-container class="pb-4 ">
     <c-row class="align-items-center my-2 w-103">
 
       <c-col xs="12" class="d-flex justify-content-end">
-        <button cButton color="secondary" class="text-white" size="sm" shape="rounded-0">
+        <button cButton color="secondary" class="text-white " size="sm" shape="rounded-0">
           <svg cIcon name="cilHistory"></svg> Recarregar
         </button>
-        <button cButton color="success" class="text-white" size="sm" shape="rounded-0" (click)="abrirModal('createClientModal')">
+        <button cButton color="success" class="text-white" size="sm" shape="rounded-0"
+          (click)="abrirModal('createClientModal')">
           <svg cIcon name="cilPlus"></svg> Registar
         </button>
       </c-col>
@@ -44,6 +45,11 @@
                     <svg cIcon name="cilPenAlt"></svg>
                   </a>
                 </li>
+                <li>
+                  <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Eliminar <svg
+                      cIcon name="cilTrash"></svg>
+                  </a>
+                </li>
 
               </ul>
             </c-dropdown>
@@ -66,7 +72,11 @@
                     <svg cIcon name="cilPenAlt"></svg>
                   </a>
                 </li>
-
+                <li>
+                  <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Eliminar <svg
+                      cIcon name="cilTrash"></svg>
+                  </a>
+                </li>
               </ul>
             </c-dropdown>
           </td>
@@ -87,7 +97,11 @@
                     <svg cIcon name="cilPenAlt"></svg>
                   </a>
                 </li>
-
+                <li>
+                  <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Eliminar <svg
+                      cIcon name="cilTrash"></svg>
+                  </a>
+                </li>
               </ul>
             </c-dropdown>
           </td>
