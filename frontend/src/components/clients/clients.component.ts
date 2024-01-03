@@ -13,13 +13,26 @@ import { IconSubset } from 'src/app/icons/icon-subset'; */
 })
 export class ClientsComponent {
   public loading: boolean = false;
-  constructor(private utils: Utilities, public ngxSmartModalService: NgxSmartModalService) {
+  constructor(
+    private utils: Utilities,
+    public ngxSmartModalService: NgxSmartModalService
+  ) {
     //private iconSetService: IconSetService - Isso vai dentro () do construtor
     //console.log(IconSubset);
     //this.iconSetService.icons = { ...IconSubset }
   }
   abrirModal(modalId: string): void {
     this.ngxSmartModalService.getModal(modalId).open();
+  }
+
+  openModal() {
+    this.utils.modal.open(
+      CreateClientsComponent,
+      {},
+      {
+        size: 'md',
+      }
+    );
   }
 
   ngOnInit() {}

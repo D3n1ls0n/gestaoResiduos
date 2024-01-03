@@ -16,8 +16,8 @@ export abstract class _ModalLib {
     if ((options as Object).hasOwnProperty('size') && options.size != null)
       size = options.size;
     this.close(component);
-   /*  this.ngxSmartModalService
-      .create(String(component), component,{
+    /* this.ngxSmartModalService
+      .create(String(component), component, {
         dismissable: false,
       })
       .addCustomClass(size)
