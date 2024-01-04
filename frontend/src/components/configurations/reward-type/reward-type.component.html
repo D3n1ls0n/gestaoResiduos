@@ -1,0 +1,144 @@
+<c-container class="bg-white p-5" *ngIf="loading == false">
+  <h5 class="my-3">TIPOS DE RECONPENSAS</h5>
+  <c-nav variant="tabs">
+    <c-nav-item>
+      <a [active]="true" [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="0" cNavLink>
+        Lista
+      </a>
+    </c-nav-item>
+    <c-nav-item>
+      <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="1" cNavLink>
+        Registro
+      </a>
+    </c-nav-item>
+  </c-nav>
+  <c-tab-content #tabContent="cTabContent" [activeTabPaneIdx]="1">
+    <c-tab-pane class="p-3">
+      <c-container>
+        <table *ngIf="loading == false" class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Tipo</th>
+              <th>Acção</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>
+                <c-dropdown direction="dropend">
+                  <button cButton cDropdownToggle color="secondary" shape="rounded-0" size="sm" class="text-white">
+                    Opções
+                  </button>
+                  <ul cDropdownMenu>
+                    <li (click)="openEditRewardType('editRewardTypeModal')">
+                      <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
+                        <svg cIcon name="cilPenAlt"></svg>
+                      </a>
+                    </li>
+
+                  </ul>
+                </c-dropdown>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>
+                <c-dropdown direction="dropend">
+                  <button cButton cDropdownToggle color="secondary" shape="rounded-0" size="sm" class="text-white">
+                    Opções
+                  </button>
+                  <ul cDropdownMenu>
+                    <li>
+                      <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
+                        <svg cIcon name="cilPenAlt"></svg>
+                      </a>
+                    </li>
+
+                  </ul>
+                </c-dropdown>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>
+                <c-dropdown direction="dropend">
+                  <button cButton cDropdownToggle color="secondary" shape="rounded-0" size="sm" class="text-white">
+                    Opções
+                  </button>
+                  <ul cDropdownMenu>
+                    <li>
+                      <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
+                        <svg cIcon name="cilPenAlt"></svg>
+                      </a>
+                    </li>
+
+                  </ul>
+                </c-dropdown>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ngx-smart-modal identifier="editRewardTypeModal" customClass="md">
+          <app-edit-reward-type></app-edit-reward-type>
+        </ngx-smart-modal>
+      </c-container>
+    </c-tab-pane>
+    <c-tab-pane class="p-3">
+      <c-container>
+        <form cForm class="row g-3">
+          <c-col [md]="4">
+            <label cLabel for="assignment">Nome do tipo de recompensa</label>
+            <input cFormControl id="assignment" type="text" placeholder="Nome do tipo de recompensa" />
+          </c-col>
+          <c-col [md]="4" class="mt-5">
+            <button cButton type="button" color="success" shape="rounded-0" class="text-white" (click)="submit()">
+              <svg cIcon name="cilPlus"></svg> Registar
+            </button>
+          </c-col>
+        </form>
+      </c-container>
+    </c-tab-pane>
+  </c-tab-content>
+</c-container>
+
+<c-container class="bg-white p-5" cPlaceholderAnimation="glow" *ngIf="loading == true">
+  <span cCol="1" class="mb-2" cPlaceholderSize="lg" cPlaceholder></span>
+  <c-nav variant="tabs">
+    <c-nav-item>
+      <a [active]="true" [cTabContent]="tabContent1" [routerLink] [tabPaneIdx]="0" cNavLink>
+        Lista
+      </a>
+    </c-nav-item>
+    <c-nav-item>
+      <a [cTabContent]="tabContent1" [routerLink] [tabPaneIdx]="1" cNavLink id="second-tab">
+        Registro
+      </a>
+    </c-nav-item>
+  </c-nav>
+  <c-tab-content #tabContent1="cTabContent" [activeTabPaneIdx]="1">
+    <c-tab-pane class="p-3">
+      <c-container><span cCol="12" cPlaceholder cPlaceholderSize="lg"></span>
+      </c-container>
+    </c-tab-pane>
+    <c-tab-pane class="p-3">
+      <c-container>
+        <form cForm class="g-3">
+          <c-row>
+            <c-col [md]="7"><span cCol="6" cPlaceholder cPlaceholderSize="lg"></span>
+              <button cButton cCol="4" cPlaceholder color="secondary" style="margin-left: 20px"></button>
+            </c-col>
+          </c-row>
+        </form>
+      </c-container>
+    </c-tab-pane>
+  </c-tab-content>
+</c-container>

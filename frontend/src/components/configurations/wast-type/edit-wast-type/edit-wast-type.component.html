@@ -1,0 +1,18 @@
+<c-container>
+  <h5><svg cIcon name="cilPenAlt"></svg> Editar Tipo de resíduo </h5>
+  <hr />
+  <form cForm class="row g-3" (ngSubmit)="submit()">
+    <c-col [md]="12">
+      <label cLabel for="assignment">Descrição<sup class="text-danger">*</sup></label>
+      <input cFormControl id="assignment" type="text"/>
+    </c-col>
+    <c-col class="mb-2 mt-3 d-flex justify-content-end col-ctl-cr mt-3" [xs]="12">
+      <button cButton color="danger" shape="rounded-0" type="reset" class="text-white" size="sm" (click)="cancel('editWastTypeModal')">
+        <svg cIcon name="cilXCircle"></svg> Cancelar
+      </button>
+      <button cButton type="submit" size="sm" color="success" shape="rounded-0" class="text-white">
+        <svg cIcon name="cilPlus"></svg> Actualizar
+      </button>
+    </c-col>
+  </form>
+</c-container>

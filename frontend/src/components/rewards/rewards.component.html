@@ -1,5 +1,5 @@
 <div class="bg-white p-5">
-  <h4 class="my-3" style="font-weight: bolder">EMPRESAS</h4>
+  <h4 class="my-3" style="font-weight: bolder">RECOMPENSAS</h4>
   <hr />
   <c-container class="pb-4">
     <c-row class="align-items-center my-2 w-103">
@@ -8,7 +8,7 @@
         <button cButton color="secondary" class="text-white" size="sm" shape="rounded-0">
           <svg cIcon name="cilHistory"></svg> Recarregar
         </button>
-        <button cButton color="success" class="text-white" size="sm" shape="rounded-0">
+        <button cButton color="success" class="text-white" size="sm" shape="rounded-0" (click)="abrirModal('createRewardsModal')">
           <svg cIcon name="cilPlus"></svg> Registar
         </button>
       </c-col>
@@ -39,7 +39,7 @@
                 Opções
               </button>
               <ul cDropdownMenu>
-                <li>
+                <li (click)="abrirModal('editRewardsModal')">
                   <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
                     <svg cIcon name="cilPenAlt"></svg>
                   </a>
@@ -61,7 +61,7 @@
                 Opções
               </button>
               <ul cDropdownMenu>
-                <li>
+                <li (click)="abrirModal('editRewardsModal')">
                   <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
                     <svg cIcon name="cilPenAlt"></svg>
                   </a>
@@ -95,6 +95,14 @@
       </tbody>
     </table>
   </c-container>
+
+  <ngx-smart-modal identifier="createRewardsModal" customClass="md">
+    <app-create-rewards></app-create-rewards>
+  </ngx-smart-modal>
+
+  <ngx-smart-modal identifier="editRewardsModal" customClass="md">
+    <app-edit-rewards></app-edit-rewards>
+  </ngx-smart-modal>
 </div>
 <c-container cPlaceholderAnimation="glow" class="bg-white p-5" *ngIf="loading == true">
   <c-row>

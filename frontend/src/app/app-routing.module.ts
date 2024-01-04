@@ -9,8 +9,10 @@ import { RegisterComponent } from './views/pages/register/register.component';
 import { ClientsComponent } from '../components/clients/clients.component';
 import {ItemsComponent} from '../components/items/items.component'
 import {SadnessComponent} from '../components/sadness/sadness.component'
-import {CompanyComponent} from '../components/configurations/company/company.component'
-import {RewardsComponent} from '../components/configurations/rewards/rewards.component'
+import {CompanyComponent} from '../components/company/company.component'
+import {RewardsComponent} from '../components/rewards/rewards.component'
+import { RewardTypeComponent } from '../components/configurations/reward-type/reward-type.component';
+import { WastTypeComponent } from '../components/configurations/wast-type/wast-type.component';
 
 const routes: Routes = [
   {
@@ -94,6 +96,14 @@ const routes: Routes = [
       {
         path: "rewards", /* Resíduo */
         component: RewardsComponent,
+      },
+      {
+        path: "rewards-types", /* Resíduo */
+        component: RewardTypeComponent,
+      },
+      {
+        path: "wast-types", /* Resíduo */
+        component: WastTypeComponent,
       },
     ]
   },

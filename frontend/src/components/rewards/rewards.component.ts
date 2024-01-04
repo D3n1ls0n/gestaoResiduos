@@ -2,23 +2,19 @@ import { Component } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 
 @Component({
-  selector: 'app-items',
-  templateUrl: './items.component.html',
-  styleUrl: './items.component.scss'
+  selector: 'app-rewards',
+  templateUrl: './rewards.component.html',
+  styleUrl: './rewards.component.scss',
 })
-export class ItemsComponent {
+export class RewardsComponent {
+  constructor(public modal: NgxSmartModalService) {}
   public loading: boolean = false;
-  constructor(
-    public modal: NgxSmartModalService
-  ) {}
 
-  openCreateItems(modalId: string): void {
+  abrirModal(modalId: string): void {
     this.modal.getModal(modalId).open();
   }
-
 
   openEditClient(modalId: string): void {
     this.modal.getModal(modalId).open();
   }
-
 }

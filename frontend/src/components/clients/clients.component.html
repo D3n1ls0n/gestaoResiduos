@@ -9,7 +9,7 @@
           <svg cIcon name="cilHistory"></svg> Recarregar
         </button>
         <button cButton color="success" class="text-white" size="sm" shape="rounded-0"
-          (click)="abrirModal('createClientModal')">
+          (click)="openCreateClient('createClientModal')">
           <svg cIcon name="cilPlus"></svg> Registar
         </button>
       </c-col>
@@ -40,7 +40,7 @@
                 Opções
               </button>
               <ul cDropdownMenu>
-                <li (click)="abrirModal('editClientModal')">
+                <li (click)="openEditClient('editClientModal')">
                   <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
                     <svg cIcon name="cilPenAlt"></svg>
                   </a>

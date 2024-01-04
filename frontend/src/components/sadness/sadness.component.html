@@ -8,7 +8,7 @@
         <button cButton color="secondary" class="text-white" size="sm" shape="rounded-0">
           <svg cIcon name="cilHistory"></svg> Recarregar
         </button>
-        <button cButton color="success" class="text-white" size="sm" shape="rounded-0">
+        <button cButton color="success" class="text-white" size="sm" shape="rounded-0" (click)="openCreateSadness('createSadnessModal')">
           <svg cIcon name="cilPlus"></svg> Registar
         </button>
       </c-col>
@@ -39,7 +39,7 @@
                 Opções
               </button>
               <ul cDropdownMenu>
-                <li>
+                <li (click)="openEditSadness('editSadnessModal')">
                   <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
                     <svg cIcon name="cilPenAlt"></svg>
                   </a>
@@ -95,6 +95,14 @@
       </tbody>
     </table>
   </c-container>
+  <ngx-smart-modal identifier="createSadnessModal" customClass="md">
+    <app-create-sadness></app-create-sadness>
+  </ngx-smart-modal>
+
+  <ngx-smart-modal identifier="editSadnessModal" customClass="md">
+    <app-edit-sadness></app-edit-sadness>
+  </ngx-smart-modal>
+
 </div>
 <c-container cPlaceholderAnimation="glow" class="bg-white p-5" *ngIf="loading == true">
   <c-row>

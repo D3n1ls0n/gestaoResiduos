@@ -1,0 +1,28 @@
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background: transparent !important;
+  border-radius: 0 !important;
+  border-bottom: 2px solid #4949b7;
+}
+.nav-pills {
+  border-bottom: 2px solid #ccc;
+}
+.w-103 {
+  width: 103% !important;
+}
+.col-ctl-cr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.search-input-cr {
+  width: 6em !important;
+  height: 2em;
+}
+.ng-select-cr {
+  margin-top: -0.83em;
+}
+.text-style {
+  color: #555;
+  font-weight: bold;
+}

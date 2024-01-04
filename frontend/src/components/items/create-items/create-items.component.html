@@ -1,0 +1,139 @@
+<c-container *ngIf="loading == false">
+  <h5><svg cIcon name="cilBabyCarriage"></svg> Adicionar Resíduos Para Aquisição</h5>
+  <hr />
+  <form cForm class="row g-3" (ngSubmit)="submit()" [validated]="validateForm">
+
+    <c-col class="position-relative mt-6" style="margin-left: 13%;" [md]="9">
+      <c-callout color="dark">
+        <div class="text-style my-1"><svg cIcon name="cilLineWeight"></svg> ADICIONAR ITENS</div>
+        <hr>
+        <c-row class="justify-content-center">
+          <div class="col-md-12">
+            <div class="alert alert-warning text-center alert-dismissible">
+              <h5><i class="icon fa fa-ban"></i> Atenção!</h5>
+              Os ítens selecionados serão para a aquisição!
+            </div>
+          </div>
+          <c-col class="position-relative" [md]="4">
+            <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Resíduo</label>
+            <select aria-label="Default select example" cSelect>
+              <option>Open this select menu</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </c-col>
+          <c-col class="position-relative" [md]="3">
+            <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Quantidade</label>
+            <input cFormControl required type="number" min="0" placeholder="Quantidade">
+          </c-col>
+          <c-col class="position-relative" [md]="1">
+            <label cLabel for="procedures" class="text-white">1</label>
+            <button cButton color="success" class="text-white" shape="rounded-0">
+              <svg cIcon name="cilPlus"></svg>
+            </button>
+          </c-col>
+        </c-row>
+        <!-- <table *ngIf="loading == false" class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nome</th>
+              <th scope="col">E-mail</th>
+              <th scope="col">Telefone</th>
+              <th scope="col">Telefone</th>
+              <th>Acção</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>mdo</td>
+              <td>mdo</td>
+              <td>
+                <c-dropdown direction="dropend">
+                  <button cButton cDropdownToggle color="secondary" shape="rounded-0" size="sm" class="text-white">
+                    Opções
+                  </button>
+                  <ul cDropdownMenu>
+                    <li>
+                      <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
+                        <svg cIcon name="cilPenAlt"></svg>
+                      </a>
+                    </li>
+
+                  </ul>
+                </c-dropdown>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>fat</td>
+              <td>fat</td>
+              <td>
+                <c-dropdown direction="dropend">
+                  <button cButton cDropdownToggle color="secondary" shape="rounded-0" size="sm" class="text-white">
+                    Opções
+                  </button>
+                  <ul cDropdownMenu>
+                    <li>
+                      <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
+                        <svg cIcon name="cilPenAlt"></svg>
+                      </a>
+                    </li>
+
+                  </ul>
+                </c-dropdown>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td colspan="2">Larry the Bird</td>
+              <td>twitter</td>
+              <td>twitter</td>
+              <td>
+                <c-dropdown direction="dropend">
+                  <button cButton cDropdownToggle color="secondary" shape="rounded-0" size="sm" class="text-white">
+                    Opções
+                  </button>
+                  <ul cDropdownMenu>
+                    <li>
+                      <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
+                        <svg cIcon name="cilPenAlt"></svg>
+                      </a>
+                    </li>
+
+                  </ul>
+                </c-dropdown>
+              </td>
+            </tr>
+          </tbody>
+        </table> -->
+        <ng-template #noCriteria>
+          <h5 class="text-muted text-center">Sem critérios!</h5>
+        </ng-template>
+      </c-callout>
+    </c-col>
+
+
+    <c-container class="mb-3 mt-5 d-flex justify-content-end col-ctl-cr" style="gap: 3px">
+      <button cButton class="text-white" shape="rounded-0" color="warning" size="sm" type="button"
+        title="Validar Formulário">
+        <svg cIcon name="cilCheckAlt"></svg> Validar
+      </button>
+      <button cButton color="danger" shape="rounded-0" type="reset" class="text-white" size="sm"
+        (click)="cancel('createItemsModal')">
+        <svg cIcon name="cilXCircle"></svg> Cancelar
+      </button>
+      <button cButton class="me-1 text-white" shape="rounded-0" color="success" size="sm" type="submit">
+        <svg cIcon name="cilPlus"></svg> Registar
+      </button>
+    </c-container>
+  </form>
+
+
+</c-container>

@@ -1,5 +1,5 @@
 <div class="bg-white p-5">
-  <h4 class="my-3" style="font-weight: bolder">RECOMPENSAS</h4>
+  <h4 class="my-3" style="font-weight: bolder">EMPRESAS</h4>
   <hr />
   <c-container class="pb-4">
     <c-row class="align-items-center my-2 w-103">
@@ -8,7 +8,7 @@
         <button cButton color="secondary" class="text-white" size="sm" shape="rounded-0">
           <svg cIcon name="cilHistory"></svg> Recarregar
         </button>
-        <button cButton color="success" class="text-white" size="sm" shape="rounded-0">
+        <button cButton color="success" class="text-white" size="sm" shape="rounded-0" (click)="openCreateCompany('createCompanyModal')">
           <svg cIcon name="cilPlus"></svg> Registar
         </button>
       </c-col>
@@ -39,7 +39,7 @@
                 Opções
               </button>
               <ul cDropdownMenu>
-                <li>
+                <li (click)="openEditCompany('editCompanyModal')">
                   <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
                     <svg cIcon name="cilPenAlt"></svg>
                   </a>
@@ -95,6 +95,14 @@
       </tbody>
     </table>
   </c-container>
+
+  <ngx-smart-modal identifier="createCompanyModal" customClass="md">
+    <app-create-company></app-create-company>
+  </ngx-smart-modal>
+
+  <ngx-smart-modal identifier="editCompanyModal" customClass="md">
+    <app-edit-company></app-edit-company>
+  </ngx-smart-modal>
 </div>
 <c-container cPlaceholderAnimation="glow" class="bg-white p-5" *ngIf="loading == true">
   <c-row>

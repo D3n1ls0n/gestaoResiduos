@@ -23,21 +23,30 @@ export const navItems: INavData[] = [
     url: '/items',
     iconComponent: { name: 'cil-baby-carriage' },
   },
-
+  {
+    name: 'Recompensas',
+    url: '/rewards',
+    iconComponent: { name: 'cil-gem' },
+  },
+  {
+    name: 'Empresas',
+    url: '/company',
+    iconComponent: { name: 'cil-home' },
+  },
   {
     name: 'Configurações',
     url: '/base',
     iconComponent: { name: 'cil-cog' },
     children: [
       {
-        name: 'Empresas',
-        url: '/company',
-        iconComponent: { name: 'cil-home' },
+        name: 'Tipo de Recompensa',
+        url: '/rewards-types',
+        iconComponent: { name: 'cil-gem' },
       },
       {
-        name: 'Recompensas',
-        url: '/rewards',
-        iconComponent: { name: 'cil-gem' },
+        name: 'Tipo de Resíduo',
+        url: '/wast-types',
+        iconComponent: { name: 'cil-drop' },
       },
     ],
   },

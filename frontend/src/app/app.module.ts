@@ -21,8 +21,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-
-
 // Import containers
 import {
   DefaultFooterComponent,
@@ -56,20 +54,31 @@ import {
   ModalModule,
 } from '@coreui/angular';
 
-
 import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
 import { FormsModule } from '@angular/forms';
+import { CalloutModule } from '@coreui/angular';
 
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { ClientsComponent } from '@docs-components/clients/clients.component';
 import { ItemsComponent } from '@docs-components/items/items.component';
 import { SadnessComponent } from '@docs-components/sadness/sadness.component';
-import { CompanyComponent } from '@docs-components/configurations/company/company.component';
-import { RewardsComponent } from '@docs-components/configurations/rewards/rewards.component';
+import { CompanyComponent } from '@docs-components/company/company.component';
+import { RewardsComponent } from '@docs-components/rewards/rewards.component';
 import { Utilities } from '../app/utilities/utilities';
 import { CreateClientsComponent } from '@docs-components/clients/create-clients/create-clients.component';
 import { EditClientsComponent } from '@docs-components/clients/edit-clients/edit-clients.component';
+import { CreateSadnessComponent } from '@docs-components/sadness/create-sadness/create-sadness.component';
+import { EditSadnessComponent } from '@docs-components/sadness/edit-sadness/edit-sadness.component';
+import { CreateRewardsComponent } from '@docs-components/rewards/create-rewards/create-rewards.component';
+import { EditRewardsComponent } from '@docs-components/rewards/edit-rewards/edit-rewards.component';
+import { CreateCompanyComponent } from '@docs-components/company/create-company/create-company.component';
+import { EditCompanyComponent } from '@docs-components/company/edit-company/edit-company.component';
+import { RewardTypeComponent } from '@docs-components/configurations/reward-type/reward-type.component';
+import { EditRewardTypeComponent } from '@docs-components/configurations/reward-type/edit-reward-type/edit-reward-type.component';
+import { WastTypeComponent } from '@docs-components/configurations/wast-type/wast-type.component';
+import { EditWastTypeComponent } from '@docs-components/configurations/wast-type/edit-wast-type/edit-wast-type.component';
+import { CreateItemsComponent } from '@docs-components/items/create-items/create-items.component';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -84,7 +93,18 @@ const COMPONENTS = [
   CompanyComponent,
   RewardsComponent,
   CreateClientsComponent,
-  EditClientsComponent
+  EditClientsComponent,
+  CreateSadnessComponent,
+  EditSadnessComponent,
+  CreateRewardsComponent,
+  EditRewardsComponent,
+  CreateCompanyComponent,
+  EditCompanyComponent,
+  RewardTypeComponent,
+  EditRewardTypeComponent,
+  WastTypeComponent,
+  EditWastTypeComponent,
+  CreateItemsComponent
 ];
 
 @NgModule({
@@ -123,7 +143,8 @@ const COMPONENTS = [
     ModalModule,
     NgxSmartModalModule.forRoot(),
     NgSelectModule,
-    FormsModule
+    FormsModule,
+    CalloutModule
   ],
   providers: [
     {
@@ -133,11 +154,9 @@ const COMPONENTS = [
     IconSetService,
     Title,
     Utilities,
-    NgxSmartModalService
+    NgxSmartModalService,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule {
-
-}
+export class AppModule {}
