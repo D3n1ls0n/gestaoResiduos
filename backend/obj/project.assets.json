@@ -465,11 +465,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\denilson.joao\\Documents\\PROJECTO MVC\\GESTAO RESIDUO\\backend\\backend.csproj",
+      "projectUniqueName": "C:\\Users\\denilson.joao\\Documents\\PROJECTO MVC\\NOVO\\gestaoResiduos\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "C:\\Users\\denilson.joao\\Documents\\PROJECTO MVC\\GESTAO RESIDUO\\backend\\backend.csproj",
+      "projectPath": "C:\\Users\\denilson.joao\\Documents\\PROJECTO MVC\\NOVO\\gestaoResiduos\\backend\\backend.csproj",
       "packagesPath": "C:\\Users\\denilson.joao\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\denilson.joao\\Documents\\PROJECTO MVC\\GESTAO RESIDUO\\backend\\obj\\",
+      "outputPath": "C:\\Users\\denilson.joao\\Documents\\PROJECTO MVC\\NOVO\\gestaoResiduos\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\denilson.joao\\AppData\\Roaming\\NuGet\\NuGet.Config",

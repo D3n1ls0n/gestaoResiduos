@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "s02g/l8g4F1BlLm668qk9w/e7xMWx+6bnGeBvGQ+3Ny8yC9+PY1BLSxBZJQ5+vSVPYpXVant+FwZl/UyVBKuEA==",
+  "dgSpecHash": "q9MlyYvz21n9N+3DJaGU5RD+QHvVjHrIS4t52pIdN+n6DU4GAMJxLtDa8FFmWHCRiJC9Hi/YaHi+jG3TgP2RQA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\denilson.joao\\Documents\\PROJECTO MVC\\GESTAO RESIDUO\\backend\\backend.csproj",
+  "projectFilePath": "C:\\Users\\denilson.joao\\Documents\\PROJECTO MVC\\NOVO\\gestaoResiduos\\backend\\backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\denilson.joao\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.0\\microsoft.aspnetcore.openapi.8.0.0.nupkg.sha512",
     "C:\\Users\\denilson.joao\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
