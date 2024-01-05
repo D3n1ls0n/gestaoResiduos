@@ -18,4 +18,6 @@ export class CompanyComponent {
   openEditCompany(modalId: string): void {
     this.modal.getModal(modalId).open();
   }
+
+
 }

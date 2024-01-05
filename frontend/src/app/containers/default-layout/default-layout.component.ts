@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { navItems } from './_nav';
 import { DadosService } from '../../Services/dados.service';
+import { EmailService } from '../../Services/email.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +13,7 @@ export class DefaultLayoutComponent {
   public navItems = navItems;
   public Produto: any;
 
-  constructor(private dados: DadosService) {}
+  constructor(private dados: DadosService, private email: EmailService) {}
 
   obterDados() {
     this.dados.obterDados().subscribe((response: any) => {
@@ -20,7 +21,14 @@ export class DefaultLayoutComponent {
     });
   }
 
+  sendEmail() {
+    this.email.senemail().subscribe((response: any) => {
+      console.log(response);
+    });
+  }
+
   ngOnInit() {
     this.obterDados();
+    //this.sendEmail();
   }
 }

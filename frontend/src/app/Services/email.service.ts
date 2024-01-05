@@ -6,12 +6,14 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class DadosService {
+export class EmailService {
   public baseUrl = environment.app_url;
 
   constructor(private http: HttpClient) {}
 
-  obterDados(): Observable<any> {
-    return this.http.get<any>(this.baseUrl + '/api/product');
+  senemail(): Observable<any> {
+    const email = 'denilson105joao@gmail.com';
+
+    return this.http.post<any>(this.baseUrl + '/api/mail/sendemail', {email});
   }
 }
