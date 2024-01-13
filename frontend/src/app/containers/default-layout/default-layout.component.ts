@@ -22,11 +22,7 @@ export class DefaultLayoutComponent {
     });
   }
 
-  obterBairros() {
-    this.bairro.obterBairro().subscribe((response: any) => {
-      console.log("Bairros",response);
-    });
-  }
+
 
   sendEmail() {
     this.email.senemail().subscribe((response: any) => {
@@ -37,6 +33,5 @@ export class DefaultLayoutComponent {
   ngOnInit() {
     this.obterDados();
     //this.sendEmail();
-    this.obterBairros()
   }
 }

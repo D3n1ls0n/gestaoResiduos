@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
-import { Utilities } from 'src/app/utilities/utilities';
 
 /* import { IconSetService } from '@coreui/icons-angular';
 import { IconSubset } from 'src/app/icons/icon-subset'; */
@@ -12,9 +11,8 @@ import { IconSubset } from 'src/app/icons/icon-subset'; */
 })
 export class ClientsComponent {
   public loading: boolean = false;
-  constructor(
-    public modal: NgxSmartModalService
-  ) {
+
+  constructor(public modal: NgxSmartModalService) {
     //private iconSetService: IconSetService - Isso vai dentro () do construtor
     //console.log(IconSubset);
     //this.iconSetService.icons = { ...IconSubset }
@@ -23,7 +21,6 @@ export class ClientsComponent {
   openCreateClient(modalId: string): void {
     this.modal.getModal(modalId).open();
   }
-
 
   openEditClient(modalId: string): void {
     this.modal.getModal(modalId).open();
