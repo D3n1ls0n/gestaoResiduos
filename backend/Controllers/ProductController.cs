@@ -16,6 +16,8 @@ public class ProductController : ControllerBase
         return Ok(_products);
     }
 
+
+//Pesquisa o produto por ID
     [HttpGet("{id}")]
     public IActionResult GetById(int id)
     {

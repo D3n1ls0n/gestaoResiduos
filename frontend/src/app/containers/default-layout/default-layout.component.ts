@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { navItems } from './_nav';
 import { DadosService } from '../../Services/dados.service';
 import { EmailService } from '../../Services/email.service';
+import { BairroService } from '../../Services/bairro.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,11 +14,17 @@ export class DefaultLayoutComponent {
   public navItems = navItems;
   public Produto: any;
 
-  constructor(private dados: DadosService, private email: EmailService) {}
+  constructor(private dados: DadosService, private email: EmailService, private bairro: BairroService) {}
 
   obterDados() {
     this.dados.obterDados().subscribe((response: any) => {
       console.log(response);
+    });
+  }
+
+  obterBairros() {
+    this.bairro.obterBairro().subscribe((response: any) => {
+      console.log("Bairros",response);
     });
   }
 
@@ -30,5 +37,6 @@ export class DefaultLayoutComponent {
   ngOnInit() {
     this.obterDados();
     //this.sendEmail();
+    this.obterBairros()
   }
 }
