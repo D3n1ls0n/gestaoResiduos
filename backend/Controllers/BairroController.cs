@@ -12,10 +12,16 @@ public class BairroController : ControllerBase
         _dbContext = dbContext;
     }
 
+
+/* Get Bairro */
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Bairro>>> GetBairros()
     {
         var bairros = await _dbContext.Bairros.ToListAsync();
         return Ok(bairros);
     }
+
+
+
+
 }
