@@ -31,6 +31,7 @@ export class EditClientsComponent {
     this.cliente.clienteData$.subscribe((data) => {
       this.clienteData = data;
       this.utils.patchFormValues(this.meuFormulario, this.clienteData);
+     /*  this.meuFormulario.value.bairroId = this.clienteData.bairroId */
     });
   }
 
@@ -41,10 +42,6 @@ export class EditClientsComponent {
   submit() {
     let data = this.meuFormulario.value;
     data.bairroId = this.bairroSelecionado;
-
-
-    console.log(data);
-
     this.cliente.editCliente(data, this.clienteData.id).subscribe((response: any) => {
       if (response) {
         this.meuFormulario.reset();

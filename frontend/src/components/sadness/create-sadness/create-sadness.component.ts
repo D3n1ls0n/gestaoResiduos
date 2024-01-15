@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
+import { ToastrService } from 'ngx-toastr';
+import { ClienteService } from 'src/app/Services/cliente.service';
+import { ResiduoService } from 'src/app/Services/residuo.service';
+import { UtilsService } from 'src/app/Services/utils.service';
 
 @Component({
   selector: 'app-create-sadness',
@@ -7,14 +11,74 @@ import { NgxSmartModalService } from 'ngx-smart-modal';
   styleUrl: './create-sadness.component.scss',
 })
 export class CreateSadnessComponent {
-  constructor(public modal: NgxSmartModalService) {}
+  constructor(
+    public modal: NgxSmartModalService,
+    private utils: UtilsService,
+    private residuo: ResiduoService,
+    private toast: ToastrService,
+    private cliente: ClienteService
+  ) {}
   public loading: boolean = false;
   public validateForm: boolean = false;
   public neighborHood: any;
+  public meuFormulario: any;
+  public clienteId: any;
+  public tipoRediduoId: any;
+  public clientes: any;
+  public tipoResiduos: any;
+
+  createFrm() {
+    this.meuFormulario = this.utils.createForm(
+      { name: 'Nome', value: null, required: true },
+      { name: 'TipoResiduoId', value: null, required: true },
+      { name: 'ClienteId', value: null, required: true }
+    );
+  }
 
   cancel(modalId: any) {
     this.modal.getModal(modalId).close();
   }
 
-  submit() {}
+  submit() {
+    let data = this.meuFormulario.value;
+    console.log(data);
+
+    this.residuo.createResiduo(data).subscribe((response: any) => {
+      if (response) {
+        this.meuFormulario.reset();
+        this.toast.success('Cliente registado com sucesso!', 'Clientes');
+        this.cancel('createSadnessModal');
+        this.residuo.emitRecarregarResiduo(true);
+      } else {
+        this.toast.error('Erro ao registar cliente!', 'Clientes');
+        return;
+      }
+    });
+  }
+
+  selectCliente(evt: any) {
+    this.clienteId = evt.target.value;
+  }
+
+  selectTipoResiduo(evt: any) {
+    this.tipoRediduoId = evt.target.value;
+  }
+
+  obterCliente() {
+    this.cliente.listCliente().subscribe((response: any) => {
+      this.clientes = response;
+    });
+  }
+
+  obterTipoResiduo() {
+    this.residuo.listTipoResiduo().subscribe((response: any) => {
+      this.tipoResiduos = response;
+    });
+  }
+
+  ngOnInit() {
+    this.createFrm();
+    this.obterCliente();
+    this.obterTipoResiduo();
+  }
 }

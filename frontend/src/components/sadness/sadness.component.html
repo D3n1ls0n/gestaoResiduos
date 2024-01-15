@@ -20,74 +20,33 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Nome</th>
-          <th scope="col">E-mail</th>
-          <th scope="col">Telefone</th>
-          <th scope="col">Telefone</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Gerador</th>
           <th>Acção</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>mdo</td>
-          <td>mdo</td>
+        <tr *ngFor="let r of residuos, index as i">
+          <th scope="row">{{i+1}}</th>
+          <td>{{ r.nome }}</td>
+          <td>{{ r.tipoResiduoNome }}</td>
+          <td>{{ r.clienteNome + " " + r.clienteSobrenome }}</td>
           <td>
             <c-dropdown direction="dropend">
               <button cButton cDropdownToggle color="secondary" shape="rounded-0" size="sm" class="text-white">
                 Opções
               </button>
               <ul cDropdownMenu>
-                <li (click)="openEditSadness('editSadnessModal')">
+                <li (click)="openEditSadness('editSadnessModal', r)">
                   <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
                     <svg cIcon name="cilPenAlt"></svg>
                   </a>
                 </li>
-
-              </ul>
-            </c-dropdown>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>fat</td>
-          <td>fat</td>
-          <td>
-            <c-dropdown direction="dropend">
-              <button cButton cDropdownToggle color="secondary" shape="rounded-0" size="sm" class="text-white">
-                Opções
-              </button>
-              <ul cDropdownMenu>
-                <li>
-                  <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
+                <li (click)="deleteCliente(r.id)">
+                  <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Eliminar
                     <svg cIcon name="cilPenAlt"></svg>
                   </a>
                 </li>
-
-              </ul>
-            </c-dropdown>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>twitter</td>
-          <td>twitter</td>
-          <td>
-            <c-dropdown direction="dropend">
-              <button cButton cDropdownToggle color="secondary" shape="rounded-0" size="sm" class="text-white">
-                Opções
-              </button>
-              <ul cDropdownMenu>
-                <li>
-                  <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
-                    <svg cIcon name="cilPenAlt"></svg>
-                  </a>
-                </li>
-
               </ul>
             </c-dropdown>
           </td>
