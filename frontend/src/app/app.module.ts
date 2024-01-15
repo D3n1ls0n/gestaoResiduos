@@ -79,6 +79,7 @@ import { EditRewardTypeComponent } from '@docs-components/configurations/reward-
 import { WastTypeComponent } from '@docs-components/configurations/wast-type/wast-type.component';
 import { EditWastTypeComponent } from '@docs-components/configurations/wast-type/edit-wast-type/edit-wast-type.component';
 import { CreateItemsComponent } from '@docs-components/items/create-items/create-items.component';
+import { ToastrModule } from 'ngx-toastr';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -104,7 +105,9 @@ const COMPONENTS = [
   EditRewardTypeComponent,
   WastTypeComponent,
   EditWastTypeComponent,
-  CreateItemsComponent
+  CreateItemsComponent,
+  EditClientsComponent,
+  CreateClientsComponent
 ];
 
 @NgModule({
@@ -144,7 +147,8 @@ const COMPONENTS = [
     NgxSmartModalModule.forRoot(),
     NgSelectModule,
     FormsModule,
-    CalloutModule
+    CalloutModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     {

@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
+import { ClienteService } from 'src/app/Services/cliente.service';
+import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { FormGroup } from '@angular/forms';
+
 
 /* import { IconSetService } from '@coreui/icons-angular';
 import { IconSubset } from 'src/app/icons/icon-subset'; */
@@ -11,8 +16,15 @@ import { IconSubset } from 'src/app/icons/icon-subset'; */
 })
 export class ClientsComponent {
   public loading: boolean = false;
+  public clients: any;
+  recarregarClientesSubscription!: Subscription;
+  public meuFormulario: any;
 
-  constructor(public modal: NgxSmartModalService) {
+  constructor(
+    public modal: NgxSmartModalService,
+    private cliente: ClienteService,
+    private toast: ToastrService,
+  ) {
     //private iconSetService: IconSetService - Isso vai dentro () do construtor
     //console.log(IconSubset);
     //this.iconSetService.icons = { ...IconSubset }
@@ -22,9 +34,41 @@ export class ClientsComponent {
     this.modal.getModal(modalId).open();
   }
 
-  openEditClient(modalId: string): void {
+  openEditClient(modalId: string, cliente: any): void {
+    this.cliente.setClienteData(cliente);
     this.modal.getModal(modalId).open();
   }
 
-  ngOnInit() {}
+  getCliente() {
+    this.cliente.listCliente().subscribe((response: any) => {
+      this.clients = response;
+    });
+  }
+
+  deleteCliente(id: any) {
+    this.cliente.deleteCliente(id).subscribe((response: any) => {
+      if (response) {
+        this.toast.success('Cliente eliminado com sucesso!', 'Clientes');
+        this.cliente.emitRecarregarClientes(true);
+      } else {
+        this.toast.error('Erro ao eliminar cliente!', 'Clientes');
+      }
+    });
+  }
+
+  ngOnInit() {
+    this.getCliente();
+    // Inscreva-se no evento de recarregar clientes
+    this.recarregarClientesSubscription = this.cliente
+      .getRecarregarClientesObservable()
+      .subscribe((recarregar) => {
+        if (recarregar) {
+          this.getCliente();
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.recarregarClientesSubscription.unsubscribe();
+  }
 }

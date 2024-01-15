@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BairroService } from 'src/app/Services/bairro.service';
 import { UtilsService } from 'src/app/Services/utils.service';
 import { ClienteService } from 'src/app/Services/cliente.service';
+import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-create-clients',
   templateUrl: './create-clients.component.html',
@@ -12,12 +15,14 @@ import { ClienteService } from 'src/app/Services/cliente.service';
 export class CreateClientsComponent {
   public neigahood: any;
 
+
   constructor(
     public modal: NgxSmartModalService,
     private bairro: BairroService,
     public form: FormBuilder,
     private utils: UtilsService,
-    private cliente: ClienteService
+    private cliente: ClienteService,
+    private toast: ToastrService
   ) {}
 
   public loading: boolean = false;
@@ -47,8 +52,17 @@ export class CreateClientsComponent {
   submit() {
     let data = this.meuFormulario.value;
     data.bairroId = this.bairroSelecionado;
-    this.cliente.createCliente(data).subscribe((response: any) => {});
-    this.meuFormulario.reset();
+    this.cliente.createCliente(data).subscribe((response: any) => {
+      if (response) {
+        this.meuFormulario.reset();
+        this.toast.success('Cliente registado com sucesso!', 'Clientes');
+        this.cancel('createClientModal');
+        this.cliente.emitRecarregarClientes(true);
+      } else {
+        this.toast.error('Erro ao registar cliente!', 'Clientes');
+        return
+      }
+    });
   }
 
   obterBairros() {

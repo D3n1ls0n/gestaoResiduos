@@ -16,4 +16,9 @@ export class UtilsService {
 
     return this.formBuilder.group(formConfig);
   }
+
+  patchFormValues(form: FormGroup, values: Record<string, any>) {
+    form.patchValue(values);
+  }
+
 }
