@@ -46,19 +46,6 @@ public class RecompensaController : ControllerBase
                 )
                 .ToListAsync();
 
-            /*    new
-               {
-                   recompensa.Id,
-                   recompensa.Nome,
-                   recompensa.Descricao,
-                   recompensa.TipoRecompensaId,
-                   recompensa.ClienteId,
-                   tipoReconpens = tipoRecompensa.Nome,
-                   // Adicione outras propriedades conforme necessário
-               }
-           )
-           .ToListAsync(); */
-
             return Ok(recompensas);
         }
         catch (Exception)
@@ -68,8 +55,8 @@ public class RecompensaController : ControllerBase
         }
     }
 
-    [HttpPost("register")]
-    public async Task<ActionResult<Cliente>> CreateRecompensa([FromBody] Recompensa recompensaInput)
+    [HttpPost("create")]
+    public async Task<ActionResult<Recompensa>> CreateRecompensa([FromBody] Recompensa recompensaInput)
     {
         Console.WriteLine(1);
 
@@ -95,7 +82,7 @@ public class RecompensaController : ControllerBase
             // Retorna o cliente recém-criado
             //    return CreatedAtAction(nameof(GetClientes), new { id = novoCliente.Id }, novoCliente);
         }
-        return BadRequest(ModelState); 
+        return BadRequest(ModelState);
     }
 
     [HttpPut("{id}")]
@@ -130,6 +117,21 @@ public class RecompensaController : ControllerBase
         catch (Exception)
         {
             return StatusCode(500, "Erro ao editar o cliente no banco de dados.");
+        }
+    }
+
+    [HttpGet("tipo/lista")]
+    public async Task<ActionResult<IEnumerable<TipoRecompensa>>> GetTipoRecompensa()
+    {
+        try
+        {
+            var tipo = await _dbContext.TipoRecompensas.ToListAsync();
+            return Ok(tipo);
+        }
+        catch (Exception)
+        {
+            // Logue a exceção, e retorne um StatusCode 500 ou outra resposta apropriada
+            return StatusCode(500, "Erro ao recuperar clientes do banco de dados.");
         }
     }
 }

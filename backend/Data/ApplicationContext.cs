@@ -25,6 +25,7 @@ public class ApplicationContext : DbContext
     {
       optionsBuilder.UseSqlServer("Server=ITGAOWK115\\SQL_SERVER;Database=GestaoResiduo;User Id=sa;Password=105Denis;TrustServerCertificate=True;");
     }
+    
     public void SeedData()
     {
         // Adiciona dados aleatórios para testes
