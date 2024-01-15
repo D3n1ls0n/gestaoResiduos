@@ -95,7 +95,7 @@ public class RecompensaController : ControllerBase
             // Retorna o cliente recém-criado
             //    return CreatedAtAction(nameof(GetClientes), new { id = novoCliente.Id }, novoCliente);
         }
-        return BadRequest(ModelState);
+        return BadRequest(ModelState); 
     }
 
     [HttpPut("{id}")]
