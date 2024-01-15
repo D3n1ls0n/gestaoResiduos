@@ -41,7 +41,6 @@ export class CreateSadnessComponent {
 
   submit() {
     let data = this.meuFormulario.value;
-    console.log(data);
 
     this.residuo.createResiduo(data).subscribe((response: any) => {
       if (response) {

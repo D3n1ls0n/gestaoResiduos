@@ -10,7 +10,7 @@ export class ResiduoService {
   public baseUrl = environment.app_url;
   private recarregarResiduoSubject = new BehaviorSubject<boolean>(false);
   private residuoDataSubject = new BehaviorSubject<any>(null);
-  clienteData$: Observable<any> = this.residuoDataSubject.asObservable();
+  residuoData$: Observable<any> = this.residuoDataSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 

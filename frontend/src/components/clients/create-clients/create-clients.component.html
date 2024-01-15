@@ -29,7 +29,7 @@
     </c-col>
     <c-col class="position-relative" [md]="4">
       <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Bairro</label>
-      <select aria-label="Default select example" (change)="selectNeighborHood($event)" cSelect>
+      <select aria-label="Default select example" (change)="selectNeighborHood($event)" formControlName="bairroId" cSelect>
         <option value="" disabled selected>Escolha um bairro</option>
         <option *ngFor="let bairro of neigahood" [value]="bairro.id">{{ bairro.nome }}</option>
       </select>

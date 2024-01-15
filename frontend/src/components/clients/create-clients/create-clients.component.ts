@@ -37,7 +37,8 @@ export class CreateClientsComponent {
       { name: 'Sobrenome', value: null, required: true },
       { name: 'Telefone', value: null, required: true },
       { name: 'Contribuinte', value: null, required: true },
-      { name: 'Email', value: null, required: true }
+      { name: 'Email', value: null, required: true },
+      { name: 'bairroId', value: null, required: true }
     );
   }
 
@@ -50,8 +51,8 @@ export class CreateClientsComponent {
   }
 
   submit() {
-    let data = this.meuFormulario.value;
-    data.bairroId = this.bairroSelecionado;
+    let data = this.meuFormulario.value;/*
+    data.bairroId = this.bairroSelecionado; */
     this.cliente.createCliente(data).subscribe((response: any) => {
       if (response) {
         this.meuFormulario.reset();

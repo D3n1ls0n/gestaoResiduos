@@ -38,8 +38,6 @@ export class SadnessComponent {
 
       this.residuos = response;
 
-      console.log(this.residuos);
-
     });
   }
 

@@ -18,7 +18,6 @@ export class DefaultLayoutComponent {
 
   obterDados() {
     this.dados.obterDados().subscribe((response: any) => {
-      console.log(response);
     });
   }
 
