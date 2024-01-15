@@ -23,15 +23,14 @@ export class CompanyComponent {
     this.modal.getModal(modalId).open();
   }
 
-  openEditCompany(modalId: string): void {
+  openEditCompany(modalId: string, empresa: any): void {
+    this.empresa.setEmpresaData(empresa);
     this.modal.getModal(modalId).open();
   }
 
   getCliente() {
     this.empresa.listEmpresa().subscribe((response: any) => {
       this.empresas = response;
-      console.log(this.empresas);
-
     });
   }
 

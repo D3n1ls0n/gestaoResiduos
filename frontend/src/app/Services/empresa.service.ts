@@ -42,8 +42,8 @@ export class EmpresaService {
     this.recarregarEmpresasSubject.next(true);
   }
 
-  setEmpresaData(clienteData: any) {
-    this.recarregarEmpresasSubject.next(clienteData);
+  setEmpresaData(empresaData: any) {
+    this.empresaDataSubject.next(empresaData);
   }
 
   clearEmpresaData() {

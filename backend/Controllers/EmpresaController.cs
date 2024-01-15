@@ -35,6 +35,7 @@ public class EmpresaController : ControllerBase
                             empresas.Email,
                             empresas.IsActive,
                             empresas.IsDeleted,
+                            empresas.BairroId,
                             BairroNome = bairro.Nome,
                             // Adicione outras propriedades conforme necessário
                         }
