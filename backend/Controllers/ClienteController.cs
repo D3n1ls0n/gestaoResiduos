@@ -32,24 +32,44 @@ public class ClienteController : ControllerBase
 
     /* Get Cliente */
     [HttpGet("lista")]
-    public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
+public async Task<ActionResult<IEnumerable<object>>> GetClientes()
+{
+    try
     {
-        try
-        {
-            var clientes = await _dbContext
-                .Clientes
-                .Where(c => !c.IsDeleted)
-                .OrderByDescending(c => c.Id)
-                .ToListAsync();
+        var clientes = await _dbContext
+            .Clientes
+            .Where(c => !c.IsDeleted)
+            .OrderByDescending(c => c.Id)
+            .Join(
+                _dbContext.Bairros,
+                cliente => cliente.BairroId,
+                bairro => bairro.Id,
+                (cliente, bairro) => new
+                {
+                    cliente.Id,
+                    cliente.Nome,
+                    cliente.Sobrenome,
+                    cliente.BairroId,
+                    cliente.Telefone,
+                    cliente.Contribuinte,
+                    cliente.Email,
+                    cliente.IsActive,
+                    cliente.IsDeleted,
+                    BairroNome = bairro.Nome,
+                    // Adicione outras propriedades conforme necessário
+                }
+            )
+            .ToListAsync();
 
-            return Ok(clientes);
-        }
-        catch (Exception)
-        {
-            // Logue a exceção, e retorne um StatusCode 500 ou outra resposta apropriada
-            return StatusCode(500, "Erro ao recuperar clientes do banco de dados.");
-        }
+        return Ok(clientes);
     }
+    catch (Exception)
+    {
+        // Logue a exceção, e retorne um StatusCode 500 ou outra resposta apropriada
+        return StatusCode(500, "Erro ao recuperar clientes do banco de dados.");
+    }
+}
+
 
     [HttpPost("register")]
     public async Task<ActionResult<Cliente>> CreateCliente([FromBody] Cliente clienteInput)
