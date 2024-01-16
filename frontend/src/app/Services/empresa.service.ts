@@ -30,6 +30,10 @@ export class EmpresaService {
     return this.http.patch<any>(`${this.baseUrl}/api/empresa/delete/${id}`, {});
   }
 
+  listEmailEmpresa(): Observable<any> {
+    return this.http.get<any>(this.baseUrl + '/api/empresa/lista/email');
+  }
+
   emitRecarregarEmpresas(recarregar: boolean) {
     this.recarregarEmpresasSubject.next(recarregar);
   }

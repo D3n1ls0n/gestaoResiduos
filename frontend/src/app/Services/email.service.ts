@@ -11,9 +11,10 @@ export class EmailService {
 
   constructor(private http: HttpClient) {}
 
-  senemail(): Observable<any> {
-    const email = 'denilson105joao@gmail.com';
+  sendemail(email: any): Observable<any> {
+    console.log(email);
 
+    //const email = 'denilson105joao@gmail.com';
     return this.http.post<any>(this.baseUrl + '/api/mail/sendemail', {email});
   }
 }

@@ -24,13 +24,13 @@ export class DefaultLayoutComponent {
 
 
   sendEmail() {
-    this.email.senemail().subscribe((response: any) => {
+    this.email.sendemail("denilson105joao@gmail.com").subscribe((response: any) => {
       console.log(response);
     });
   }
 
   ngOnInit() {
     this.obterDados();
-    //this.sendEmail();
+    /* this.sendEmail(); */
   }
 }

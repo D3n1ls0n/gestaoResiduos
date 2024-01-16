@@ -12,7 +12,7 @@
 
     <c-col class="position-relative" [md]="4">
       <label cLabel for="email"><svg cIcon name="cilAt"></svg> E-mail</label><input required cFormControl id="email"
-        type="text" placeholder="Quantidade"  [disabled]="true" />
+        type="text" placeholder="Quantidade" formControlName="quantidade" />
       <c-form-feedback [valid]="false" tooltip>Designação do sobrenome inválida!</c-form-feedback>
     </c-col>
 
