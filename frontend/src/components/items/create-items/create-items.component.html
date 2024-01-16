@@ -1,9 +1,8 @@
 <c-container *ngIf="loading == false">
   <h5><svg cIcon name="cilBabyCarriage"></svg> Adicionar Resíduos Para Aquisição</h5>
   <hr />
-  <form cForm class="row g-3" (ngSubmit)="submit()" [validated]="validateForm">
-
-    <c-col class="position-relative mt-6" style="margin-left: 13%;" [md]="9">
+  <form cForm class="row g-3" [formGroup]="meuFormulario" (ngSubmit)="submit()" [validated]="validateForm">
+    <c-col class="position-relative mt-1" style="margin-left: 13%;" [md]="9">
       <c-callout color="dark">
         <div class="text-style my-1"><svg cIcon name="cilLineWeight"></svg> ADICIONAR ITENS</div>
         <hr>
@@ -14,107 +13,62 @@
               Os ítens selecionados serão para a aquisição!
             </div>
           </div>
+          <!-- <c-col class="position-relative" [md]="4">
+            <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Bairro</label>
+            <select aria-label="Default select example" cSelect (change)="seletectCriterial($event)">
+              <option value="" disabled selected>Escolha um bairro</option>
+              <option *ngFor="let s of stocks" [ngValue]="{nome: s.residuoNome, quantidade: s.quantidade}">{{ s.residuoNome }}</option>
+            </select>
+          </c-col> -->
           <c-col class="position-relative" [md]="4">
-            <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Resíduo</label>
-            <select aria-label="Default select example" cSelect>
-              <option>Open this select menu</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+            <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Bairro</label>
+            <select aria-label="Default select example" cSelect [(ngModel)]="residuo_.nome"
+              [ngModelOptions]="{ standalone: true }" (change)="seletectCriterial($event)">
+              <option value="" disabled selected>Escolha um bairro</option>
+              <option *ngFor="let s of stocks" [value]="s.residuoNome" [attr.data-quantidade]="s.quantidade" [attr.data-residuoId]="s.residuoId">
+                {{ s.residuoNome }}
+              </option>
             </select>
           </c-col>
-          <c-col class="position-relative" [md]="3">
-            <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Quantidade</label>
-            <input cFormControl required type="number" min="0" placeholder="Quantidade">
+
+
+          <c-col class="position-relative" [md]="4">
+            <label cLabel for="email"><svg cIcon name="cilAt"></svg> Quantidade</label><input required cFormControl
+              id="email" type="text" placeholder="Quantidade" [(ngModel)]="residuo_.qtd"
+              [ngModelOptions]="{ standalone: true }" [disabled]="true" />
+            <c-form-feedback [valid]="false" tooltip>Designação do sobrenome inválida!</c-form-feedback>
           </c-col>
+
+
           <c-col class="position-relative" [md]="1">
             <label cLabel for="procedures" class="text-white">1</label>
-            <button cButton color="success" class="text-white" shape="rounded-0">
+            <button cButton color="success" class="text-white" shape="rounded-0" (click)="addResiduo()">
               <svg cIcon name="cilPlus"></svg>
             </button>
           </c-col>
         </c-row>
-        <!-- <table *ngIf="loading == false" class="table table-hover">
+        <table cTable *ngIf="residuo.length > 0; else noCriteria">
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Nome</th>
-              <th scope="col">E-mail</th>
-              <th scope="col">Telefone</th>
-              <th scope="col">Telefone</th>
-              <th>Acção</th>
+              <th class="text-center" scope="col">Artigo</th>
+              <th class="text-center" scope="col">Quantidade</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>mdo</td>
-              <td>mdo</td>
-              <td>
-                <c-dropdown direction="dropend">
-                  <button cButton cDropdownToggle color="secondary" shape="rounded-0" size="sm" class="text-white">
-                    Opções
-                  </button>
-                  <ul cDropdownMenu>
-                    <li>
-                      <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
-                        <svg cIcon name="cilPenAlt"></svg>
-                      </a>
-                    </li>
-
-                  </ul>
-                </c-dropdown>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>fat</td>
-              <td>fat</td>
-              <td>
-                <c-dropdown direction="dropend">
-                  <button cButton cDropdownToggle color="secondary" shape="rounded-0" size="sm" class="text-white">
-                    Opções
-                  </button>
-                  <ul cDropdownMenu>
-                    <li>
-                      <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
-                        <svg cIcon name="cilPenAlt"></svg>
-                      </a>
-                    </li>
-
-                  </ul>
-                </c-dropdown>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td colspan="2">Larry the Bird</td>
-              <td>twitter</td>
-              <td>twitter</td>
-              <td>
-                <c-dropdown direction="dropend">
-                  <button cButton cDropdownToggle color="secondary" shape="rounded-0" size="sm" class="text-white">
-                    Opções
-                  </button>
-                  <ul cDropdownMenu>
-                    <li>
-                      <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
-                        <svg cIcon name="cilPenAlt"></svg>
-                      </a>
-                    </li>
-
-                  </ul>
-                </c-dropdown>
-              </td>
+            <tr *ngFor="let r of residuo;">
+              <td class="text-center">{{ r.nome }}</td>
+              <td class="text-center">{{ r.qtd }}</td>
+              <td style="display: flex; justify-content: flex-end;"><button cButton color="danger" class="text-white"
+                  shape="rounded-0" (click)="removeResiduo(r)">
+                  <svg cIcon name="cilTrash"></svg>
+                </button></td>
             </tr>
           </tbody>
-        </table> -->
+        </table>
+
         <ng-template #noCriteria>
-          <h5 class="text-muted text-center">Sem critérios!</h5>
+          <h5 class="text-muted text-center">Sem artigo selecionado!</h5>
         </ng-template>
       </c-callout>
     </c-col>

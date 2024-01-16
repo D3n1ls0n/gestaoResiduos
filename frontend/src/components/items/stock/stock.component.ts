@@ -60,14 +60,7 @@ export class StockComponent {
         this.toast.success('Stock adicionado com sucesso!', 'Stock');
         this.cancel('createStockModal');
         this.stock.emitRecarregarStock(true);
-        this.sendEmail();
-        /* this.empresa.listEmailEmpresa().subscribe((response: any) => {
-          response.forEach((element: any) => {
-            this.email
-              .sendemail(element.email)
-              .subscribe((response: any) => {});
-          });
-        }); */
+        // this.sendEmail();  ACTIVA ESSA FUNÇÃO PARA ENVIAR E-MAIL
       } else {
         this.toast.error('Erro ao registar stock!', 'Stock');
         return;
@@ -77,9 +70,6 @@ export class StockComponent {
 
   sendEmail() {
     this.empresa.listEmailEmpresa().subscribe((response: any) => {
-      /*  response.forEach((element: any) => {
-        this.email.sendemail(element.email).subscribe((response: any) => {});
-      }); */
       const intervalo = 5000; // 5 segundos
       from(response)
         .pipe(
