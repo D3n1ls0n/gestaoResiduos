@@ -58,7 +58,6 @@ import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
 import { FormsModule } from '@angular/forms';
 import { CalloutModule } from '@coreui/angular';
 
-
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { ClientsComponent } from '@docs-components/clients/clients.component';
 import { ItemsComponent } from '@docs-components/items/items.component';
@@ -79,6 +78,7 @@ import { EditRewardTypeComponent } from '@docs-components/configurations/reward-
 import { WastTypeComponent } from '@docs-components/configurations/wast-type/wast-type.component';
 import { EditWastTypeComponent } from '@docs-components/configurations/wast-type/edit-wast-type/edit-wast-type.component';
 import { CreateItemsComponent } from '@docs-components/items/create-items/create-items.component';
+import { StockComponent } from '@docs-components/items/stock/stock.component';
 import { ToastrModule } from 'ngx-toastr';
 
 const APP_CONTAINERS = [
@@ -107,7 +107,8 @@ const COMPONENTS = [
   EditWastTypeComponent,
   CreateItemsComponent,
   EditClientsComponent,
-  CreateClientsComponent
+  CreateClientsComponent,
+  StockComponent,
 ];
 
 @NgModule({
@@ -148,7 +149,7 @@ const COMPONENTS = [
     NgSelectModule,
     FormsModule,
     CalloutModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
   ],
   providers: [
     {

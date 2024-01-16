@@ -16,6 +16,13 @@ export class ItemsComponent {
     this.modal.getModal(modalId).open();
   }
 
+  openCreateStock(modalId: string): void {
+    this.modal.getModal(modalId).open();
+  }
+
+
+
+
 
   openEditClient(modalId: string): void {
     this.modal.getModal(modalId).open();

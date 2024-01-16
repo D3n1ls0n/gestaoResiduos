@@ -5,6 +5,9 @@
     <c-row class="align-items-center my-2 w-103">
 
       <c-col xs="12" class="d-flex justify-content-end">
+        <button cButton color="warning" class="text-white" size="sm" shape="rounded-0" (click)="openCreateStock('createStockModal')">
+          <svg cIcon name="cilHistory"></svg> Stock
+        </button>
         <button cButton color="secondary" class="text-white" size="sm" shape="rounded-0">
           <svg cIcon name="cilHistory"></svg> Recarregar
         </button>
@@ -51,6 +54,10 @@
   </c-container>
   <ngx-smart-modal identifier="createItemsModal" customClass="lg">
     <app-create-items></app-create-items>
+  </ngx-smart-modal>
+
+  <ngx-smart-modal identifier="createStockModal" customClass="md">
+    <app-stock></app-stock>
   </ngx-smart-modal>
 </div>
 <c-container cPlaceholderAnimation="glow" class="bg-white p-5" *ngIf="loading == true">
