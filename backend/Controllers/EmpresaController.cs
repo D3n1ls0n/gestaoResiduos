@@ -12,8 +12,6 @@ public class EmpresaController : ControllerBase
         _dbContext = dbContext;
     }
 
-
-
     [HttpGet("lista")]
     public async Task<ActionResult<IEnumerable<object>>> GetEmpresas()
     {
@@ -51,9 +49,37 @@ public class EmpresaController : ControllerBase
         }
     }
 
+    [HttpGet("lista/email")]
+    public async Task<ActionResult<IEnumerable<object>>> GetEmailEmpresas()
+    {
+        try
+        {
+            var empresaEmail = await _dbContext
+                .Empresas.Where(c => !c.IsDeleted)
+                .OrderByDescending(c => c.Id)
+                .Join(
+                    _dbContext.Bairros,
+                    empresas => empresas.BairroId,
+                    bairro => bairro.Id,
+                    (empresas, bairro) =>
+                        new
+                        {
+                            empresas.Email,
+                            // Adicione outras propriedades conforme necessário
+                        }
+                )
+                .ToListAsync();
 
+            return Ok(empresaEmail);
+        }
+        catch (Exception)
+        {
+            // Logue a exceção, e retorne um StatusCode 500 ou outra resposta apropriada
+            return StatusCode(500, "Erro ao recuperar clientes do banco de dados.");
+        }
+    }
 
-[HttpPost("register")]
+    [HttpPost("register")]
     public async Task<ActionResult<Empresa>> CreateEmpresa([FromBody] Empresa empresaInput)
     {
         Console.WriteLine(1);
@@ -83,8 +109,7 @@ public class EmpresaController : ControllerBase
         return BadRequest(ModelState);
     }
 
-
- [HttpPut("{id}")]
+    [HttpPut("{id}")]
     public async Task<ActionResult<Empresa>> EditarEmpresa(int id, [FromBody] Empresa empresaInput)
     {
         try
@@ -102,7 +127,6 @@ public class EmpresaController : ControllerBase
             empresaExistente.Telefone = empresaInput.Telefone;
             empresaExistente.Email = empresaInput.Email;
 
-
             // Marcar como modificado
             _dbContext.Entry(empresaExistente).State = EntityState.Modified;
 
@@ -117,7 +141,7 @@ public class EmpresaController : ControllerBase
         }
     }
 
-[HttpPatch("delete/{id}")]
+    [HttpPatch("delete/{id}")]
     public async Task<ActionResult<Empresa>> DeleteEmpresa(int id)
     {
         try
@@ -131,7 +155,6 @@ public class EmpresaController : ControllerBase
 
             // Atualizar os campos do cliente existente
             empresaExistente.IsDeleted = true;
-           
 
             // Marcar como modificado
             _dbContext.Entry(empresaExistente).State = EntityState.Modified;
@@ -146,7 +169,4 @@ public class EmpresaController : ControllerBase
             return StatusCode(500, "Erro ao eliminar o cliente no banco de dados.");
         }
     }
-
-
-
 }

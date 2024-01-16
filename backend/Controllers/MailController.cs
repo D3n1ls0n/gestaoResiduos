@@ -21,16 +21,21 @@ public class MailController : ControllerBase
 
                 // Autenticação
                 client.Credentials = new NetworkCredential(
-                    "denilson47joao@outlook.com",
+                    "limpo.horizonte_@outlook.com",
                     "105Denis"
                 );
+
+                /* client.Credentials = new NetworkCredential(
+                    "denilson47joao@outlook.com",
+                    "105Denis"
+                ); */
 
                 // Criar e-mail
                 var mailMessage = new MailMessage
                 {
-                    From = new MailAddress("denilson47joao@outlook.com"),
+                    From = new MailAddress("limpo.horizonte_@outlook.com"),
                     Subject = "Assunto do E-mail",
-                    Body = "Conteúdo do E-mail",
+                    Body = "Conteudo do E-mail",
                     IsBodyHtml = true
                 };
 
@@ -41,7 +46,11 @@ public class MailController : ControllerBase
 
 
                 // Enviar e-mail
-                await client.SendMailAsync(mailMessage);
+                await client.SendMailAsync(mailMessage); 
+
+                // Aguardar 5 segundos antes de enviar o próximo e-mail
+                await Task.Delay(TimeSpan.FromSeconds(4));
+
                 Console.WriteLine(emailRequest.Email);
                 return Ok(new { Message = "E-mail enviado com sucesso." });
             }
