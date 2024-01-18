@@ -48,6 +48,7 @@ public class StockController : ControllerBase
                             ResiduoNome = residuo.Nome, // Adicione outras propriedades conforme necessário
                         }
                 )
+                .Where(stock => stock.Quantidade > 0) // Filtra apenas os itens com quantidade maior que 0
                 .ToListAsync();
 
             return Ok(stock);

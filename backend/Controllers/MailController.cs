@@ -34,8 +34,8 @@ public class MailController : ControllerBase
                 var mailMessage = new MailMessage
                 {
                     From = new MailAddress("limpo.horizonte_@outlook.com"),
-                    Subject = "Assunto do E-mail",
-                    Body = "Conteudo do E-mail",
+                    Subject = "Residuos disponiveis para aquisição!",
+                    Body = "Existem disponíveis novos resíduos.",
                     IsBodyHtml = true
                 };
 
