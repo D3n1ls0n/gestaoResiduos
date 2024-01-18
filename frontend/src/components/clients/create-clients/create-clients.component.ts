@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 })
 export class CreateClientsComponent {
   public neigahood: any;
-
+  public email: any;
 
   constructor(
     public modal: NgxSmartModalService,
@@ -27,6 +27,7 @@ export class CreateClientsComponent {
 
   public loading: boolean = false;
   public validateForm: boolean = false;
+  public validateEmail_: boolean = false;
   public neighborHood: any;
   public meuFormulario: any;
   public bairroSelecionado: any;
@@ -46,12 +47,25 @@ export class CreateClientsComponent {
     this.modal.getModal(modalId).close();
   }
 
+  validateEmail(e: any) {
+    let email = e.target.value;
+    let isValid = this.validateEmail__(email);
+    this.validateEmail_ = isValid
+
+  }
+
+
+  validateEmail__(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
   selectNeighborHood(evt: any) {
     this.bairroSelecionado = evt.target.value;
   }
 
   submit() {
-    let data = this.meuFormulario.value;/*
+    let data = this.meuFormulario.value; /*
     data.bairroId = this.bairroSelecionado; */
     this.cliente.createCliente(data).subscribe((response: any) => {
       if (response) {
@@ -61,7 +75,7 @@ export class CreateClientsComponent {
         this.cliente.emitRecarregarClientes(true);
       } else {
         this.toast.error('Erro ao registar cliente!', 'Clientes');
-        return
+        return;
       }
     });
   }
@@ -75,5 +89,6 @@ export class CreateClientsComponent {
   ngOnInit() {
     this.createFrm();
     this.obterBairros();
+    this.meuFormulario.reset();
   }
 }

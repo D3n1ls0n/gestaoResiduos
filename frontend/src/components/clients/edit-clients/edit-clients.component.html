@@ -3,32 +3,32 @@
   <hr />
   <form cForm class="row g-3" [formGroup]="meuFormulario" [validated]="validateForm">
     <c-col class="position-relative" [md]="4">
-      <label cLabel for="projects"><svg cIcon name="cilPenAlt"></svg> Nome</label><input required cFormControl id="name"
+      <label cLabel for="projects"><svg cIcon name="cilPenAlt"></svg> Nome<sup class="text-danger">*</sup></label><input required cFormControl id="name"
         type="text" placeholder="Nome" formControlName="nome" />
       <c-form-feedback [valid]="false" tooltip>Designação do nome inválido!</c-form-feedback>
     </c-col>
     <c-col class="position-relative" [md]="4">
-      <label cLabel for="sobrenome"><svg cIcon name="cilPenAlt"></svg> Sobrenome</label><input required cFormControl
+      <label cLabel for="sobrenome"><svg cIcon name="cilPenAlt"></svg> Sobrenome<sup class="text-danger">*</sup></label><input required cFormControl
         id="sobrenome" type="text" placeholder="Sobrenome" formControlName="sobrenome"/>
       <c-form-feedback [valid]="false" tooltip>Designação do sobrenome inválida!</c-form-feedback>
     </c-col>
     <c-col class="position-relative" [md]="4">
-      <label cLabel for="telefone"><svg cIcon name="cilScreenSmartphone"></svg> Telefone</label><input required
+      <label cLabel for="telefone"><svg cIcon name="cilScreenSmartphone"></svg> Telefone<sup class="text-danger">*</sup></label><input required
         cFormControl id="telefone" type="text" placeholder="Telefone" formControlName="telefone"/>
       <c-form-feedback [valid]="false" tooltip>Designação do sobrenome inválida!</c-form-feedback>
     </c-col>
     <c-col class="position-relative" [md]="4">
-      <label cLabel for="email"><svg cIcon name="cilAt"></svg> E-mail</label><input required cFormControl id="email"
+      <label cLabel for="email"><svg cIcon name="cilAt"></svg> E-mail<sup class="text-danger">*</sup></label><input required cFormControl id="email"
         type="text" placeholder="E-mail" formControlName="email"/>
       <c-form-feedback [valid]="false" tooltip>Designação do sobrenome inválida!</c-form-feedback>
     </c-col>
     <c-col class="position-relative" [md]="4">
-      <label cLabel for="nif"><svg cIcon name="cilListNumbered"></svg> NIF</label>
+      <label cLabel for="nif"><svg cIcon name="cilListNumbered"></svg> NIF<sup class="text-danger">*</sup></label>
       <!-- <sup class="text-danger">*</sup> -->
       <input type="text" cFormControl id="nif" placeholder="NIF" formControlName="contribuinte"/>
     </c-col>
     <c-col class="position-relative" [md]="4">
-      <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Bairro</label>
+      <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Bairro<sup class="text-danger">*</sup></label>
       <select aria-label="Default select example" (change)="selectNeighborHood($event)" cSelect formControlName="bairroId">
         <option value="" disabled selected>Escolha um bairro</option>
         <option *ngFor="let bairro of neigahood" [value]="bairro.id">{{ bairro.nome }}</option>
@@ -44,7 +44,7 @@
         (click)="cancel('editClientModal')">
         <svg cIcon name="cilXCircle"></svg> Cancelar
       </button>
-      <button cButton class="me-1 text-white" shape="rounded-0" color="success" size="sm" type="submit" (click)="submit()">
+      <button cButton class="me-1 text-white" shape="rounded-0" color="success" size="sm" type="submit" (click)="submit()" [disabled]="!meuFormulario.dirty || meuFormulario.invalid">
         <svg cIcon name="cilPlus"></svg> Actualizar
       </button>
     </c-container>

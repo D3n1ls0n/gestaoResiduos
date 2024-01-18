@@ -26,6 +26,7 @@ export class EditClientsComponent {
   public neighborHood: any;
   public bairroSelecionado: any;
   public neigahood: any;
+  public validateEmail_: boolean = false;
 
   getModalData() {
     this.cliente.clienteData$.subscribe((data) => {
@@ -41,6 +42,11 @@ export class EditClientsComponent {
 
   submit() {
     let data = this.meuFormulario.value;
+    this.validateEmail(data.email);
+    if (!this.validateEmail_) {
+      this.toast.error('O e-mail fornecido é inválido!', 'Clientes');
+      return
+    }
     /* data.bairroId = this.bairroSelecionado; */
     this.cliente
       .editCliente(data, this.clienteData.id)
@@ -76,6 +82,17 @@ export class EditClientsComponent {
     this.bairro.obterBairro().subscribe((response: any) => {
       this.neigahood = response;
     });
+  }
+
+  validateEmail(e: any) {
+    let email = e;
+    let isValid = this.validateEmail__(email);
+    this.validateEmail_ = isValid;
+  }
+
+  validateEmail__(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   }
 
   ngOnInit() {

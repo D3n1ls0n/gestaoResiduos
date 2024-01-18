@@ -64,8 +64,6 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
       response.forEach((element: any) => {
         if (element.quantidade > 0) {
           this.stocks.quantidade = i + 1;
-          console.log(i);
-
           i = i + 1;
         }
       });
