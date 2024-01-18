@@ -21,6 +21,7 @@ export class EditCompanyComponent {
     private empresa: EmpresaService
   ) {}
   public loading: boolean = false;
+  public validateEmail_: boolean = false
   public bairroSelecionado: any;
   public neigahood: any;
   public validateForm: boolean = false;
@@ -44,6 +45,11 @@ export class EditCompanyComponent {
 
   submit() {
     let data = this.meuFormulario.value;
+    this.validateEmail(data.email);
+    if (!this.validateEmail_) {
+      this.toast.error('O e-mail fornecido é inválido!', 'Clientes');
+      return
+    }
     /* data.bairroId = this.bairroSelecionado; */
     this.empresa
       .editEmpresa(data, this.empresaData.id)
@@ -58,6 +64,17 @@ export class EditCompanyComponent {
           return;
         }
       });
+  }
+
+  validateEmail(e: any) {
+    let email = e;
+    let isValid = this.validateEmail__(email);
+    this.validateEmail_ = isValid;
+  }
+
+  validateEmail__(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   }
 
   createFrm() {

@@ -6,6 +6,7 @@ import { NgModel } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { EmpresaService } from 'src/app/Services/empresa.service';
 import { FaturaService } from 'src/app/Services/fatura.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-items',
@@ -21,6 +22,8 @@ export class CreateItemsComponent {
     private empresa: EmpresaService,
     private fatura: FaturaService
   ) {}
+
+  recarregarStocksSubscription!: Subscription;
 
   public loading: boolean = false;
   public validateForm: boolean = false;
@@ -129,13 +132,17 @@ export class CreateItemsComponent {
     this.residuoToSend.ResiduoId = residuoId;
     this.residuoToSend.EmpresaId = this.empresaId;
     this.stokIds.Id = residuoId;
-
   }
   selectEmpresa(e: any) {
     this.empresaId = e.target.value;
   }
 
   submit() {
+    if (!this.empresaId) {
+      this.toast.error('É necessário selecionar uma empresa!', 'Item');
+      return;
+    }
+
     this.fatura.createFatura(this.residuoToSend_).subscribe((response: any) => {
       if (response) {
         this.meuFormulario.reset();
@@ -147,12 +154,26 @@ export class CreateItemsComponent {
       }
     });
     this.resetResiduo();
-    this.resetStockId(this.stokIds_)
+    this.resetStockId(this.stokIds_);
   }
 
   ngOnInit() {
     this.createFrm();
     this.getStock();
     this.getEmpresas();
+    // Inscreva-se no evento de recarregar clientes
+    this.recarregarStocksSubscription = this.stock
+      .getRecarregarStocksObservable()
+      .subscribe((recarregar) => {
+        if (recarregar) {
+          this.getStock();
+        }
+      });
+      this.empresaId = null
+      this.residuo_.nome = null
+  }
+
+  ngOnDestroy(): void {
+    this.recarregarStocksSubscription.unsubscribe();
   }
 }

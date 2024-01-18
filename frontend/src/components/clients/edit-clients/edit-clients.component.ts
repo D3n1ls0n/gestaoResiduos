@@ -27,6 +27,8 @@ export class EditClientsComponent {
   public bairroSelecionado: any;
   public neigahood: any;
   public validateEmail_: boolean = false;
+  public validateNumber: boolean = false
+  public validateNif: boolean = false
 
   getModalData() {
     this.cliente.clienteData$.subscribe((data) => {
@@ -93,6 +95,17 @@ export class EditClientsComponent {
   validateEmail__(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  }
+
+
+  containsOnlyNumbersNIF(value: any) {
+    const regex = /^[0-9]+$/;
+    this.validateNif = regex.test(value.target.value);
+  }
+
+  containsOnlyNumbers(value: any) {
+    const regex = /^[0-9]+$/;
+    this.validateNumber = regex.test(value.target.value);
   }
 
   ngOnInit() {

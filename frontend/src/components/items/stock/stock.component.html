@@ -1,32 +1,32 @@
 <c-container *ngIf="loading == false">
-  <h5><svg cIcon name="cilPeople"></svg> Registar Stock</h5>
+  <h5><svg cIcon name="cilViewModule"></svg> Registar Stock</h5>
   <hr />
   <form cForm class="row g-3" [formGroup]="meuFormulario" [validated]="validateForm">
-    <c-col class="position-relative" [md]="4">
-      <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Bairro</label>
+    <c-col class="position-relative" [md]="6">
+      <label cLabel for="procedures"><svg cIcon name="cilLocationPin"></svg> Resíduo<sup class="text-danger">*</sup></label>
       <select aria-label="Default select example" formControlName="residuoId" cSelect>
-        <option value="" disabled selected>Escolha um bairro</option>
+        <option value="" disabled selected>Escolha um resíduo</option>
         <option *ngFor="let redisuo of redisuo" [value]="redisuo.id">{{ redisuo.nome }}</option>
       </select>
     </c-col>
 
-    <c-col class="position-relative" [md]="4">
-      <label cLabel for="email"><svg cIcon name="cilAt"></svg> Quantidade</label><input required cFormControl id="email"
-        type="text" placeholder="Quantidade" formControlName="quantidade" />
+    <c-col class="position-relative" [md]="6">
+      <label cLabel for="email"><svg cIcon name="cilSortAscending"></svg> Quantidade<sup class="text-danger">*</sup></label><input required cFormControl id="email"
+        type="text" placeholder="Quantidade" formControlName="quantidade" (input)="containsOnlyNumbers($event)" />
       <c-form-feedback [valid]="false" tooltip>Designação do sobrenome inválida!</c-form-feedback>
     </c-col>
 
 
     <c-container class="mb-3 mt-5 d-flex justify-content-end col-ctl-cr" style="gap: 3px">
-      <button cButton class="text-white" shape="rounded-0" color="warning" size="sm" type="button"
+      <!-- <button cButton class="text-white" shape="rounded-0" color="warning" size="sm" type="button"
         title="Validar Formulário">
         <svg cIcon name="cilCheckAlt"></svg> Validar
-      </button>
+      </button> -->
       <button cButton color="danger" shape="rounded-0" type="reset" class="text-white" size="sm"
         (click)="cancel('createStockModal')">
         <svg cIcon name="cilXCircle"></svg> Cancelar
       </button>
-      <button cButton class="me-1 text-white" shape="rounded-0" color="success" size="sm" type="submit" (click)="submit()" [disabled]="meuFormulario.invalid">
+      <button cButton class="me-1 text-white" shape="rounded-0" color="success" size="sm" type="submit" (click)="submit()" [disabled]="meuFormulario.invalid || !validateQtd">
         <svg cIcon name="cilPlus"></svg> Registar
       </button>
     </c-container>

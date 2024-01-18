@@ -14,8 +14,10 @@
             </div>
           </div>
           <c-col class="position-relative mb-2" [md]="12">
-            <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Empresa</label>
-            <select aria-label="Default select example" cSelect (change)="selectEmpresa($event)" formControlName="empresaId">
+            <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Empresa<sup
+                class="text-danger">*</sup></label>
+            <select aria-label="Default select example" cSelect (change)="selectEmpresa($event)"
+              formControlName="empresaId">
               <option value="" disabled selected>Escolha uma empresa</option>
               <option *ngFor="let e of empresas" [value]="e.id">
                 {{ e.nome }}
@@ -24,29 +26,33 @@
           </c-col>
 
 
-          <c-col class="position-relative" [md]="4">
-            <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Bairro</label>
+          <c-col class="position-relative" [md]="5">
+            <label cLabel for="procedures"><svg cIcon name="cilDrop"></svg> Resíduo<sup
+                class="text-danger">*</sup></label>
             <select aria-label="Default select example" cSelect [(ngModel)]="residuo_.nome"
               [ngModelOptions]="{ standalone: true }" (change)="seletectCriterial($event)">
-              <option value="" disabled selected>Escolha um bairro</option>
-              <option *ngFor="let s of stocks" [value]="s.residuoNome" [attr.data-quantidade]="s.quantidade" [attr.data-residuoId]="s.residuoId">
+              <option value="" disabled selected>Escolha um resíduo</option>
+              <option *ngFor="let s of stocks" [value]="s.residuoNome" [attr.data-quantidade]="s.quantidade"
+                [attr.data-residuoId]="s.residuoId">
                 {{ s.residuoNome }}
               </option>
             </select>
           </c-col>
 
 
-          <c-col class="position-relative" [md]="4">
-            <label cLabel for="email"><svg cIcon name="cilAt"></svg> Quantidade</label><input required cFormControl
-              id="email" type="text" placeholder="Quantidade" [(ngModel)]="residuo_.qtd"
-              [ngModelOptions]="{ standalone: true }" [disabled]="true" />
+          <c-col class="position-relative" [md]="5">
+            <label cLabel for="email"><svg cIcon name="cilSortAscending"></svg> Quantidade<sup
+                class="text-danger">*</sup></label><input required cFormControl id="email" type="text"
+              placeholder="Quantidade" [(ngModel)]="residuo_.qtd" [ngModelOptions]="{ standalone: true }"
+              [disabled]="true" />
             <c-form-feedback [valid]="false" tooltip>Designação do sobrenome inválida!</c-form-feedback>
           </c-col>
 
 
           <c-col class="position-relative" [md]="1">
             <label cLabel for="procedures" class="text-white">1</label>
-            <button cButton color="success" class="text-white" shape="rounded-0" (click)="addResiduo()">
+            <button cButton color="success" class="text-white" shape="rounded-0" (click)="addResiduo()"
+              [disabled]="!residuo_.nome || !empresaId || residuo_.qtd == 0">
               <svg cIcon name="cilPlus"></svg>
             </button>
           </c-col>
@@ -72,22 +78,23 @@
         </table>
 
         <ng-template #noCriteria>
-          <h5 class="text-muted text-center">Sem artigo selecionado!</h5>
+          <h5 class="text-muted text-center" style="padding: 1rem;">Sem artigo selecionado!</h5>
         </ng-template>
       </c-callout>
     </c-col>
 
 
     <c-container class="mb-3 mt-5 d-flex justify-content-end col-ctl-cr" style="gap: 3px">
-      <button cButton class="text-white" shape="rounded-0" color="warning" size="sm" type="button"
+      <!--  <button cButton class="text-white" shape="rounded-0" color="warning" size="sm" type="button"
         title="Validar Formulário">
         <svg cIcon name="cilCheckAlt"></svg> Validar
-      </button>
+      </button> -->
       <button cButton color="danger" shape="rounded-0" type="reset" class="text-white" size="sm"
         (click)="cancel('createItemsModal')">
         <svg cIcon name="cilXCircle"></svg> Cancelar
       </button>
-      <button cButton class="me-1 text-white" shape="rounded-0" color="success" size="sm" (click)="submit()">
+      <button cButton class="me-1 text-white" shape="rounded-0" color="success" size="sm" (click)="submit()"
+        [disabled]="residuo.length == 0">
         <svg cIcon name="cilPlus"></svg> Registar
       </button>
     </c-container>

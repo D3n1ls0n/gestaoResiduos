@@ -54,7 +54,7 @@ export class EditSadnessComponent {
       if (response) {
         this.meuFormulario.reset();
         this.toast.success('Resíduo registado com sucesso!', 'Resíduos');
-        this.cancel('createSadnessModal');
+        this.cancel('editSadnessModal');
         this.residuo.emitRecarregarResiduo(true);
       } else {
         this.toast.error('Erro ao registar resíduo!', 'Resíduos');

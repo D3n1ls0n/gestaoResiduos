@@ -14,7 +14,7 @@
     </c-col>
     <c-col class="position-relative" [md]="4">
       <label cLabel for="telefone"><svg cIcon name="cilScreenSmartphone"></svg> Telefone<sup class="text-danger">*</sup></label><input required
-        cFormControl id="telefone" type="text" placeholder="Telefone" formControlName="telefone"/>
+        cFormControl id="telefone" type="text" placeholder="Telefone" formControlName="telefone" (input)="containsOnlyNumbers($event)"/>
       <c-form-feedback [valid]="false" tooltip>Designação do sobrenome inválida!</c-form-feedback>
     </c-col>
     <c-col class="position-relative" [md]="4">
@@ -25,7 +25,7 @@
     <c-col class="position-relative" [md]="4">
       <label cLabel for="nif"><svg cIcon name="cilListNumbered"></svg> NIF<sup class="text-danger">*</sup></label>
       <!-- <sup class="text-danger">*</sup> -->
-      <input type="text" cFormControl id="nif" placeholder="NIF" formControlName="contribuinte"/>
+      <input type="text" cFormControl id="nif" placeholder="NIF" formControlName="contribuinte" (input)="containsOnlyNumbersNIF($event)"/>
     </c-col>
     <c-col class="position-relative" [md]="4">
       <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Bairro<sup class="text-danger">*</sup></label>
@@ -36,10 +36,10 @@
     </c-col>
 
     <c-container class="mb-3 mt-5 d-flex justify-content-end col-ctl-cr" style="gap: 3px">
-      <button cButton class="text-white" shape="rounded-0" color="warning" size="sm" type="button"
+     <!--  <button cButton class="text-white" shape="rounded-0" color="warning" size="sm" type="button"
         title="Validar Formulário">
         <svg cIcon name="cilCheckAlt"></svg> Validar
-      </button>
+      </button> -->
       <button cButton color="danger" shape="rounded-0" type="reset" class="text-white" size="sm"
         (click)="cancel('editClientModal')">
         <svg cIcon name="cilXCircle"></svg> Cancelar

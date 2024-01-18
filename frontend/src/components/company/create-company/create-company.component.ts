@@ -25,8 +25,8 @@ export class CreateCompanyComponent {
   public validateForm: boolean = false;
   public meuFormulario: any;
   public neigahood: any;
-  public bairroSelecionado: any
-
+  public bairroSelecionado: any;
+  public validateEmail_: boolean = false;
 
   createFrm() {
     this.meuFormulario = this.utils.createForm(
@@ -37,8 +37,6 @@ export class CreateCompanyComponent {
     );
   }
 
-
-
   cancel(modalId: any) {
     this.modal.getModal(modalId).close();
   }
@@ -47,9 +45,8 @@ export class CreateCompanyComponent {
     this.bairroSelecionado = evt.target.value;
   }
 
-
   submit() {
-    let data = this.meuFormulario.value;/*
+    let data = this.meuFormulario.value; /*
     data.bairroId = this.bairroSelecionado; */
     this.empresa.createEmpresa(data).subscribe((response: any) => {
       if (response) {
@@ -59,7 +56,7 @@ export class CreateCompanyComponent {
         this.empresa.emitRecarregarEmpresas(true);
       } else {
         this.toast.error('Erro ao registar cliente!', 'Clientes');
-        return
+        return;
       }
     });
   }
@@ -68,6 +65,17 @@ export class CreateCompanyComponent {
     this.bairro.obterBairro().subscribe((response: any) => {
       this.neigahood = response;
     });
+  }
+
+  validateEmail(e: any) {
+    let email = e.target.value;
+    let isValid = this.validateEmail__(email);
+    this.validateEmail_ = isValid;
+  }
+
+  validateEmail__(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   }
 
   ngOnInit() {

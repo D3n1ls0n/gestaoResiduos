@@ -5,7 +5,7 @@
     <c-row class="align-items-center my-2 w-103">
 
       <c-col xs="12" class="d-flex justify-content-end">
-        <button cButton color="secondary" class="text-white" size="sm" shape="rounded-0">
+        <button cButton color="secondary" class="text-white" size="sm" shape="rounded-0" (click)="this.getCliente()">
           <svg cIcon name="cilHistory"></svg> Recarregar
         </button>
         <button cButton color="success" class="text-white" size="sm" shape="rounded-0" (click)="openCreateSadness('createSadnessModal')">
@@ -20,8 +20,8 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Nome</th>
-          <th scope="col">Tipo</th>
-          <th scope="col">Gerador</th>
+          <th style="background: #eee;" scope="col">Tipo</th>
+          <th scope="col">Cliente</th>
           <th>Acção</th>
         </tr>
       </thead>
@@ -29,7 +29,7 @@
         <tr *ngFor="let r of residuos, index as i">
           <th scope="row">{{i+1}}</th>
           <td>{{ r.nome }}</td>
-          <td>{{ r.tipoResiduoNome }}</td>
+          <td style="background: #eee;">{{ r.tipoResiduoNome }}</td>
           <td>{{ r.clienteNome + " " + r.clienteSobrenome }}</td>
           <td>
             <c-dropdown direction="dropend">

@@ -3,13 +3,13 @@
   <hr />
   <form cForm class="row g-3" [formGroup]="meuFormulario" (ngSubmit)="submit()" [validated]="validateForm">
     <c-col class="position-relative" [md]="4">
-      <label cLabel for="projects"><svg cIcon name="cilPenAlt"></svg> Nome</label><input required cFormControl id="name"
+      <label cLabel for="projects"><svg cIcon name="cilPenAlt"></svg> Nome<sup class="text-danger">*</sup></label><input required cFormControl id="name"
         type="text" placeholder="Nome" formControlName="nome"/>
       <c-form-feedback [valid]="false" tooltip>Designação do nome inválido!</c-form-feedback>
     </c-col>
 
     <c-col class="position-relative" [md]="4">
-      <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Tipo</label>
+      <label cLabel for="procedures"><svg cIcon name="cilDrop"></svg> Tipo<sup class="text-danger">*</sup></label>
       <select aria-label="Default select example" (change)="selectCliente($event)" formControlName="tipoResiduoId" cSelect>
         <option value="" disabled selected>Escolha um tipo</option>
         <option *ngFor="let tipo of tipoResiduos" [value]="tipo.id">{{ tipo.nome }}</option>
@@ -17,7 +17,7 @@
     </c-col>
 
     <c-col class="position-relative" [md]="4">
-      <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Gerador</label>
+      <label cLabel for="procedures"><svg cIcon name="cilPeople"></svg> Cliente<sup class="text-danger">*</sup></label>
       <select aria-label="Default select example" (change)="selectCliente($event)" formControlName="clienteId" cSelect>
         <option value="" disabled selected>Escolha um gerador</option>
         <option *ngFor="let cliente of clientes" [value]="cliente.id">{{ cliente.nome }}</option>
@@ -26,14 +26,14 @@
 
 
     <c-container class="mb-3 mt-5 d-flex justify-content-end col-ctl-cr" style="gap: 3px">
-      <button cButton class="text-white" shape="rounded-0" color="warning" size="sm" type="button"
+      <!-- <button cButton class="text-white" shape="rounded-0" color="warning" size="sm" type="button"
         title="Validar Formulário" >
         <svg cIcon name="cilCheckAlt"></svg> Validar
-      </button>
+      </button> -->
       <button cButton color="danger" shape="rounded-0" type="reset" class="text-white" size="sm" (click)="cancel('editSadnessModal')">
         <svg cIcon name="cilXCircle"></svg> Cancelar
       </button>
-      <button [disabled]="!meuFormulario.dirty" cButton class="me-1 text-white" shape="rounded-0" color="success" size="sm" type="submit">
+      <button [disabled]="!meuFormulario.dirty" cButton class="me-1 text-white" shape="rounded-0" color="success" size="sm" type="submit" [disabled]="!meuFormulario.dirty" >
         <svg cIcon name="cilPlus"></svg> Actualizar
       </button>
     </c-container>

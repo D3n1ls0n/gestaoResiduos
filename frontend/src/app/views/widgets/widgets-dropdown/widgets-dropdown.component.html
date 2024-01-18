@@ -1,14 +1,8 @@
 <c-row>
   <c-col sm="6" xl="3">
-    <c-widget-stat-a
-      class="mb-4"
-      color="primary"
-      title="Clientes"
-      [routerLink]="'/clients'"
-      type="button"
-    >
+    <c-widget-stat-a class="mb-4" color="primary" title="Clientes" [routerLink]="'/clients'" type="button">
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-       {{clientes?.quantidade}}
+        {{clientes?.quantidade}}
       </ng-template>
       <!-- <ng-template cTemplateId="widgetActionTemplate">
         <c-dropdown alignment="end" variant="btn-group">
@@ -34,13 +28,7 @@
     </c-widget-stat-a>
   </c-col>
   <c-col sm="6" xl="3">
-    <c-widget-stat-a
-      [title]="'Resíduos'"
-      class="mb-4"
-      color="info"
-      [routerLink]="'/sadness'"
-      type="button"
-    >
+    <c-widget-stat-a [title]="'Resíduos'" class="mb-4" color="info" [routerLink]="'/sadness'" type="button">
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
         <span>{{ residuos?.quantidade }}</span>
       </ng-template>
@@ -63,13 +51,8 @@
     </c-widget-stat-a>
   </c-col>
   <c-col sm="6" xl="3">
-    <c-widget-stat-a
-      [title]="'Disponível Para Aquisição'"
-      class="mb-4"
-      color="warning"
-      [routerLink]="'/items'"
-      type="button"
-    >
+    <c-widget-stat-a [title]="'Disponível Para Aquisição'" class="mb-4" color="warning" [routerLink]="'/items'"
+      type="button">
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
         <span> {{stocks?.quantidade}} </span>
       </ng-template>
@@ -92,17 +75,11 @@
     </c-widget-stat-a>
   </c-col>
   <c-col sm="6" xl="3">
-    <c-widget-stat-a
-      [title]="'Empresas'"
-      class="mb-4"
-      color="danger"
-      [routerLink]="'/company'"
-      type="button"
-    >
+    <c-widget-stat-a [title]="'Empresas'" class="mb-4" color="danger" [routerLink]="'/company'" type="button">
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
         <span>{{empresas?.quantidade}}</span>
       </ng-template>
-     <!--  <ng-template cTemplateId="widgetActionTemplate">
+      <!--  <ng-template cTemplateId="widgetActionTemplate">
         <c-dropdown alignment="end" variant="btn-group">
           <button [caret]="false" cButton cDropdownToggle class="p-0" color="transparent">
             <svg cIcon class="text-high-emphasis-inverse" name="cilOptions"></svg>
@@ -121,3 +98,14 @@
     </c-widget-stat-a>
   </c-col>
 </c-row>
+
+
+<h4 style="
+                          font-size: 8.5rem;
+                          margin: 0 auto;
+                          margin-top: 60px;
+                          color: rgba(31, 34, 38, 0.02);
+                          font-weight: 600;
+                          text-align: center;
+                          font: italic;
+                      ">Limpo Horizonte</h4>

@@ -1,15 +1,15 @@
 <c-container *ngIf="loading == false">
-  <h5><svg cIcon name="cilPeople"></svg> Registar Cliente</h5>
+  <h5><svg cIcon name="cilGem"></svg> Registar Recompensa</h5>
   <hr />
   <form cForm class="row g-3" [formGroup]="meuFormulario" [validated]="validateForm">
     <c-col class="position-relative" [md]="4">
-      <label cLabel for="projects"><svg cIcon name="cilPenAlt"></svg> Nome</label><input required cFormControl id="name"
+      <label cLabel for="projects"><svg cIcon name="cilPenAlt"></svg> Nome<sup class="text-danger">*</sup></label><input required cFormControl id="name"
         type="text" placeholder="Nome" formControlName="Nome" />
       <c-form-feedback [valid]="false" tooltip>Designação do nome inválido!</c-form-feedback>
     </c-col>
 
     <c-col class="position-relative" [md]="4">
-      <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Tipo</label>
+      <label cLabel for="procedures"><svg cIcon name="cilGem"></svg> Tipo<sup class="text-danger">*</sup></label>
       <select aria-label="Default select example" formControlName="tipoRecompensaId" cSelect>
         <option value="" disabled selected>Escolha um tipo de recompensa</option>
         <option *ngFor="let tipo of tipoRecompensa" [value]="tipo.id">{{ tipo.nome }}</option>
@@ -17,16 +17,20 @@
     </c-col>
 
     <c-col class="position-relative" [md]="4">
-      <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Beneficiário</label>
+      <label cLabel for="procedures"><svg cIcon name="cilPeople"></svg> Beneficiário<sup class="text-danger">*</sup></label>
       <select aria-label="Default select example" formControlName="clienteId" cSelect>
         <option value="" disabled selected>Escolha um bairro</option>
         <option *ngFor="let clientes of clientes" [value]="clientes.id">{{ clientes.nome }}</option>
       </select>
     </c-col>
 
-    <c-col class="position-relative" [md]="4">
-      <label cLabel for="sobrenome"><svg cIcon name="cilPenAlt"></svg> Descrição</label><input required cFormControl
-        id="sobrenome" type="text" placeholder="Descrição" formControlName="Descricao" />
+    <c-col class="position-relative" [md]="12">
+      <label cLabel for="sobrenome"><svg cIcon name="cilPenAlt"></svg> Descrição<sup class="text-danger">*</sup></label>
+      <!-- <input required cFormControl
+        id="sobrenome" type="text" placeholder="Descrição" formControlName="Descricao" /> -->
+
+        <textarea cFormControl id="sobrenome" formControlName="Descricao" rows="3"
+                placeholder="Descrição"></textarea>
       <c-form-feedback [valid]="false" tooltip>Designação do sobrenome inválida!</c-form-feedback>
     </c-col>
 
@@ -35,16 +39,16 @@
 
 
     <c-container class="mb-3 mt-5 d-flex justify-content-end col-ctl-cr" style="gap: 3px">
-      <button cButton class="text-white" shape="rounded-0" color="warning" size="sm" type="button"
+     <!--  <button cButton class="text-white" shape="rounded-0" color="warning" size="sm" type="button"
         title="Validar Formulário">
         <svg cIcon name="cilCheckAlt"></svg> Validar
-      </button>
+      </button> -->
       <button cButton color="danger" shape="rounded-0" type="reset" class="text-white" size="sm"
         (click)="cancel('createClientModal')">
         <svg cIcon name="cilXCircle"></svg> Cancelar
       </button>
       <button cButton class="me-1 text-white" shape="rounded-0" color="success" size="sm" type="submit"
-        (click)="submit()">
+        (click)="submit()" [disabled]="meuFormulario.invalid" >
         <svg cIcon name="cilPlus"></svg> Registar
       </button>
     </c-container>

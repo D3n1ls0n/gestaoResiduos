@@ -32,6 +32,7 @@ export class StockComponent {
   public meuFormulario: any;
   public redisuo: any;
   public loading: boolean = false;
+  public validateQtd: boolean = false;
   public validateForm: any;
 
   createFrm() {
@@ -53,7 +54,6 @@ export class StockComponent {
 
   submit() {
     let data = this.meuFormulario.value;
-
     this.stock.createStock(data).subscribe((response: any) => {
       if (response) {
         this.meuFormulario.reset();
@@ -84,6 +84,17 @@ export class StockComponent {
         )
         .subscribe((result: any) => {});
     });
+  }
+
+  containsOnlyLetters(value: any): boolean {
+    const regex = /^[a-zA-Z]+$/; // Expressão regular para letras maiúsculas e minúsculas
+    return regex.test(value);
+  }
+
+  // Função para verificar se uma string contém apenas números
+  containsOnlyNumbers(value: any) {
+    const regex = /^[0-9]+$/;
+    this.validateQtd = regex.test(value.target.value);
   }
 
   ngOnInit() {

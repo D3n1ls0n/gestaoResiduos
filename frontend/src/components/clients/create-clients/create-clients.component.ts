@@ -28,6 +28,8 @@ export class CreateClientsComponent {
   public loading: boolean = false;
   public validateForm: boolean = false;
   public validateEmail_: boolean = false;
+  public validateNumber: boolean = false
+  public validateNif: boolean = false
   public neighborHood: any;
   public meuFormulario: any;
   public bairroSelecionado: any;
@@ -85,6 +87,17 @@ export class CreateClientsComponent {
       this.neigahood = response;
     });
   }
+
+  containsOnlyNumbersNIF(value: any) {
+    const regex = /^[0-9]+$/;
+    this.validateNif = regex.test(value.target.value);
+  }
+
+  containsOnlyNumbers(value: any) {
+    const regex = /^[0-9]+$/;
+    this.validateNumber = regex.test(value.target.value);
+  }
+
 
   ngOnInit() {
     this.createFrm();

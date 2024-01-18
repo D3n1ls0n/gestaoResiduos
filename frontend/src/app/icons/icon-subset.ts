@@ -100,7 +100,9 @@ import {
   cilScreenSmartphone,
   cilRoom,
   cilAt,
-  cilLineWeight
+  cilLineWeight,
+  cilViewModule,
+  cilSortAscending
 } from '@coreui/icons';
 
 export const iconSubset = {
@@ -205,7 +207,9 @@ export const iconSubset = {
   cilScreenSmartphone,
   cilRoom,
   cilAt,
-  cilLineWeight
+  cilLineWeight,
+  cilViewModule,
+  cilSortAscending
 };
 
 export enum IconSubset {
@@ -310,5 +314,7 @@ export enum IconSubset {
   cilScreenSmartphone='cilScreenSmartphone',
   cilRoon='cilRoom',
   cilAt='cilAt',
-  cilLineWeight='cilLineWeight'
+  cilLineWeight='cilLineWeight',
+  cilViewModule='cilViewModule',
+  cilSortAscending ='cilSortAscending'
 }
