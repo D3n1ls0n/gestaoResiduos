@@ -13,13 +13,17 @@
               Os ítens selecionados serão para a aquisição!
             </div>
           </div>
-          <!-- <c-col class="position-relative" [md]="4">
-            <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Bairro</label>
-            <select aria-label="Default select example" cSelect (change)="seletectCriterial($event)">
-              <option value="" disabled selected>Escolha um bairro</option>
-              <option *ngFor="let s of stocks" [ngValue]="{nome: s.residuoNome, quantidade: s.quantidade}">{{ s.residuoNome }}</option>
+          <c-col class="position-relative mb-2" [md]="12">
+            <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Empresa</label>
+            <select aria-label="Default select example" cSelect (change)="selectEmpresa($event)" formControlName="empresaId">
+              <option value="" disabled selected>Escolha uma empresa</option>
+              <option *ngFor="let e of empresas" [value]="e.id">
+                {{ e.nome }}
+              </option>
             </select>
-          </c-col> -->
+          </c-col>
+
+
           <c-col class="position-relative" [md]="4">
             <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Bairro</label>
             <select aria-label="Default select example" cSelect [(ngModel)]="residuo_.nome"
@@ -83,7 +87,7 @@
         (click)="cancel('createItemsModal')">
         <svg cIcon name="cilXCircle"></svg> Cancelar
       </button>
-      <button cButton class="me-1 text-white" shape="rounded-0" color="success" size="sm" type="submit">
+      <button cButton class="me-1 text-white" shape="rounded-0" color="success" size="sm" (click)="submit()">
         <svg cIcon name="cilPlus"></svg> Registar
       </button>
     </c-container>

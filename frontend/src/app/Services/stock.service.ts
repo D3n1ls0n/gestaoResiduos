@@ -22,6 +22,10 @@ export class StockService {
     return this.http.put<any>(`${this.baseUrl}/api/stock/${id}`, stock);
   }
 
+  resetStock(stockIds: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/api/stock/edit`, stockIds);
+  }
+
   listStock(): Observable<any> {
     return this.http.get<any>(this.baseUrl + '/api/stock/lista');
   }

@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup } from '@angular/forms';
 
-
 /* import { IconSetService } from '@coreui/icons-angular';
 import { IconSubset } from 'src/app/icons/icon-subset'; */
 
@@ -23,7 +22,7 @@ export class ClientsComponent {
   constructor(
     public modal: NgxSmartModalService,
     private cliente: ClienteService,
-    private toast: ToastrService,
+    private toast: ToastrService
   ) {
     //private iconSetService: IconSetService - Isso vai dentro () do construtor
     //console.log(IconSubset);
@@ -40,9 +39,12 @@ export class ClientsComponent {
   }
 
   getCliente() {
+    this.loading = true;
+
     this.cliente.listCliente().subscribe((response: any) => {
       this.clients = response;
     });
+    this.loading = false;
   }
 
   deleteCliente(id: any) {
