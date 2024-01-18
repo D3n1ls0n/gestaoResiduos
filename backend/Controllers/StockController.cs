@@ -100,4 +100,86 @@ public class StockController : ControllerBase
 
         return BadRequest(ModelState);
     }
+
+    public class IdInputModel
+    {
+        public String? Id { get; set; }
+    }
+
+    [HttpPut("edit")]
+    public async Task<ActionResult<IEnumerable<IdInputModel>>> EditarStock(
+        [FromBody] List<IdInputModel> ids
+    )
+    {
+        try
+        {
+            // Desativa o rastreamento automático de mudanças (se necessário)
+            _dbContext.ChangeTracker.AutoDetectChangesEnabled = false;
+
+            foreach (var idInput in ids)
+            {
+                // Certifique-se de que o Id é válido
+                if (idInput != null && int.TryParse(idInput.Id, out int residuoId))
+                {
+                    var stockExistente = await _dbContext.StockExistents.FirstOrDefaultAsync(
+                        se => se.ResiduoId == residuoId
+                    );
+                    //var stockExistente = await _dbContext.StockExistents.FindAsync(id);
+
+                    if (stockExistente != null)
+                    {
+                        // Atualize os campos do estoque existente
+                        stockExistente.Quantidade = 0;
+
+                        // Marque como modificado
+                        _dbContext.Entry(stockExistente).State = EntityState.Modified;
+                    }
+                }
+            }
+
+            // Salve as alterações no banco de dados
+            await _dbContext.SaveChangesAsync();
+
+            // Ativa o rastreamento automático de mudanças antes de retornar (se necessário)
+            _dbContext.ChangeTracker.AutoDetectChangesEnabled = true;
+
+            return Ok(ids);
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, "Erro ao atualizar o estoque no banco de dados.");
+        }
+    }
+
+    /*     [HttpPut("edit")]
+        public async Task<ActionResult<StockExistente>> EditarStock(
+            int id,
+            [FromBody] StockExistente stockInput
+        )
+        {
+            try
+            {
+                var stockExistente = await _dbContext.StockExistents.FindAsync(id);
+    
+                if (stockExistente == null)
+                {
+                    return NotFound(); // Retorna 404 Not Found se o cliente não for encontrado
+                }
+    
+                // Atualizar os campos do cliente existente
+                stockExistente.Quantidade = 0;
+    
+                // Marcar como modificado
+                _dbContext.Entry(stockExistente).State = EntityState.Modified;
+    
+                // Salve as alterações no banco de dados
+                await _dbContext.SaveChangesAsync();
+    
+                return Ok(stockExistente); // Retorna os detalhes do cliente atualizado
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Erro ao actualizar o stock no banco de dados.");
+            }
+        } */
 }

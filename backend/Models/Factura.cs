@@ -5,12 +5,12 @@ public class Fatura
     public int EmpresaId { get; set; }
 
     // Relacionamentos
-    public Residuo Residuo { get; set; }
-    public Empresa Empresa { get; set; }
+    public Residuo? Residuo { get; set; }
+    public Empresa? Empresa { get; set; }
 
-     public Fatura()
+     /* public Fatura()
     {
         Residuo = new Residuo();
         Empresa = new Empresa();
-    }
+    } */
 }
