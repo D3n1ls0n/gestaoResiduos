@@ -24,9 +24,8 @@ export class AuthService {
       this.http.post<any>(this.baseUrl + url, data).subscribe(
         (response) => {
           if (response) {
-            console.log(response);
-
             localStorage.setItem('user', JSON.stringify(response));
+            localStorage.setItem('token', JSON.stringify(response.token));
             this.router.navigate(['/']);
             this.toast.success('Login efectuado com sucesso!', 'Usuários');
           } else {
@@ -51,12 +50,12 @@ export class AuthService {
 
   public logout() {
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
 
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
-
     // Verifica se o token está presente e não é nulo
     if (token) {
       // Verifica se o token não expirou
