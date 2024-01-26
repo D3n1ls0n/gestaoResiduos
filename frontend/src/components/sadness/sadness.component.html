@@ -22,6 +22,7 @@
           <th scope="col">Nome</th>
           <th style="background: #eee;" scope="col">Tipo</th>
           <th scope="col">Cliente</th>
+          <th scope="col">Data</th>
           <th>Acção</th>
         </tr>
       </thead>
@@ -31,6 +32,7 @@
           <td>{{ r.nome }}</td>
           <td style="background: #eee;">{{ r.tipoResiduoNome }}</td>
           <td>{{ r.clienteNome + " " + r.clienteSobrenome }}</td>
+          <td>{{ r.created_at | date: 'dd-MM-YYYY'}}</td>
           <td>
             <c-dropdown direction="dropend">
               <button cButton cDropdownToggle color="secondary" shape="rounded-0" size="sm" class="text-white">

@@ -53,6 +53,8 @@ import {
   PlaceholderModule,
   ModalModule,
 } from '@coreui/angular';
+import { JwtModule } from '@auth0/angular-jwt';
+
 
 import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
 import { FormsModule } from '@angular/forms';
@@ -150,6 +152,11 @@ const COMPONENTS = [
     FormsModule,
     CalloutModule,
     ToastrModule.forRoot(),
+    JwtModule.forRoot({
+      config: {
+        // Configurações opcionais aqui
+      },
+    }),
   ],
   providers: [
     {

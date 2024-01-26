@@ -5,42 +5,46 @@
         <c-card-group>
           <c-card class="p-4">
             <c-card-body>
-              <form cForm>
-                <h1>Login</h1>
-                <p class="text-medium-emphasis">Sign In to your account</p>
+              <form cForm [formGroup]="meuFormulario" [validated]="validateForm">
+
+                <h1>Entrar</h1>
+                <p class="text-medium-emphasis">Entre com a sua conta de usuário!</p>
                 <c-input-group class="mb-3">
                   <span cInputGroupText>
                     <svg cIcon name="cilUser"></svg>
                   </span>
-                  <input autoComplete="username" cFormControl placeholder="Username" />
+                  <input autoComplete="username" cFormControl placeholder="Usuário" formControlName="username"/>
                 </c-input-group>
                 <c-input-group class="mb-4">
                   <span cInputGroupText>
                     <svg cIcon name="cilLockLocked"></svg>
                   </span>
-                  <input
-                    autoComplete="current-password"
-                    cFormControl
-                    placeholder="Password"
-                    type="password"
-                  />
+                  <input cFormControl placeholder="Senha"
+                  [type]="isPasswordVisible ? 'text' : 'password'" formControlName="password"/>
+                <span cInputGroupText (click)="viewPassword()" type="button">
+                  <svg [class.icon-active]="isPasswordVisible" cIcon
+                    [name]="isPasswordVisible ? 'cilToggleOn' : 'cilToggleOff'"></svg>
+                </span>
                 </c-input-group>
                 <c-row>
-                  <c-col xs="6">
-                    <button cButton class="px-4" color="primary">
-                      Login
+                  <c-col xs="12" class="d-flex justify-content-end">
+                    <button cButton class="px-4" color="success" (click)="submit()" >
+                      Entrar <svg cIcon name="cilAccountLogout" class="ml-1 icon-cr"></svg>
                     </button>
                   </c-col>
                   <c-col class="text-right" xs="6">
-                    <button cButton class="px-0" color="link">
+                    <!-- <button cButton class="px-0" color="link">
                       Forgot password?
-                    </button>
+                    </button> -->
                   </c-col>
                 </c-row>
               </form>
             </c-card-body>
           </c-card>
-          <c-card [ngStyle]="{'width.%': 44}" class="text-white bg-primary py-5">
+          <c-card class=" card-img-cr">
+            <img src="../../../../assets//img/LOGO VERSÃO 01-02.png" class="img-cr" />
+          </c-card>
+          <!-- <c-card [ngStyle]="{'width.%': 44}" class="text-white bg-primary py-5">
             <c-card-body class="text-center">
               <div>
                 <h2>Sign up</h2>
@@ -53,7 +57,7 @@
                 </button>
               </div>
             </c-card-body>
-          </c-card>
+          </c-card> -->
         </c-card-group>
       </c-col>
     </c-row>

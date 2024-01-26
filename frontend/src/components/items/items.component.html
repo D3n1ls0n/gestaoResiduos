@@ -20,11 +20,11 @@
     </c-row>
   </c-container>
   <c-container>
-    <table *ngIf="loading == false" class="table table-hover">
+    <table *ngIf="loading == false && stocks?.length > 0; else noCriteria" class="table table-hover">
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Resíduo</th>
+          <th scope="col" style="background: #eee;">Resíduo</th>
           <th scope="col">Quantidade</th>
           <th scope="col">Disponível</th>
         </tr>
@@ -32,7 +32,7 @@
       <tbody>
         <tr *ngFor="let s of stocks, index as i">
           <th scope="row"> {{i+1}} </th>
-          <td> {{s.residuoNome}} </td>
+          <td style="background: #eee;"> {{s.residuoNome}} </td>
           <td> {{s.quantidade}} </td>
           <td>
             <span class="btn btn-block btn-flat text-bold"
@@ -43,6 +43,10 @@
         </tr>
       </tbody>
     </table>
+
+    <ng-template #noCriteria>
+      <h5 class="text-muted text-center" style="padding: 1rem;">Sem artigo para aquisição!</h5>
+    </ng-template>
   </c-container>
   <ngx-smart-modal identifier="createItemsModal" customClass="lg">
     <app-create-items></app-create-items>

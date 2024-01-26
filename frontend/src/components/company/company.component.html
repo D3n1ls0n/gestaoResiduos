@@ -21,8 +21,8 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Nome</th>
-          <th scope="col">Telefone</th>
-          <th scope="col">E-mail</th>
+          <th scope="col" style="background: #eee;">Telefone</th>
+          <th scope="col" style="background: #eee;">E-mail</th>
           <th scope="col">Bairro</th>
           <th>Acção</th>
         </tr>
@@ -31,8 +31,8 @@
         <tr *ngFor="let e of empresas, index as i">
           <th scope="row">{{i+1}}</th>
           <td>{{e.nome}}</td>
-          <td>{{e.telefone}}</td>
-          <td>{{e.email}}</td>
+          <td style="background: #eee;">{{e.telefone}}</td>
+          <td style="background: #eee;">{{e.email}}</td>
           <td>{{e.bairroNome}}</td>
           <td>
             <c-dropdown direction="dropend">

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AuthService } from 'src/app/Services/auth.service';
 
 import { ClassToggleService, HeaderComponent } from '@coreui/angular';
 
@@ -8,20 +9,19 @@ import { ClassToggleService, HeaderComponent } from '@coreui/angular';
   templateUrl: './default-header.component.html',
 })
 export class DefaultHeaderComponent extends HeaderComponent {
+  @Input() sidebarId: string = 'sidebar';
 
-  @Input() sidebarId: string = "sidebar";
-
-  public newMessages = new Array(4)
-  public newTasks = new Array(5)
-  public newNotifications = new Array(5)
+  public newMessages = new Array(4);
+  public newTasks = new Array(5);
+  public newNotifications = new Array(5);
   public light: boolean = false;
 
-
-  constructor(private classToggler: ClassToggleService) {
+  constructor(
+    private classToggler: ClassToggleService,
+    private authService: AuthService
+  ) {
     super();
   }
-
-
 
   OnOff() {
     setInterval(() => {
@@ -29,7 +29,11 @@ export class DefaultHeaderComponent extends HeaderComponent {
     }, 600);
   }
 
-  ngOnInit(){
+  logout() {
+    this.authService.logout();
+  }
+
+  ngOnInit() {
     this.OnOff();
   }
 }

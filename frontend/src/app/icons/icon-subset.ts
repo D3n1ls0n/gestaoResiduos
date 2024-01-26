@@ -102,7 +102,10 @@ import {
   cilAt,
   cilLineWeight,
   cilViewModule,
-  cilSortAscending
+  cilSortAscending,
+  cilToggleOn,
+  cilToggleOff,
+  cilAccountLogout
 } from '@coreui/icons';
 
 export const iconSubset = {
@@ -209,7 +212,10 @@ export const iconSubset = {
   cilAt,
   cilLineWeight,
   cilViewModule,
-  cilSortAscending
+  cilSortAscending,
+  cilToggleOn,
+  cilToggleOff,
+  cilAccountLogout
 };
 
 export enum IconSubset {
@@ -306,15 +312,18 @@ export enum IconSubset {
   cilBabyCarriage = 'cilBabyCarriage',
   cilCog = 'cilCog',
   cilGem = 'cilGem',
-  cilHistory='cilHistory',
-  cilPlus='cilPlus',
-  cilPenAlt='cilPenAlt',
-  cilCheckAlt='cilCheckAlt',
-  cilXCircle='cilXCircle',
-  cilScreenSmartphone='cilScreenSmartphone',
-  cilRoon='cilRoom',
-  cilAt='cilAt',
-  cilLineWeight='cilLineWeight',
-  cilViewModule='cilViewModule',
-  cilSortAscending ='cilSortAscending'
+  cilHistory = 'cilHistory',
+  cilPlus = 'cilPlus',
+  cilPenAlt = 'cilPenAlt',
+  cilCheckAlt = 'cilCheckAlt',
+  cilXCircle = 'cilXCircle',
+  cilScreenSmartphone = 'cilScreenSmartphone',
+  cilRoon = 'cilRoom',
+  cilAt = 'cilAt',
+  cilLineWeight = 'cilLineWeight',
+  cilViewModule = 'cilViewModule',
+  cilSortAscending = 'cilSortAscending',
+  cilToggleOn = 'cilToggleOn',
+  cilToggleOff = 'cilToggleOff',
+  cilAccountLogout = 'cilAccountLogout'
 }

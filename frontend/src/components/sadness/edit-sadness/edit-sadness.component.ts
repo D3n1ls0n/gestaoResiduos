@@ -31,6 +31,7 @@ export class EditSadnessComponent {
   getModalData() {
     this.residuo.residuoData$.subscribe((data) => {
       this.residuoData = data;
+
       this.utils.patchFormValues(this.meuFormulario, this.residuoData);
       /*  this.meuFormulario.value.bairroId = this.clienteData.bairroId */
     });
@@ -50,7 +51,7 @@ export class EditSadnessComponent {
 
   submit() {
     let data = this.meuFormulario.value;
-    this.residuo.createResiduo(data).subscribe((response: any) => {
+    this.residuo.editResiduo(data, this.residuoData.id).subscribe((response: any) => {
       if (response) {
         this.meuFormulario.reset();
         this.toast.success('Resíduo registado com sucesso!', 'Resíduos');

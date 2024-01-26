@@ -20,20 +20,22 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Recompensa</th>
+          <th scope="col" style="background: #eee;">Recompensa</th>
           <th scope="col">Tipo</th>
           <th scope="col">Descrição</th>
-          <th scope="col">Beneficiário</th>
+          <th scope="col" style="background: #eee;">Beneficiário</th>
+          <th scope="col" style="background: #eee;">Data</th>
           <!-- <th>Acção</th> -->
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let r of recompensas, index as i">
           <th scope="row"> {{i +1}} </th>
-          <td> {{r.nome}} </td>
+          <td style="background: #eee;"> {{r.nome}} </td>
           <td> {{r.tipoRecompensa}} </td>
           <td> {{r.descricao}} </td>
-          <td> {{r.clienteNome + " " + r.clienteSobrenome}} </td>
+          <td style="background: #eee;"> {{r.clienteNome + " " + r.clienteSobrenome}} </td>
+          <td style="background: #eee;"> {{ r.created_at | date: 'dd-MM-YYYY'}} </td>
           <!-- <td>
             <c-dropdown direction="dropend">
               <button cButton cDropdownToggle color="secondary" shape="rounded-0" size="sm" class="text-white">
