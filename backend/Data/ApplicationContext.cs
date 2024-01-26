@@ -20,6 +20,7 @@ public class ApplicationContext : DbContext
     public DbSet<Provincia> Provincias { get; set; }
     public DbSet<Municipio> Municipios { get; set; }
     public DbSet<Bairro> Bairros { get; set; }
+    public DbSet<User_> User_ { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

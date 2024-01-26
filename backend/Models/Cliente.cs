@@ -10,6 +10,9 @@ public class Cliente
     public bool IsActive { get; set; }
     public bool IsDeleted { get; set; }
 
+    public DateTime? created_at { get; set; }
+    public DateTime? updated_at { get; set; }
+
     // Relacionamento com Bairro
   public Bairro Bairro { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -150,7 +151,9 @@ namespace backend.Migrations
                     TipoRecompensaId = table.Column<int>(type: "int", nullable: false),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -199,6 +202,36 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "User_",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    username = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    cliente_id = table.Column<int>(type: "int", nullable: false),
+                    is_delete = table.Column<bool>(type: "bit", nullable: false),
+                    empresa_id = table.Column<int>(type: "int", nullable: false),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ClienteId = table.Column<int>(type: "int", nullable: true),
+                    EmpresaId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User_", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_User__Clientes_ClienteId",
+                        column: x => x.ClienteId,
+                        principalTable: "Clientes",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_User__Empresas_EmpresaId",
+                        column: x => x.EmpresaId,
+                        principalTable: "Empresas",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Faturas",
                 columns: table => new
                 {
@@ -219,7 +252,8 @@ namespace backend.Migrations
                         name: "FK_Faturas_Residuos_ResiduoId",
                         column: x => x.ResiduoId,
                         principalTable: "Residuos",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -297,6 +331,16 @@ namespace backend.Migrations
                 name: "IX_StockExistents_ResiduoId",
                 table: "StockExistents",
                 column: "ResiduoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User__ClienteId",
+                table: "User_",
+                column: "ClienteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User__EmpresaId",
+                table: "User_",
+                column: "EmpresaId");
         }
 
         /// <inheritdoc />
@@ -312,13 +356,16 @@ namespace backend.Migrations
                 name: "StockExistents");
 
             migrationBuilder.DropTable(
-                name: "Empresas");
+                name: "User_");
 
             migrationBuilder.DropTable(
                 name: "TipoRecompensas");
 
             migrationBuilder.DropTable(
                 name: "Residuos");
+
+            migrationBuilder.DropTable(
+                name: "Empresas");
 
             migrationBuilder.DropTable(
                 name: "Clientes");

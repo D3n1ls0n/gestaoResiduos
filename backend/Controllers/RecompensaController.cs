@@ -36,6 +36,8 @@ public class RecompensaController : ControllerBase
                             result.recompensas.Id,
                             result.recompensas.Nome,
                             result.recompensas.Descricao,
+                            result.recompensas.created_at,
+                            result.recompensas.updated_at,
                             result.recompensas.TipoRecompensaId,
                             tipoRecompensa = result.tipo.Nome,
                             clienteNome = cliente.Nome,

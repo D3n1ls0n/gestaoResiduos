@@ -52,6 +52,8 @@ public async Task<ActionResult<IEnumerable<object>>> GetClientes()
                     cliente.BairroId,
                     cliente.Telefone,
                     cliente.Contribuinte,
+                    cliente.created_at,
+                    cliente.updated_at,
                     cliente.Email,
                     cliente.IsActive,
                     cliente.IsDeleted,

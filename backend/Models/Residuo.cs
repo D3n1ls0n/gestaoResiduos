@@ -6,15 +6,16 @@ public class Residuo
     public bool IsDeleted { get; set; }
     public int ClienteId { get; set; }
     public bool IsActive { get; set; }
+    public DateTime? created_at { get; set; }
+    public DateTime? updated_at { get; set; }
 
     // Relacionamentos
-  public Cliente Cliente { get; set; }
-   public TipoResiduo TipoResiduo { get; set; }
+    public Cliente Cliente { get; set; }
+    public TipoResiduo TipoResiduo { get; set; }
 
-  public Residuo()
+    public Residuo()
     {
         Cliente = new Cliente();
         TipoResiduo = new TipoResiduo();
     }
-   
 }

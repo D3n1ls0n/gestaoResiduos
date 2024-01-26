@@ -5,6 +5,8 @@ public class Recompensa
     public int ClienteId { get; set; }
     public string? Nome { get; set; }
     public string? Descricao { get; set; }
+    public DateTime? created_at { get; set; }
+    public DateTime? updated_at { get; set; }
 
     // Relacionamentos
     public TipoRecompensa TipoRecompensa { get; set; }
