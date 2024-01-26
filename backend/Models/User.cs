@@ -8,6 +8,7 @@ public class User_
     public DateTime created_at { get; set; }
     public DateTime updated_at { get; set; }
     public string? password { get; set; }
+    public string? token { get; set; }
 
     // Relacionamentos
     public Cliente? Cliente { get; set; }

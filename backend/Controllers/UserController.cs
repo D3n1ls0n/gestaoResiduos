@@ -1,7 +1,10 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -82,7 +85,8 @@ public class UserController : ControllerBase
             user!.password = null;
 
             // Gere e retorne um token assincronamente
-            var token = await GerarToken(loginModel.Username!);
+            var token = GerarToken(loginModel.Username!);
+            user!.token = token;
             return Ok(user);
         }
         catch (Exception ex)
@@ -134,16 +138,31 @@ public class UserController : ControllerBase
     }
 
     [NonAction]
-    public async Task<string> GerarToken(string username)
+public string GerarToken(string username)
+{
+    var tokenHandler = new JwtSecurityTokenHandler();
+
+    // Gere uma chave com 256 bits
+    var key = new byte[32]; // 32 bytes * 8 bits/byte = 256 bits
+    using (var rng = RandomNumberGenerator.Create())
     {
-        // Lógica de geração de token assíncrona aqui
-
-        // Exemplo simples de lógica assíncrona
-        await Task.Delay(500); // Simula uma operação assíncrona
-
-        // Retorne o token gerado
-        return "seu_token_gerado";
+        rng.GetBytes(key);
     }
+
+    var tokenDescriptor = new SecurityTokenDescriptor
+    {
+        Subject = new ClaimsIdentity(new[] { new Claim("username", username) }),
+        Expires = DateTime.UtcNow.AddHours(1),
+        SigningCredentials = new SigningCredentials(
+            new SymmetricSecurityKey(key),
+            SecurityAlgorithms.HmacSha256Signature
+        )
+    };
+
+    var token = tokenHandler.CreateToken(tokenDescriptor);
+    return tokenHandler.WriteToken(token);
+}
+
 
     private async Task<User_?> ObterDadosUsuario(string username)
     {
