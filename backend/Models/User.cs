@@ -9,6 +9,7 @@ public class User_
     public DateTime updated_at { get; set; }
     public string? password { get; set; }
     public string? token { get; set; }
+    public bool? is_superadmin { get; set; }
 
     // Relacionamentos
     public Cliente? Cliente { get; set; }
