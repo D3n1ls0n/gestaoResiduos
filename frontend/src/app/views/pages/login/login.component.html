@@ -1,8 +1,8 @@
-<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center body-login-cr">
   <c-container>
     <c-row class="justify-content-center">
       <c-col md="8">
-        <c-card-group>
+        <c-card-group style="margin-bottom: 9rem !important">
           <c-card class="p-4">
             <c-card-body>
               <form cForm [formGroup]="meuFormulario" [validated]="validateForm">
@@ -32,10 +32,15 @@
                       Entrar <svg cIcon name="cilAccountLogout" class="ml-1 icon-cr"></svg>
                     </button>
                   </c-col>
-                  <c-col class="text-right" xs="6">
-                    <!-- <button cButton class="px-0" color="link">
-                      Forgot password?
-                    </button> -->
+                  <c-col xs="12">
+                    <div class="forgot-password d-flex justify-content-center mt-2" (click)="openCreateClient('createClientModal')">
+                      <a href="javascript:void(0)">Criar uma conta Cliente</a>
+                    </div>
+                  </c-col>
+                  <c-col xs="12">
+                    <div class="forgot-password d-flex justify-content-center mt-2" (click)="openCreateCompany('createCompanyModal')">
+                      <a href="javascript:void(0)">Criar uma conta Empresa</a>
+                    </div>
                   </c-col>
                 </c-row>
               </form>
@@ -58,6 +63,14 @@
               </div>
             </c-card-body>
           </c-card> -->
+          <ngx-smart-modal identifier="createClientModal" customClass="md">
+            <app-create-cliente-in-login></app-create-cliente-in-login>
+          </ngx-smart-modal>
+
+  <ngx-smart-modal identifier="createCompanyModal" customClass="md">
+    <app-create-company-in-login></app-create-company-in-login>
+  </ngx-smart-modal>
+
         </c-card-group>
       </c-col>
     </c-row>

@@ -15,6 +15,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   public newTasks = new Array(5);
   public newNotifications = new Array(5);
   public light: boolean = false;
+  public user:any;
 
   constructor(
     private classToggler: ClassToggleService,
@@ -33,7 +34,13 @@ export class DefaultHeaderComponent extends HeaderComponent {
     this.authService.logout();
   }
 
+  getUser(){
+    this.user = localStorage.getItem('username');
+    this.user = this.user.match(/"([^"]*)"/)[1];
+  }
+
   ngOnInit() {
     this.OnOff();
+    this.getUser()
   }
 }

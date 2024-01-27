@@ -25,6 +25,7 @@ export class AuthService {
         (response) => {
           if (response) {
             localStorage.setItem('user', JSON.stringify(response));
+            localStorage.setItem('username', JSON.stringify(response.username));
             localStorage.setItem('token', JSON.stringify(response.token));
             this.router.navigate(['/']);
             this.toast.success('Login efectuado com sucesso!', 'Usuários');

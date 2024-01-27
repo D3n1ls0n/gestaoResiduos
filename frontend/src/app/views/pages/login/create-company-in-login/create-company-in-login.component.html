@@ -1,0 +1,67 @@
+<c-container *ngIf="loading == false">
+  <h5><svg cIcon name="cilRoom"></svg> Registar Empresa</h5>
+  <hr />
+  <form cForm class="row g-3" [formGroup]="meuFormulario" [validated]="validateForm">
+    <c-col class="position-relative" [md]="4">
+      <label cLabel for="projects"><svg cIcon name="cilPenAlt"></svg> Nome<sup class="text-danger">*</sup></label><input
+        required cFormControl id="name" type="text" placeholder="Nome" formControlName="Nome" />
+      <c-form-feedback [valid]="false" tooltip>Designação do nome inválido!</c-form-feedback>
+    </c-col>
+
+    <c-col class="position-relative" [md]="4">
+      <label cLabel for="telefone"><svg cIcon name="cilScreenSmartphone"></svg> Telefone<sup
+          class="text-danger">*</sup></label><input required cFormControl id="telefone" type="text"
+        placeholder="Telefone" formControlName="Telefone" />
+      <c-form-feedback [valid]="false" tooltip>Designação do sobrenome inválida!</c-form-feedback>
+    </c-col>
+    <c-col class="position-relative" [md]="4">
+      <label cLabel for="email"><svg cIcon name="cilAt"></svg> E-mail<sup class="text-danger">*</sup></label><input
+        required cFormControl id="email" type="text" placeholder="E-mail" formControlName="Email"
+        (input)="validateEmail($event)" />
+      <c-form-feedback [valid]="false" tooltip>Designação do sobrenome inválida!</c-form-feedback>
+    </c-col>
+
+    <c-col class="position-relative" [md]="4">
+      <label cLabel for="procedures"><svg cIcon name="cilLocationPin"></svg> Bairro<sup
+          class="text-danger">*</sup></label>
+      <select aria-label="Default select example" (change)="selectNeighborHood($event)" formControlName="bairroId"
+        cSelect>
+        <option value="" disabled selected>Escolha um bairro</option>
+        <option *ngFor="let bairro of neigahood" [value]="bairro.id">{{ bairro.nome }}</option>
+      </select>
+    </c-col>
+    <hr />
+    <h5><svg cIcon name="cilPeople"></svg> Registar utilizador</h5>
+    <c-col class="position-relative" [md]="4">
+      <label cLabel for="username"><svg cIcon name="cilPenAlt"></svg> Nome<sup class="text-danger">*</sup></label><input
+        required cFormControl id="username" type="text" placeholder="Nome" formControlName="username" />
+      <c-form-feedback [valid]="false" tooltip>Designação do nome inválido!</c-form-feedback>
+    </c-col>
+    <c-col class="position-relative" [md]="4">
+      <label cLabel for="senha"><svg cIcon name="cilPenAlt"></svg> Senha<sup class="text-danger">*</sup></label>
+      <input cFormControl placeholder="Senha" [type]="'password'" formControlName="password" />
+    </c-col>
+    <c-col class="position-relative" [md]="4">
+      <label cLabel for="senha"><svg cIcon name="cilPenAlt"></svg> Confirmar Senha<sup
+          class="text-danger">*</sup></label>
+      <input cFormControl placeholder="Senha" [type]="'password'" formControlName="confirmpassword"/>
+    </c-col>
+
+    <c-container class="mb-3 mt-5 d-flex justify-content-end col-ctl-cr" style="gap: 3px">
+      <!--   <button cButton class="text-white" shape="rounded-0" color="warning" size="sm" type="button"
+        title="Validar Formulário">
+        <svg cIcon name="cilCheckAlt"></svg> Validar
+      </button> -->
+      <button cButton color="danger" shape="rounded-0" type="reset" class="text-white" size="sm"
+        (click)="cancel('createClientModal')">
+        <svg cIcon name="cilXCircle"></svg> Cancelar
+      </button>
+      <button cButton class="me-1 text-white" shape="rounded-0" color="success" size="sm" type="submit"
+        (click)="submit()" [disabled]="meuFormulario.invalid || !validateEmail_">
+        <svg cIcon name="cilPlus"></svg> Registar
+      </button>
+    </c-container>
+  </form>
+
+
+</c-container>

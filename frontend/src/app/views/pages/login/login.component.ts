@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
 import { UtilsService } from 'src/app/Services/utils.service';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent {
   public meuFormulario: any;
   public validateForm: boolean = false;
 
-  constructor(private authService: AuthService, private utils: UtilsService) {}
+  constructor(private authService: AuthService, private utils: UtilsService,     public modal: NgxSmartModalService,
+    ) {}
 
   createFrm() {
     this.meuFormulario = this.utils.createForm(
@@ -30,6 +32,14 @@ export class LoginComponent {
     this.loading = true;
     this.authService.login(this.meuFormulario.value, '/api/user/login');
   }
+  openCreateClient(modalId: string): void {
+    this.modal.getModal(modalId).open();
+  }
+
+  openCreateCompany(modalId: string): void {
+    this.modal.getModal(modalId).open();
+  }
+
   ngOnInit() {
     this.createFrm();
   }
