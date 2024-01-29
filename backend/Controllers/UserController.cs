@@ -168,4 +168,44 @@ public string GerarToken(string username)
     {
         return await _dbContext.User_.FirstOrDefaultAsync(u => u.username == username);
     }
+
+[HttpPut("edit/{id}")]
+public async Task<ActionResult<User_>> EditUser(int id, User_ updatedUser)
+{
+    try
+    {
+        // Verifique se o ID fornecido corresponde a um usuário existente
+        var existingUser = await _dbContext.User_.FindAsync(id);
+        if (existingUser == null)
+        {
+            return NotFound(new { Message = "Usuário não encontrado." });
+        }
+
+        // Atualize as propriedades do usuário existente
+        existingUser.username = updatedUser.username;
+        // Outras propriedades que você deseja atualizar
+
+        // Se uma nova senha foi fornecida, atualize-a
+        if (!string.IsNullOrEmpty(updatedUser.password))
+        {
+            existingUser.password = HashPassword(updatedUser.password);
+        }
+
+        // Atualize a data de modificação
+        existingUser.updated_at = DateTime.Now;
+
+        // Salve as mudanças no banco de dados
+        await _dbContext.SaveChangesAsync();
+
+        // Retorne o usuário atualizado
+        return Ok(existingUser);
+    }
+    catch (Exception ex)
+    {
+        // Se ocorrer um erro, retorne um código de status 500 (Erro interno do servidor)
+        return StatusCode(500, new { Message = $"Erro ao editar usuário: {ex.Message}" });
+    }
+}
+
+
 }

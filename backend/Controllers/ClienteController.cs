@@ -31,12 +31,55 @@ public class ClienteController : ControllerBase
 
 
     /* Get Cliente */
-    [HttpGet("lista")]
-public async Task<ActionResult<IEnumerable<object>>> GetClientes()
+   /*  [HttpGet("lista")]
+    public async Task<ActionResult<IEnumerable<object>>> GetClientes()
+    {
+        try
+        {
+            var clientes = await _dbContext
+                .Clientes.Where(c => !c.IsDeleted)
+                .OrderByDescending(c => c.Id)
+                .Join(
+                    _dbContext.Bairros,
+                    cliente => cliente.BairroId,
+                    bairro => bairro.Id,
+                    (cliente, bairro) =>
+                        new
+                        {
+                            cliente.Id,
+                            cliente.Nome,
+                            cliente.Sobrenome,
+                            cliente.BairroId,
+                            cliente.Telefone,
+                            cliente.Contribuinte,
+                            cliente.created_at,
+                            cliente.updated_at,
+                            cliente.Email,
+                            cliente.IsActive,
+                            cliente.IsDeleted,
+                            BairroNome = bairro.Nome,
+                            // Adicione outras propriedades conforme necessário
+                        }
+                )
+                .ToListAsync();
+
+            return Ok(clientes);
+        }
+        catch (Exception)
+        {
+            // Logue a exceção, e retorne um StatusCode 500 ou outra resposta apropriada
+            return StatusCode(500, "Erro ao recuperar clientes do banco de dados.");
+        }
+    } */
+
+
+
+[HttpGet("lista")]
+public async Task<ActionResult<IEnumerable<object>>> GetClientesComUsuarios()
 {
     try
     {
-        var clientes = await _dbContext
+        var clientesComUsuarios = await _dbContext
             .Clientes
             .Where(c => !c.IsDeleted)
             .OrderByDescending(c => c.Id)
@@ -44,33 +87,68 @@ public async Task<ActionResult<IEnumerable<object>>> GetClientes()
                 _dbContext.Bairros,
                 cliente => cliente.BairroId,
                 bairro => bairro.Id,
-                (cliente, bairro) => new
-                {
-                    cliente.Id,
-                    cliente.Nome,
-                    cliente.Sobrenome,
-                    cliente.BairroId,
-                    cliente.Telefone,
-                    cliente.Contribuinte,
-                    cliente.created_at,
-                    cliente.updated_at,
-                    cliente.Email,
-                    cliente.IsActive,
-                    cliente.IsDeleted,
-                    BairroNome = bairro.Nome,
-                    // Adicione outras propriedades conforme necessário
-                }
+                (cliente, bairro) =>
+                    new
+                    {
+                        cliente.Id,
+                        cliente.Nome,
+                        cliente.Sobrenome,
+                        cliente.BairroId,
+                        cliente.Telefone,
+                        cliente.Contribuinte,
+                        cliente.created_at,
+                        cliente.updated_at,
+                        cliente.Email,
+                        cliente.IsActive,
+                        cliente.IsDeleted,
+                        BairroNome = bairro.Nome,
+                        // Adicione outras propriedades conforme necessário
+                    }
+            )
+            .GroupJoin(
+                _dbContext.User_,
+                cliente => cliente.Id,
+                user => user.cliente_id,
+                (cliente, usuarios) =>
+                    new
+                    {
+                        cliente.Id,
+                        cliente.Nome,
+                        cliente.Sobrenome,
+                        cliente.BairroId,
+                        cliente.Telefone,
+                        cliente.Contribuinte,
+                        cliente.created_at,
+                        cliente.updated_at,
+                        cliente.Email,
+                        cliente.IsActive,
+                        cliente.IsDeleted,
+                        cliente.BairroNome,
+                        Usuarios = usuarios
+                            .Where(u => !u.is_delete)
+                            .Select(u =>
+                                new
+                                {
+                                    u.id,
+                                    u.username,
+                                    // Adicione outras propriedades do usuário conforme necessário
+                                }
+                            )
+                            .ToList(),
+                        // Adicione outras propriedades conforme necessário
+                    }
             )
             .ToListAsync();
 
-        return Ok(clientes);
+        return Ok(clientesComUsuarios);
     }
     catch (Exception)
     {
         // Logue a exceção, e retorne um StatusCode 500 ou outra resposta apropriada
-        return StatusCode(500, "Erro ao recuperar clientes do banco de dados.");
+        return StatusCode(500, "Erro ao recuperar clientes com usuários do banco de dados.");
     }
 }
+
 
 
     [HttpPost("register")]
@@ -88,7 +166,9 @@ public async Task<ActionResult<IEnumerable<object>>> GetClientes()
                 Sobrenome = clienteInput.Sobrenome,
                 Telefone = clienteInput.Telefone,
                 Contribuinte = clienteInput.Contribuinte,
-                Email = clienteInput.Email
+                Email = clienteInput.Email,
+                created_at = DateTime.Now,
+                updated_at = DateTime.Now,
             };
 
             _dbContext.Entry(novoCliente).State = EntityState.Modified;
@@ -125,6 +205,7 @@ public async Task<ActionResult<IEnumerable<object>>> GetClientes()
             clienteExistente.Telefone = clienteInput.Telefone;
             clienteExistente.Contribuinte = clienteInput.Contribuinte;
             clienteExistente.Email = clienteInput.Email;
+            clienteExistente.updated_at = DateTime.Now;
 
             // Marcar como modificado
             _dbContext.Entry(clienteExistente).State = EntityState.Modified;
@@ -155,7 +236,6 @@ public async Task<ActionResult<IEnumerable<object>>> GetClientes()
 
             // Atualizar os campos do cliente existente
             clienteExistente.IsDeleted = true;
-           
 
             // Marcar como modificado
             _dbContext.Entry(clienteExistente).State = EntityState.Modified;
