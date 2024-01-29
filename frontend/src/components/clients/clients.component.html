@@ -55,7 +55,7 @@
                 </li>
                 <li>
                   <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between"
-                    (click)="deleteCliente(c.id)">Eliminar <svg cIcon name="cilTrash"></svg>
+                     [cModalToggle]="staticBackdropModal.id" (click)="getClientId(c.id, c.nome, c.usuarios)">Eliminar <svg cIcon name="cilTrash"></svg>
                   </a>
                 </li>
 
@@ -69,7 +69,18 @@
   <ngx-smart-modal identifier="createClientModal" customClass="md">
     <app-create-clients></app-create-clients>
   </ngx-smart-modal>
-
+  <c-modal #staticBackdropModal backdrop="static" id="staticBackdropModal">
+    <c-modal-header>
+      <h5 cModalTitle>Deseja realmente eliminar a conta de {{clientNome}} ?</h5>
+      <button [cModalToggle]="staticBackdropModal.id" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-footer>
+      <button [cModalToggle]="staticBackdropModal.id" cButton color="secondary">
+        Não
+      </button>
+      <button cButton color="primary" (click)="deleteCliente(clientId)">Sim</button>
+    </c-modal-footer>
+  </c-modal>
   <ngx-smart-modal identifier="editClientModal" customClass="md">
     <app-edit-clients></app-edit-clients>
   </ngx-smart-modal>
