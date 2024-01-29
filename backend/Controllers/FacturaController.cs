@@ -43,6 +43,7 @@ public class FacturaController : ControllerBase
     {
         public int ResiduoId { get; set; }
         public int EmpresaId { get; set; }
+        public int quantidade { get; set; }
     }
 
     [HttpPost("gerarFaturas__")]
@@ -63,6 +64,9 @@ public class FacturaController : ControllerBase
                 {
                     ResiduoId = faturaInput.ResiduoId,
                     EmpresaId = faturaInput.EmpresaId,
+                    quantidade = faturaInput.quantidade,
+                    created_at = DateTime.Now,
+                    updated_at = DateTime.Now,
                 };
 
                 // Anexa a nova fatura ao contexto
@@ -80,5 +84,40 @@ public class FacturaController : ControllerBase
         _dbContext.ChangeTracker.AutoDetectChangesEnabled = true;
 
         return BadRequest(ModelState);
+    }
+
+    [HttpGet("listarFaturasComInfo")]
+    public ActionResult<IEnumerable<object>> ListarFaturasComInfo()
+    {
+        try
+        {
+            var faturasComInfo = _dbContext
+                .Faturas.Include(f => f.Residuo) // Inclui dados do Resíduo (se houver uma propriedade de navegação chamada Residuo)
+                .Include(f => f.Empresa) // Inclui dados da Empresa (se houver uma propriedade de navegação chamada Empresa)
+                .Select(
+                    f =>
+                        new
+                        {
+                            FaturaId = f.Id,
+                            ResiduoNome = f.Residuo != null ? f.Residuo.Nome : string.Empty,
+                            EmpresaNome = f.Empresa != null ? f.Empresa.Nome : string.Empty,
+                            Quantidade = f.quantidade,
+                            EmpresaId = f.EmpresaId,
+                            Created_at = f.created_at
+                            // Adicione outras propriedades conforme necessário
+                        }
+                )
+                .ToList();
+
+            return Ok(faturasComInfo);
+        }
+        catch (Exception ex)
+        {
+            // Logue a exceção, e retorne um StatusCode 500 ou outra resposta apropriada
+            return StatusCode(
+                500,
+                new { Message = $"Erro ao recuperar faturas com informações: {ex.Message}" }
+            );
+        }
     }
 }

@@ -58,7 +58,9 @@ public class RecompensaController : ControllerBase
     }
 
     [HttpPost("create")]
-    public async Task<ActionResult<Recompensa>> CreateRecompensa([FromBody] Recompensa recompensaInput)
+    public async Task<ActionResult<Recompensa>> CreateRecompensa(
+        [FromBody] Recompensa recompensaInput
+    )
     {
         Console.WriteLine(1);
 
@@ -71,6 +73,8 @@ public class RecompensaController : ControllerBase
                 ClienteId = recompensaInput.ClienteId,
                 Nome = recompensaInput.Nome,
                 Descricao = recompensaInput.Descricao,
+                created_at = DateTime.Now,
+                updated_at = DateTime.Now,
             };
 
             _dbContext.Entry(novaRecompensa).State = EntityState.Modified;
@@ -107,6 +111,8 @@ public class RecompensaController : ControllerBase
             recompensaExistente.ClienteId = recompensaInput.ClienteId;
             recompensaExistente.Nome = recompensaInput.Nome;
             recompensaExistente.Descricao = recompensaInput.Descricao;
+             recompensaExistente.created_at = DateTime.Now;
+             recompensaExistente.updated_at = DateTime.Now;
 
             // Marcar como modificado
             _dbContext.Entry(recompensaExistente).State = EntityState.Modified;

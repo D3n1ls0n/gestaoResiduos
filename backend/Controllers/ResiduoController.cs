@@ -90,6 +90,8 @@ public class ResiduoController : ControllerBase
                 Nome = residuoInput.Nome,
                 TipoResiduoId = residuoInput.TipoResiduoId,
                 ClienteId = residuoInput.ClienteId,
+                created_at = DateTime.Now,
+                updated_at = DateTime.Now,
             };
 
             _dbContext.Entry(novoResiduo).State = EntityState.Modified;
@@ -120,6 +122,8 @@ public class ResiduoController : ControllerBase
             residuoExistente.Nome = residuoInput.Nome;
             residuoExistente.TipoResiduoId = residuoInput.TipoResiduoId;
             residuoExistente.ClienteId = residuoInput.ClienteId;
+            residuoExistente.created_at = DateTime.Now;
+            residuoExistente.updated_at = DateTime.Now;
 
             // Marcar como modificado
             _dbContext.Entry(residuoExistente).State = EntityState.Modified;
