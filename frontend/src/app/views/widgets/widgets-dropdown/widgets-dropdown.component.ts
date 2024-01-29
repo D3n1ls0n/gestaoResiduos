@@ -26,6 +26,9 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
   public clientes: any;
   public residuos: any;
   public stocks: any;
+  public cliente_id: any;
+  public empresa_id: any;
+  public is_superadmin: any;
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -59,7 +62,7 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
   getStock() {
     this.stock.listStock().subscribe((response: any) => {
       this.stocks = response;
-      this.stocks.quantidade = 0
+      this.stocks.quantidade = 0;
       let i = 0;
       response.forEach((element: any) => {
         if (element.quantidade > 0) {
@@ -180,6 +183,10 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
     this.getCliente();
     this.getResiduo();
     this.getStock();
+    this.cliente_id = localStorage.getItem('cliente_id');
+    this.empresa_id = localStorage.getItem('empresa_id');
+    this.is_superadmin = localStorage.getItem('is_superadmin');
+
   }
 
   ngAfterContentInit(): void {

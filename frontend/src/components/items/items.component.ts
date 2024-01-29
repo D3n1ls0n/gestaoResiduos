@@ -16,6 +16,10 @@ export class ItemsComponent {
   recarregarStockSubscription!: Subscription;
   public loading: boolean = false;
   public stocks: any;
+  public cliente_id: any;
+  public empresa_id: any;
+  public is_superadmin: any;
+
 
   constructor(
     public modal: NgxSmartModalService,
@@ -38,6 +42,10 @@ export class ItemsComponent {
     this.modal.getModal(modalId).open();
   }
 
+  openListItem(modalId: string): void {
+    this.modal.getModal(modalId).open();
+  }
+
   getStock() {
     this.stock.listStock().subscribe((response: any) => {
       this.stocks = response;
@@ -54,6 +62,9 @@ export class ItemsComponent {
           this.getStock();
         }
       });
+    this.cliente_id = localStorage.getItem('cliente_id');
+    this.empresa_id = localStorage.getItem('empresa_id');
+    this.is_superadmin = localStorage.getItem('is_superadmin');
   }
 
   ngOnDestroy(): void {

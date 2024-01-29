@@ -21,6 +21,7 @@ export class SadnessComponent {
   public loading: boolean = false;
   public residuos: any;
 
+
   openCreateSadness(modalId: string): void {
     this.modal.getModal(modalId).open();
   }
@@ -37,7 +38,6 @@ export class SadnessComponent {
       }) */
 
       this.residuos = response;
-
     });
   }
 

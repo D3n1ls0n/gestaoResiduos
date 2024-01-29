@@ -46,11 +46,15 @@ export class CreateItemsComponent {
   public residuoToSend: any = {
     ResiduoId: null,
     EmpresaId: null,
+    quantidade: null
   };
 
   public stokIds: any = {
     Id: null,
   };
+  public cliente_id: any;
+  public empresa_id: any;
+  public is_superadmin: any;
 
   cancel(modalId: any) {
     this.modal.getModal(modalId).close();
@@ -82,12 +86,12 @@ export class CreateItemsComponent {
         name: 'quantidade',
         value: null,
         required: true,
-      },
-      {
+      }
+      /* {
         name: 'empresaId',
         value: null,
         required: true,
-      }
+      } */
     );
   }
 
@@ -117,7 +121,6 @@ export class CreateItemsComponent {
   }
 
   resetStockId(stockId: any) {
-    console.log(stockId);
     this.stock.resetStock(stockId).subscribe((response: any) => {});
   }
 
@@ -130,7 +133,8 @@ export class CreateItemsComponent {
     this.residuo_.qtd = quantidade;
 
     this.residuoToSend.ResiduoId = residuoId;
-    this.residuoToSend.EmpresaId = this.empresaId;
+    this.residuoToSend.EmpresaId = this.empresa_id;
+    this.residuoToSend.quantidade = quantidade;
     this.stokIds.Id = residuoId;
   }
   selectEmpresa(e: any) {
@@ -138,16 +142,20 @@ export class CreateItemsComponent {
   }
 
   submit() {
-    if (!this.empresaId) {
+    /* if (!this.empresaId) {
       this.toast.error('É necessário selecionar uma empresa!', 'Item');
       return;
-    }
+    } */
 
     this.fatura.createFatura(this.residuoToSend_).subscribe((response: any) => {
       if (response) {
         this.meuFormulario.reset();
         this.toast.success('Item registado com sucesso!', 'Item');
-        // this.cancel('createItemsModal');
+        this.fatura.emitRecarregarClientes(true);
+        this.cancel('createItemsModal');
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       } else {
         this.toast.error('Erro ao registar item!', 'Item');
         return;
@@ -169,8 +177,11 @@ export class CreateItemsComponent {
           this.getStock();
         }
       });
-      this.empresaId = null
-      this.residuo_.nome = null
+    this.empresaId = null;
+    this.residuo_.nome = null;
+    this.cliente_id = localStorage.getItem('cliente_id');
+    this.empresa_id = localStorage.getItem('empresa_id');
+    this.is_superadmin = localStorage.getItem('is_superadmin');
   }
 
   ngOnDestroy(): void {

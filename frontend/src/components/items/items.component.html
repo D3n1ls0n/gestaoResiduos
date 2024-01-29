@@ -3,19 +3,29 @@
   <hr />
   <c-container class="pb-4">
     <c-row class="align-items-center my-2 w-103">
-
       <c-col xs="12" class="d-flex justify-content-end">
-        <button cButton color="warning" class="text-white" size="sm" shape="rounded-0"
-          (click)="openCreateStock('createStockModal')">
-          <svg cIcon name="cilViewModule"></svg> Stock
-        </button>
+        <div *ngIf="cliente_id>0 || is_superadmin== 'true'">
+          <button cButton color="warning" class="text-white" size="sm" shape="rounded-0"
+            (click)="openCreateStock('createStockModal')">
+            <svg cIcon name="cilViewModule"></svg> Stock
+          </button>
+        </div>
         <button cButton color="secondary" class="text-white" size="sm" shape="rounded-0" (click)="getStock()">
           <svg cIcon name="cilHistory"></svg> Recarregar
         </button>
-        <button cButton color="success" class="text-white" size="sm" shape="rounded-0"
-          (click)="openCreateItems('createItemsModal')">
-          <svg cIcon name="cilBabyCarriage"></svg> Adquirir Resíduo
-        </button>
+        <div *ngIf="empresa_id>0 || is_superadmin== 'true'">
+          <button cButton color="warning" class="text-white" size="sm" shape="rounded-0"
+            (click)="openListItem('viewItemListkModal')">
+            <svg cIcon name="cilViewModule"></svg> Ver Itens Adquiridos
+          </button>
+        </div>
+        <div *ngIf="empresa_id>0 || is_superadmin== 'true'">
+          <button cButton color="success" class="text-white" size="sm" shape="rounded-0"
+            (click)="openCreateItems('createItemsModal')">
+            <svg cIcon name="cilBabyCarriage"></svg> Adquirir Resíduo
+          </button>
+        </div>
+
       </c-col>
     </c-row>
   </c-container>
@@ -54,6 +64,10 @@
 
   <ngx-smart-modal identifier="createStockModal" customClass="md">
     <app-stock></app-stock>
+  </ngx-smart-modal>
+
+  <ngx-smart-modal identifier="viewItemListkModal" customClass="md">
+    <app-view-item-list></app-view-item-list>
   </ngx-smart-modal>
 </div>
 <c-container cPlaceholderAnimation="glow" class="bg-white p-5" *ngIf="loading == true">

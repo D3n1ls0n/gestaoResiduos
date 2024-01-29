@@ -13,7 +13,7 @@
               Os ítens selecionados serão para a aquisição!
             </div>
           </div>
-          <c-col class="position-relative mb-2" [md]="12">
+          <!-- <c-col class="position-relative mb-2" [md]="12">
             <label cLabel for="procedures"><svg cIcon name="cilRoom"></svg> Empresa<sup
                 class="text-danger">*</sup></label>
             <select aria-label="Default select example" cSelect (change)="selectEmpresa($event)"
@@ -23,7 +23,7 @@
                 {{ e.nome }}
               </option>
             </select>
-          </c-col>
+          </c-col> -->
 
 
           <c-col class="position-relative" [md]="5">
@@ -52,7 +52,7 @@
           <c-col class="position-relative" [md]="1">
             <label cLabel for="procedures" class="text-white">1</label>
             <button cButton color="success" class="text-white" shape="rounded-0" (click)="addResiduo()"
-              [disabled]="!residuo_.nome || !empresaId || residuo_.qtd == 0">
+              [disabled]="!residuo_.nome || residuo_.qtd == 0">
               <svg cIcon name="cilPlus"></svg>
             </button>
           </c-col>

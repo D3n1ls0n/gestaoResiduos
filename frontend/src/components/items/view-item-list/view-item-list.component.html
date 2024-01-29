@@ -1,0 +1,42 @@
+<c-container>
+  <h4 class="my-3" style="font-weight: bolder">ITENS ADQUIRIDOS</h4>
+  <hr />
+  <table *ngIf="loading == false" class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col" style="background: #eee;">Sigla</th>
+        <th scope="col">Resíduo</th>
+        <th scope="col">Empresa</th>
+        <th scope="col" style="background: #eee;">Quantidade</th>
+        <th scope="col" style="background: #eee;">Data</th>
+        <!-- <th>Acção</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let f of faturas, index as i">
+        <th scope="row"> {{i +1}} </th>
+        <td style="background: #eee;"> FT-{{f.faturaId}} </td>
+        <td> {{f.residuoNome}} </td>
+        <td> {{f.empresaNome}} </td>
+        <td style="background: #eee;"> {{f.quantidade}} </td>
+        <td style="background: #eee;"> {{ f.created_at | date: 'dd-MM-YYYY'}} </td>
+        <!-- <td>
+          <c-dropdown direction="dropend">
+            <button cButton cDropdownToggle color="secondary" shape="rounded-0" size="sm" class="text-white">
+              Opções
+            </button>
+            <ul cDropdownMenu>
+              <li (click)="abrirModal('editRewardsModal')">
+                <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between">Editar
+                  <svg cIcon name="cilPenAlt"></svg>
+                </a>
+              </li>
+
+            </ul>
+          </c-dropdown>
+        </td> -->
+      </tr>
+    </tbody>
+  </table>
+</c-container>

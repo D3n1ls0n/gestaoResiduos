@@ -14,13 +14,15 @@ export class RewardsComponent {
     public modal: NgxSmartModalService,
     private recompensa: RecompensaService,
     private cliente: ClienteService,
-    private toast: ToastrService
+    private toast: ToastrService,
   ) {}
   recarregarRecompensasSubscription!: Subscription;
 
   public loading: boolean = false;
   public clientes: any;
+  public clientesMes: any;
   public recompensas: any;
+  public residuos: any
 
   abrirModal(modalId: string): void {
     this.modal.getModal(modalId).open();
@@ -29,6 +31,8 @@ export class RewardsComponent {
   openEditClient(modalId: string): void {
     this.modal.getModal(modalId).open();
   }
+
+
 
 
 
@@ -52,6 +56,7 @@ export class RewardsComponent {
           this.getRecompensa();
         }
       });
+
   }
 
   ngOnDestroy(): void {

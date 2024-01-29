@@ -26,12 +26,15 @@ export class CreateSadnessComponent {
   public tipoRediduoId: any;
   public clientes: any;
   public tipoResiduos: any;
+  public cliente_id: any;
+  public empresa_id: any;
+  public is_superadmin: any;
 
   createFrm() {
     this.meuFormulario = this.utils.createForm(
       { name: 'Nome', value: null, required: true },
       { name: 'TipoResiduoId', value: null, required: true },
-      { name: 'ClienteId', value: null, required: true }
+      /* { name: 'ClienteId', value: null, required: true } */
     );
   }
 
@@ -41,6 +44,7 @@ export class CreateSadnessComponent {
 
   submit() {
     let data = this.meuFormulario.value;
+    data.ClienteId = this.cliente_id
 
     this.residuo.createResiduo(data).subscribe((response: any) => {
       if (response) {
@@ -79,5 +83,8 @@ export class CreateSadnessComponent {
     this.createFrm();
     this.obterCliente();
     this.obterTipoResiduo();
+    this.cliente_id = localStorage.getItem('cliente_id');
+    this.empresa_id = localStorage.getItem('empresa_id');
+    this.is_superadmin = localStorage.getItem('is_superadmin');
   }
 }

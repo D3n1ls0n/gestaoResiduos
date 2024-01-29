@@ -27,6 +27,9 @@ export class EditSadnessComponent {
   public tipoRediduoId: any;
   public clientes: any;
   public tipoResiduos: any;
+  public cliente_id: any;
+  public empresa_id: any;
+  public is_superadmin: any;
 
   getModalData() {
     this.residuo.residuoData$.subscribe((data) => {
@@ -51,6 +54,7 @@ export class EditSadnessComponent {
 
   submit() {
     let data = this.meuFormulario.value;
+    data.ClienteId = this.cliente_id
     this.residuo.editResiduo(data, this.residuoData.id).subscribe((response: any) => {
       if (response) {
         this.meuFormulario.reset();
@@ -88,7 +92,7 @@ export class EditSadnessComponent {
     this.meuFormulario = this.utils.createForm(
       { name: 'nome', value: null, required: true },
       { name: 'tipoResiduoId', value: null, required: true },
-      { name: 'clienteId', value: null, required: true }
+      /* { name: 'clienteId', value: null, required: true } */
     );
   }
 
@@ -97,5 +101,8 @@ export class EditSadnessComponent {
     this.getModalData();
     this.obterCliente();
     this.obterTipoResiduo();
+    this.cliente_id = localStorage.getItem('cliente_id');
+    this.empresa_id = localStorage.getItem('empresa_id');
+    this.is_superadmin = localStorage.getItem('is_superadmin');
   }
 }

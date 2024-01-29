@@ -16,13 +16,13 @@
       </select>
     </c-col>
 
-    <c-col class="position-relative" [md]="4">
+    <!-- <c-col class="position-relative" [md]="4">
       <label cLabel for="procedures"><svg cIcon name="cilPeople"></svg> Cliente<sup class="text-danger">*</sup></label>
       <select aria-label="Default select example" (change)="selectCliente($event)" formControlName="ClienteId" cSelect>
         <option value="" disabled selected>Escolha um gerador</option>
         <option *ngFor="let cliente of clientes" [value]="cliente.id">{{ cliente.nome }}</option>
       </select>
-    </c-col>
+    </c-col> -->
 
 
     <c-container class="mb-3 mt-5 d-flex justify-content-end col-ctl-cr" style="gap: 3px">

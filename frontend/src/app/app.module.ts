@@ -81,6 +81,7 @@ import { WastTypeComponent } from '@docs-components/configurations/wast-type/was
 import { EditWastTypeComponent } from '@docs-components/configurations/wast-type/edit-wast-type/edit-wast-type.component';
 import { CreateItemsComponent } from '@docs-components/items/create-items/create-items.component';
 import { StockComponent } from '@docs-components/items/stock/stock.component';
+import { ViewItemListComponent } from '@docs-components/items/view-item-list/view-item-list.component';
 import { ToastrModule } from 'ngx-toastr';
 
 const APP_CONTAINERS = [
@@ -111,6 +112,7 @@ const COMPONENTS = [
   EditClientsComponent,
   CreateClientsComponent,
   StockComponent,
+  ViewItemListComponent
 ];
 
 @NgModule({
