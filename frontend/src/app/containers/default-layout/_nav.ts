@@ -1,5 +1,9 @@
 import { INavData } from '@coreui/angular';
 
+const cliente_id: any = localStorage.getItem('cliente_id');
+const empresa_id: any = localStorage.getItem('empresa_id');
+const is_superadmin: any = localStorage.getItem('is_superadmin');
+
 export const navItems: INavData[] = [
   {
     name: 'Menu Principal',
@@ -9,31 +13,44 @@ export const navItems: INavData[] = [
   {
     name: 'Clientes',
     url: '/clients',
-
     iconComponent: { name: 'cil-User' },
+    class: cliente_id > 0 ? '' : 'd-none' || is_superadmin == 1,
   },
   {
     name: 'Resíduos',
     url: '/sadness',
     linkProps: { fragment: 'someAnchor' },
     iconComponent: { name: 'cil-drop' },
+    class: cliente_id > 0 ? '' : 'd-none' || is_superadmin == 1,
   },
   {
     name: 'Itens Disponíveis',
     url: '/items',
     iconComponent: { name: 'cil-baby-carriage' },
+    class:
+      cliente_id > 0
+        ? ''
+        : 'd-none' || is_superadmin == 1 || empresa_id > 0
+        ? ''
+        : 'd-none',
   },
   {
     name: 'Recompensas',
     url: '/rewards',
     iconComponent: { name: 'cil-gem' },
+    class: cliente_id
+      ? ''
+      : 'd-none' || is_superadmin == 1 || empresa_id
+      ? ''
+      : 'd-none',
   },
   {
     name: 'Empresas',
     url: '/company',
     iconComponent: { name: 'cil-home' },
+    class: empresa_id > 0 ? '' : 'd-none' || is_superadmin == 1,
   },
-  {
+  /* {
     name: 'Configurações',
     url: '/base',
     iconComponent: { name: 'cil-cog' },
@@ -49,5 +66,5 @@ export const navItems: INavData[] = [
         iconComponent: { name: 'cil-drop' },
       },
     ],
-  },
+  }, */
 ];

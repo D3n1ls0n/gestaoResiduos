@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { EventService } from '../Services/refresh.service'
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,8 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
     private toast: ToastrService,
-    private jwtHelper: JwtHelperService
+    private jwtHelper: JwtHelperService,
+    private eventService: EventService
   ) {}
 
   public login(data: any, url: string) {
@@ -26,9 +28,22 @@ export class AuthService {
           if (response) {
             localStorage.setItem('user', JSON.stringify(response));
             localStorage.setItem('username', JSON.stringify(response.username));
+            localStorage.setItem(
+              'cliente_id',
+              JSON.stringify(response.cliente_id)
+            );
+            localStorage.setItem(
+              'empresa_id',
+              JSON.stringify(response.empresa_id)
+            );
+            localStorage.setItem(
+              'is_superadmin',
+              JSON.stringify(response.is_superadmin)
+            );
             localStorage.setItem('token', JSON.stringify(response.token));
             this.router.navigate(['/']);
             this.toast.success('Login efectuado com sucesso!', 'Usuários');
+            this.eventService.emitLoginSuccess();
           } else {
             this.router.navigate(['/login']);
             this.toast.error('Erro ao efectuar login!', 'Usuários');

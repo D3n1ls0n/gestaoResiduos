@@ -5,6 +5,8 @@ import { UtilsService } from 'src/app/Services/utils.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BairroService } from 'src/app/Services/bairro.service';
 import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-edit-clients',
@@ -17,8 +19,11 @@ export class EditClientsComponent {
     private cliente: ClienteService,
     private utils: UtilsService,
     private bairro: BairroService,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private http: HttpClient
   ) {}
+  public baseUrl = environment.app_url;
+
   public loading: boolean = false;
   public validateForm: boolean = false;
   public clienteData: any;
@@ -27,12 +32,18 @@ export class EditClientsComponent {
   public bairroSelecionado: any;
   public neigahood: any;
   public validateEmail_: boolean = false;
-  public validateNumber: boolean = false
-  public validateNif: boolean = false
+  public validateNumber: boolean = false;
+  public validateNif: boolean = false;
+  public lastClientId: any;
+  public userId: any;
 
   getModalData() {
     this.cliente.clienteData$.subscribe((data) => {
       this.clienteData = data;
+      this.clienteData?.usuarios.forEach((element: any) => {
+        this.userId = element.id;
+      });
+
       this.utils.patchFormValues(this.meuFormulario, this.clienteData);
       /*  this.meuFormulario.value.bairroId = this.clienteData.bairroId */
     });
@@ -44,23 +55,59 @@ export class EditClientsComponent {
 
   submit() {
     let data = this.meuFormulario.value;
+    let { username, password, confirmpassword, ...newData } = data;
+    if (password !== confirmpassword) {
+      this.toast.warning('Senhas não coinscidem!', 'Clientes');
+      return;
+    }
     this.validateEmail(data.email);
     if (!this.validateEmail_) {
       this.toast.error('O e-mail fornecido é inválido!', 'Clientes');
-      return
+      return;
     }
     /* data.bairroId = this.bairroSelecionado; */
     this.cliente
-      .editCliente(data, this.clienteData.id)
+      .editCliente(newData, this.clienteData.id)
       .subscribe((response: any) => {
         if (response) {
           this.meuFormulario.reset();
           this.toast.success('Cliente editado com sucesso!', 'Clientes');
           this.cancel('editClientModal');
           this.cliente.emitRecarregarClientes(true);
+
+          this.getlastClientId();
+
+          setTimeout(() => {
+            let dataUser = {
+              username: username,
+              password: password,
+              cliente_id: this.lastClientId,
+              is_superadmin: false,
+            };
+            this.http
+              .put<any>(
+                this.baseUrl + '/api/user/edit/' + this.userId,
+                dataUser
+              )
+              .subscribe((response) => {});
+          }, 500);
         } else {
           this.toast.error('Erro ao editar cliente!', 'Clientes');
           return;
+        }
+      });
+  }
+
+  getlastClientId() {
+    this.http
+      .get<any>(this.baseUrl + '/api/cliente/lista')
+      .subscribe((response) => {
+        if (response.length > 0) {
+          // Obtenha o primeiro elemento
+          const firstClient = response[0];
+          this.lastClientId = firstClient.id;
+        } else {
+          console.log('A lista está vazia.');
         }
       });
   }
@@ -72,7 +119,10 @@ export class EditClientsComponent {
       { name: 'telefone', value: null, required: true },
       { name: 'contribuinte', value: null, required: true },
       { name: 'email', value: null, required: true },
-      { name: 'bairroId', value: null, required: true }
+      { name: 'bairroId', value: null, required: true },
+      { name: 'username', value: null, required: true },
+      { name: 'password', value: null, required: true },
+      { name: 'confirmpassword', value: null, required: true }
     );
   }
 
@@ -96,7 +146,6 @@ export class EditClientsComponent {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
-
 
   containsOnlyNumbersNIF(value: any) {
     const regex = /^[0-9]+$/;

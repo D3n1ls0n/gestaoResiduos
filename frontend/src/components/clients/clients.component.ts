@@ -16,6 +16,7 @@ import { IconSubset } from 'src/app/icons/icon-subset'; */
 export class ClientsComponent {
   public loading: boolean = false;
   public clients: any;
+  public is_superadmin: any
   recarregarClientesSubscription!: Subscription;
   public meuFormulario: any;
 
@@ -40,10 +41,23 @@ export class ClientsComponent {
 
   getCliente() {
     this.loading = true;
+    const clientId: any = localStorage.getItem('cliente_id');
+     this.is_superadmin = localStorage.getItem('is_superadmin');
 
-    this.cliente.listCliente().subscribe((response: any) => {
-      this.clients = response;
-    });
+    if (this.is_superadmin == 1) {
+      this.cliente.listCliente().subscribe((response: any) => {
+        this.clients = response;
+      });
+    }
+
+    if (clientId > 0) {
+      this.cliente.listCliente().subscribe((response: any) => {
+        response.forEach((element: any) => {
+          if (element.id == clientId) this.clients = [element];
+          return;
+        });
+      });
+    }
     this.loading = false;
   }
 

@@ -34,6 +34,22 @@
         <option *ngFor="let bairro of neigahood" [value]="bairro.id">{{ bairro.nome }}</option>
       </select>
     </c-col>
+    <hr />
+    <h5><svg cIcon name="cilPeople"></svg> Editar utilizador</h5>
+    <c-col class="position-relative" [md]="4">
+      <label cLabel for="username"><svg cIcon name="cilPenAlt"></svg> Nome<sup class="text-danger">*</sup></label><input
+        required cFormControl id="username" type="text" placeholder="Nome" formControlName="username" />
+      <c-form-feedback [valid]="false" tooltip>Designação do nome inválido!</c-form-feedback>
+    </c-col>
+    <c-col class="position-relative" [md]="4">
+      <label cLabel for="senha"><svg cIcon name="cilPenAlt"></svg> Senha<sup class="text-danger">*</sup></label>
+      <input cFormControl placeholder="Senha" [type]="'password'" formControlName="password" />
+    </c-col>
+    <c-col class="position-relative" [md]="4">
+      <label cLabel for="senha"><svg cIcon name="cilPenAlt"></svg> Confirmar Senha<sup
+          class="text-danger">*</sup></label>
+      <input cFormControl placeholder="Senha" [type]="'password'" formControlName="confirmpassword"/>
+    </c-col>
 
     <c-container class="mb-3 mt-5 d-flex justify-content-end col-ctl-cr" style="gap: 3px">
      <!--  <button cButton class="text-white" shape="rounded-0" color="warning" size="sm" type="button"
