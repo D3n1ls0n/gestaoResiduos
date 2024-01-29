@@ -14,23 +14,21 @@ export const navItems: INavData[] = [
     name: 'Clientes',
     url: '/clients',
     iconComponent: { name: 'cil-User' },
-    class: cliente_id > 0 ? '' : 'd-none' || is_superadmin == 1,
+    class: cliente_id > 0 || is_superadmin == 'true' ? '' : 'd-none',
   },
   {
     name: 'Resíduos',
     url: '/sadness',
     linkProps: { fragment: 'someAnchor' },
     iconComponent: { name: 'cil-drop' },
-    class: cliente_id > 0 ? '' : 'd-none' || is_superadmin == 1,
+    class: cliente_id > 0 || is_superadmin == 'true' ? '' : 'd-none',
   },
   {
     name: 'Itens Disponíveis',
     url: '/items',
     iconComponent: { name: 'cil-baby-carriage' },
     class:
-      cliente_id > 0
-        ? ''
-        : 'd-none' || is_superadmin == 1 || empresa_id > 0
+      cliente_id > 0 || is_superadmin == 'true' || empresa_id > 0
         ? ''
         : 'd-none',
   },
@@ -38,17 +36,16 @@ export const navItems: INavData[] = [
     name: 'Recompensas',
     url: '/rewards',
     iconComponent: { name: 'cil-gem' },
-    class: cliente_id
-      ? ''
-      : 'd-none' || is_superadmin == 1 || empresa_id
-      ? ''
-      : 'd-none',
+    class:
+      cliente_id > 0 || is_superadmin == 'true' || empresa_id > 0
+        ? ''
+        : 'd-none',
   },
   {
     name: 'Empresas',
     url: '/company',
     iconComponent: { name: 'cil-home' },
-    class: empresa_id > 0 ? '' : 'd-none' || is_superadmin == 1,
+    class: empresa_id > 0 || is_superadmin == 'true' ? '' : 'd-none',
   },
   /* {
     name: 'Configurações',
