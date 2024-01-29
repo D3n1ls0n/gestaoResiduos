@@ -103,7 +103,7 @@ public class UserController : ControllerBase
         var usuario = await _dbContext.User_.FirstOrDefaultAsync(u => u.username == username);
 
         // Verifique se o usuário existe e a senha corresponde
-        if (usuario != null && VerificarSenhaHash(password, usuario.password))
+        if (usuario != null && VerificarSenhaHash(password, usuario.password) && usuario.is_delete != true)
         {
             // Credenciais válidas
             return true;
@@ -183,6 +183,10 @@ public async Task<ActionResult<User_>> EditUser(int id, User_ updatedUser)
 
         // Atualize as propriedades do usuário existente
         existingUser.username = updatedUser.username;
+        existingUser.cliente_id = updatedUser.cliente_id;
+        existingUser.empresa_id = updatedUser.empresa_id;
+        existingUser.is_delete = updatedUser.is_delete;
+        existingUser.is_superadmin = updatedUser.is_superadmin;
         // Outras propriedades que você deseja atualizar
 
         // Se uma nova senha foi fornecida, atualize-a
