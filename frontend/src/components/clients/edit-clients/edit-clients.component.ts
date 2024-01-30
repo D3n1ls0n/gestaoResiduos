@@ -35,11 +35,14 @@ export class EditClientsComponent {
   public validateNumber: boolean = false;
   public validateNif: boolean = false;
   public lastClientId: any;
+  public clientId: any;
   public userId: any;
 
   getModalData() {
     this.cliente.clienteData$.subscribe((data) => {
       this.clienteData = data;
+
+      this.clientId = this.clienteData?.id
       this.clienteData?.usuarios.forEach((element: any) => {
         this.userId = element.id;
       });
@@ -81,7 +84,7 @@ export class EditClientsComponent {
             let dataUser = {
               username: username,
               password: password,
-              cliente_id: this.lastClientId,
+              cliente_id: this.clientId,
               is_superadmin: false,
             };
             this.http

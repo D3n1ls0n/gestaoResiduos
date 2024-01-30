@@ -54,6 +54,8 @@ export class ClientsComponent {
     const clientId: any = localStorage.getItem('cliente_id');
     this.is_superadmin = localStorage.getItem('is_superadmin');
 
+    console.log(clientId);
+
     if (this.is_superadmin == 1) {
       this.cliente.listCliente().subscribe((response: any) => {
         this.clients = response;

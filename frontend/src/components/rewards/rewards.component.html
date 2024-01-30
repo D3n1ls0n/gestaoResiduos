@@ -8,10 +8,12 @@
         <button cButton color="secondary" class="text-white" size="sm" shape="rounded-0" (click)="getRecompensa()">
           <svg cIcon name="cilHistory"></svg> Recarregar
         </button>
+        <div *ngIf="is_superadmin== 'true'">
         <button cButton color="success" class="text-white" size="sm" shape="rounded-0"
           (click)="abrirModal('createRewardsModal')">
           <svg cIcon name="cilPlus"></svg> Registar
         </button>
+      </div>
       </c-col>
     </c-row>
   </c-container>

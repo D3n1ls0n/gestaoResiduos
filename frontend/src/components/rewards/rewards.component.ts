@@ -23,6 +23,9 @@ export class RewardsComponent {
   public clientesMes: any;
   public recompensas: any;
   public residuos: any
+  public cliente_id: any;
+  public empresa_id: any;
+  public is_superadmin: any;
 
   abrirModal(modalId: string): void {
     this.modal.getModal(modalId).open();
@@ -56,6 +59,10 @@ export class RewardsComponent {
           this.getRecompensa();
         }
       });
+
+      this.cliente_id = localStorage.getItem('cliente_id');
+    this.empresa_id = localStorage.getItem('empresa_id');
+    this.is_superadmin = localStorage.getItem('is_superadmin');
 
   }
 

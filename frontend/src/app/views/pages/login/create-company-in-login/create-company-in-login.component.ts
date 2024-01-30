@@ -89,6 +89,14 @@ export class CreateCompanyInLoginComponent {
     });
   }
 
+  getAllUser(){
+    this.http
+    .get<any>(this.baseUrl + '/api/user/listarUsuarios')
+    .subscribe((response) => {
+
+    });
+  }
+
   obterBairros() {
     this.bairro.obterBairro().subscribe((response: any) => {
       this.neigahood = response;
