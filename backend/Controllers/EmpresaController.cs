@@ -12,7 +12,7 @@ public class EmpresaController : ControllerBase
         _dbContext = dbContext;
     }
 
-    [HttpGet("lista")]
+    /* [HttpGet("lista")]
     public async Task<ActionResult<IEnumerable<object>>> GetEmpresas()
     {
         try
@@ -46,6 +46,74 @@ public class EmpresaController : ControllerBase
         {
             // Logue a exceção, e retorne um StatusCode 500 ou outra resposta apropriada
             return StatusCode(500, "Erro ao recuperar clientes do banco de dados.");
+        }
+    } */
+
+
+    [HttpGet("lista")]
+    public async Task<ActionResult<IEnumerable<object>>> GetClientesComUsuarios()
+    {
+        try
+        {
+            var empresaComUsuarios = await _dbContext
+                .Empresas.Where(c => !c.IsDeleted)
+                .OrderByDescending(c => c.Id)
+                .Join(
+                    _dbContext.Bairros,
+                    empresas => empresas.BairroId,
+                    bairro => bairro.Id,
+                    (empresas, bairro) =>
+                        new
+                        {
+                            empresas.Id,
+                            empresas.Nome,
+                            empresas.Telefone,
+                            empresas.Email,
+                            empresas.IsActive,
+                            empresas.IsDeleted,
+                            empresas.BairroId,
+                            BairroNome = bairro.Nome,
+                            // Adicione outras propriedades conforme necessário
+                        }
+                )
+                .GroupJoin(
+                    _dbContext.User_,
+                    empresas => empresas.Id,
+                    user => user.empresa_id,
+                    (empresas, usuarios) =>
+                        new
+                        {
+                          empresas.Id,
+                            empresas.Nome,
+                            empresas.Telefone,
+                            empresas.Email,
+                            empresas.IsActive,
+                            empresas.IsDeleted,
+                            empresas.BairroId,
+                            empresas.BairroNome,
+                            Usuarios = usuarios
+                                .Where(u => !u.is_delete) // Filtra usuários onde is_delete não é 1
+                                .Select(
+                                    u =>
+                                        new
+                                        {
+                                            u.id,
+                                            u.username,
+                                            // Adicione outras propriedades do usuário conforme necessário
+                                        }
+                                )
+                                .ToList(),
+                            // Adicione outras propriedades conforme necessário
+                        }
+                )
+                .ToListAsync();
+
+            return Ok(empresaComUsuarios);
+        }
+        catch (Exception)
+        {
+            // Logue a exceção, e retorne um StatusCode 500 ou outra resposta apropriada
+            return StatusCode(500, "Erro ao recuperar clientes com usuários do banco de dados.");
         }
     }
 

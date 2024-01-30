@@ -17,6 +17,24 @@ public class UserController : ControllerBase
         _dbContext = dbContext;
     }
 
+    [HttpGet("listarUsuarios")]
+    public async Task<ActionResult<IEnumerable<User_>>> ListarUsuarios()
+    {
+        try
+        {
+            var usuarios = await _dbContext
+                .User_.Where(u => !u.is_delete) // Filtra usuários onde is_delete não é 1
+                .ToListAsync();
+
+            return Ok(usuarios);
+        }
+        catch (Exception)
+        {
+            // Logue a exceção, e retorne um StatusCode 500 ou outra resposta apropriada
+            return StatusCode(500, "Erro ao recuperar usuários do banco de dados.");
+        }
+    }
+
     [HttpPost("add")]
     public async Task<ActionResult<User_>> CreateUser(User_ newUser)
     {
@@ -103,7 +121,11 @@ public class UserController : ControllerBase
         var usuario = await _dbContext.User_.FirstOrDefaultAsync(u => u.username == username);
 
         // Verifique se o usuário existe e a senha corresponde
-        if (usuario != null && VerificarSenhaHash(password, usuario.password) && usuario.is_delete != true)
+        if (
+            usuario != null
+            && VerificarSenhaHash(password, usuario.password)
+            && usuario.is_delete != true
+        )
         {
             // Credenciais válidas
             return true;
@@ -138,78 +160,75 @@ public class UserController : ControllerBase
     }
 
     [NonAction]
-public string GerarToken(string username)
-{
-    var tokenHandler = new JwtSecurityTokenHandler();
-
-    // Gere uma chave com 256 bits
-    var key = new byte[32]; // 32 bytes * 8 bits/byte = 256 bits
-    using (var rng = RandomNumberGenerator.Create())
+    public string GerarToken(string username)
     {
-        rng.GetBytes(key);
+        var tokenHandler = new JwtSecurityTokenHandler();
+
+        // Gere uma chave com 256 bits
+        var key = new byte[32]; // 32 bytes * 8 bits/byte = 256 bits
+        using (var rng = RandomNumberGenerator.Create())
+        {
+            rng.GetBytes(key);
+        }
+
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(new[] { new Claim("username", username) }),
+            Expires = DateTime.UtcNow.AddHours(1),
+            SigningCredentials = new SigningCredentials(
+                new SymmetricSecurityKey(key),
+                SecurityAlgorithms.HmacSha256Signature
+            )
+        };
+
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        return tokenHandler.WriteToken(token);
     }
-
-    var tokenDescriptor = new SecurityTokenDescriptor
-    {
-        Subject = new ClaimsIdentity(new[] { new Claim("username", username) }),
-        Expires = DateTime.UtcNow.AddHours(1),
-        SigningCredentials = new SigningCredentials(
-            new SymmetricSecurityKey(key),
-            SecurityAlgorithms.HmacSha256Signature
-        )
-    };
-
-    var token = tokenHandler.CreateToken(tokenDescriptor);
-    return tokenHandler.WriteToken(token);
-}
-
 
     private async Task<User_?> ObterDadosUsuario(string username)
     {
         return await _dbContext.User_.FirstOrDefaultAsync(u => u.username == username);
     }
 
-[HttpPut("edit/{id}")]
-public async Task<ActionResult<User_>> EditUser(int id, User_ updatedUser)
-{
-    try
+    [HttpPut("edit/{id}")]
+    public async Task<ActionResult<User_>> EditUser(int id, User_ updatedUser)
     {
-        // Verifique se o ID fornecido corresponde a um usuário existente
-        var existingUser = await _dbContext.User_.FindAsync(id);
-        if (existingUser == null)
+        try
         {
-            return NotFound(new { Message = "Usuário não encontrado." });
+            // Verifique se o ID fornecido corresponde a um usuário existente
+            var existingUser = await _dbContext.User_.FindAsync(id);
+            if (existingUser == null)
+            {
+                return NotFound(new { Message = "Usuário não encontrado." });
+            }
+
+            // Atualize as propriedades do usuário existente
+            existingUser.username = updatedUser.username;
+            existingUser.cliente_id = updatedUser.cliente_id;
+            existingUser.empresa_id = updatedUser.empresa_id;
+            existingUser.is_delete = updatedUser.is_delete;
+            existingUser.is_superadmin = updatedUser.is_superadmin;
+            // Outras propriedades que você deseja atualizar
+
+            // Se uma nova senha foi fornecida, atualize-a
+            if (!string.IsNullOrEmpty(updatedUser.password))
+            {
+                existingUser.password = HashPassword(updatedUser.password);
+            }
+
+            // Atualize a data de modificação
+            existingUser.updated_at = DateTime.Now;
+
+            // Salve as mudanças no banco de dados
+            await _dbContext.SaveChangesAsync();
+
+            // Retorne o usuário atualizado
+            return Ok(existingUser);
         }
-
-        // Atualize as propriedades do usuário existente
-        existingUser.username = updatedUser.username;
-        existingUser.cliente_id = updatedUser.cliente_id;
-        existingUser.empresa_id = updatedUser.empresa_id;
-        existingUser.is_delete = updatedUser.is_delete;
-        existingUser.is_superadmin = updatedUser.is_superadmin;
-        // Outras propriedades que você deseja atualizar
-
-        // Se uma nova senha foi fornecida, atualize-a
-        if (!string.IsNullOrEmpty(updatedUser.password))
+        catch (Exception ex)
         {
-            existingUser.password = HashPassword(updatedUser.password);
+            // Se ocorrer um erro, retorne um código de status 500 (Erro interno do servidor)
+            return StatusCode(500, new { Message = $"Erro ao editar usuário: {ex.Message}" });
         }
-
-        // Atualize a data de modificação
-        existingUser.updated_at = DateTime.Now;
-
-        // Salve as mudanças no banco de dados
-        await _dbContext.SaveChangesAsync();
-
-        // Retorne o usuário atualizado
-        return Ok(existingUser);
     }
-    catch (Exception ex)
-    {
-        // Se ocorrer um erro, retorne um código de status 500 (Erro interno do servidor)
-        return StatusCode(500, new { Message = $"Erro ao editar usuário: {ex.Message}" });
-    }
-}
-
-
 }
