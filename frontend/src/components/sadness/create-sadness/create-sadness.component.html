@@ -2,13 +2,13 @@
   <h5><svg cIcon name="cilDrop"></svg> Registar Resíduo</h5>
   <hr />
   <form cForm class="row g-3" [formGroup]="meuFormulario" (ngSubmit)="submit()" [validated]="validateForm">
-    <c-col class="position-relative" [md]="4">
+    <c-col class="position-relative" [md]="6">
       <label cLabel for="projects"><svg cIcon name="cilPenAlt"></svg> Nome<sup class="text-danger">*</sup></label><input required cFormControl id="name"
         type="text" placeholder="Nome" formControlName="Nome"/>
       <c-form-feedback [valid]="false" tooltip>Designação do nome inválido!</c-form-feedback>
     </c-col>
 
-    <c-col class="position-relative" [md]="4">
+    <c-col class="position-relative" [md]="6">
       <label cLabel for="procedures"><svg cIcon name="cilDrop"></svg> Tipo<sup class="text-danger">*</sup></label>
       <select aria-label="Default select example" (change)="selectTipoResiduo($event)" formControlName="TipoResiduoId" cSelect>
         <option value="" disabled selected>Escolha um tipo</option>

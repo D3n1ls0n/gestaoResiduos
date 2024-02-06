@@ -1,0 +1,84 @@
+/* home.component.css */
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.header {
+  margin-top: 20px;
+  font-size: 24px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.content {
+  margin-top: 20px;
+}
+
+.login-button {
+  margin-top: 30px;
+}
+
+.carousel-custom {
+  max-width: 200% !important; /* Ajuste a largura máxima conforme necessário */
+  margin: 0 auto; /* Centralizar o carousel na página */
+}
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* Isso ajuda a garantir que a barra de navegação esteja acima de outros elementos na página */
+  margin: auto;
+}
+
+.welcome-section {
+  text-align: center;
+  padding: 50px 0;
+}
+
+/* Estilos para os cards */
+.card {
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+/* Estilos para o botão de login */
+.login-button {
+  text-align: center;
+}
+.footer {
+  text-align: center;
+  margin-top: 20px; /* Adiciona um espaçamento superior opcional */
+}
+.about-section {
+  padding: 40px 0;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.services-section {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.contact-section {
+  padding: 40px 0;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.testimonials-section {
+  padding: 40px 0;
+  text-align: center;
+}
+
+
+

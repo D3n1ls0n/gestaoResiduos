@@ -15,6 +15,7 @@ import { RewardTypeComponent } from '../components/configurations/reward-type/re
 import { WastTypeComponent } from '../components/configurations/wast-type/wast-type.component';
 import { TesteComponent } from '../components/teste/teste.component';
 import { AuthGuard } from '../../src/app/Services/guards/auth.guard';
+import { ShowSlideComponent } from './views/pages/login/show-slide/show-slide.component';
 
 const routes: Routes = [
   {
@@ -138,6 +139,10 @@ const routes: Routes = [
   {
     path: 'login' /* Resíduo */,
     component: LoginComponent,
+  },
+  {
+    path: 'show-slide' /* Resíduo */,
+    component: ShowSlideComponent,
   },
   {
     path: 'register',

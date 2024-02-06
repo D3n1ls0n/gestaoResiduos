@@ -54,12 +54,13 @@ export class ClientsComponent {
     const clientId: any = localStorage.getItem('cliente_id');
     this.is_superadmin = localStorage.getItem('is_superadmin');
 
-    console.log(clientId);
-
-    if (this.is_superadmin == 1) {
+    if (this.is_superadmin == 'true') {
       this.cliente.listCliente().subscribe((response: any) => {
         this.clients = response;
       });
+      this.loading = false;
+
+      return;
     }
 
     if (clientId > 0) {
@@ -68,11 +69,10 @@ export class ClientsComponent {
           if (element.id == clientId) {
             this.clients = [element];
           }
-          return;
         });
       });
+      this.loading = false;
     }
-    this.loading = false;
   }
 
   getClientId(id: any, clienteNome: any, user: any) {
@@ -100,8 +100,7 @@ export class ClientsComponent {
             is_superadmin: false,
             password: '0000',
           })
-          .subscribe((response) => {
-          });
+          .subscribe((response) => {});
 
         localStorage.removeItem('user');
         localStorage.removeItem('token');

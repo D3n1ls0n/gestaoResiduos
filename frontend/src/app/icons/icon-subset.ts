@@ -105,7 +105,7 @@ import {
   cilSortAscending,
   cilToggleOn,
   cilToggleOff,
-  cilAccountLogout
+  cilAccountLogout,
 } from '@coreui/icons';
 
 export const iconSubset = {

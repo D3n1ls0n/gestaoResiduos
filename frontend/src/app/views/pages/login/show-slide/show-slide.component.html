@@ -1,0 +1,90 @@
+<div class="header bg-light navbar" style="cursor: pointer !important;">
+  <!-- Ícones do CoreUI -->
+  <svg cIcon name="cibFacebook"></svg>
+  <svg cIcon name="cibLinkedin"></svg>
+  <svg cIcon name="cibTwitter"></svg>
+  <button class="btn btn-success" routerLink="/login">Login</button>
+</div>
+
+<div class="container bg-light" style="max-width: 100% !important; max-height: 100% !important;">
+  <div class="content">
+    <br>
+    <br>
+    <h1 class="mb-4">Bem-vindo à Limpo Horizonte</h1>
+    <p>Receba notificações em tempo real sobre resíduos disponíveis para aquisição.</p>
+  </div>
+
+  <c-carousel class="carousel-custom" style="max-width: 75% !important; max-height: 30% !important;">
+    <c-carousel-indicators></c-carousel-indicators>
+    <c-carousel-inner>
+      <c-carousel-item *ngFor="let slide of slides">
+        <img alt="{{slide.title}}" class="d-block w-100" loading="lazy" src="{{slide.src}}" />
+        <c-carousel-caption class="d-md-block">
+          <h3 style="font-size: 1000%;">{{slide.title}}</h3>
+          <p style="font-size: 150%;"><strong>{{slide.subtitle}}</strong></p>
+        </c-carousel-caption>
+      </c-carousel-item>
+    </c-carousel-inner>
+    <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+    <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+  </c-carousel>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <div class="row">
+    <!-- Cards para apresentar informações adicionais -->
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Resíduos Disponíveis</h5>
+          <p class="card-text">Fique atualizado sobre os resíduos disponíveis para aquisição.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Aquisição Simplificada</h5>
+          <p class="card-text">Facilidade na aquisição de resíduos de maneira rápida e eficiente.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Notificações em Tempo Real</h5>
+          <p class="card-text">Receba notificações instantâneas sobre novas oportunidades.</p>
+        </div>
+      </div>
+    </div>
+    <div class="login-button mt-5">
+    </div>
+    <div class="about-section">
+      <h2>Sobre Nós</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ex ac urna auctor varius at vitae nunc.</p>
+    </div>
+
+    <div class="services-section">
+      <h2>Nossos Serviços</h2>
+      <p>Oferecemos soluções inovadoras para a gestão eficiente de resíduos. Conheça nossos serviços abaixo:</p>
+      <!-- Adicione informações sobre serviços aqui -->
+    </div>
+
+    <div class="contact-section">
+      <h2>Entre em Contato</h2>
+      <p>Tire suas dúvidas ou faça parcerias conosco. Estamos aqui para ajudar!</p>
+      <!-- Adicione formulário de contato ou informações de contato aqui -->
+    </div>
+
+    <div class="testimonials-section">
+      <h2>Depoimentos</h2>
+      <!-- Adicione depoimentos de clientes aqui -->
+    </div>
+    <!-- Rodapé -->
+    <div class="footer">
+      <p>&copy; 2024 Limpo Horizonte. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</div>

@@ -52,6 +52,7 @@ import {
   AlertModule,
   PlaceholderModule,
   ModalModule,
+  CarouselModule
 } from '@coreui/angular';
 import { JwtModule } from '@auth0/angular-jwt';
 
@@ -83,6 +84,7 @@ import { CreateItemsComponent } from '@docs-components/items/create-items/create
 import { StockComponent } from '@docs-components/items/stock/stock.component';
 import { ViewItemListComponent } from '@docs-components/items/view-item-list/view-item-list.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ShowSlideComponent } from '../app/views/pages/login/show-slide/show-slide.component';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -112,7 +114,8 @@ const COMPONENTS = [
   EditClientsComponent,
   CreateClientsComponent,
   StockComponent,
-  ViewItemListComponent
+  ViewItemListComponent,
+  ShowSlideComponent
 ];
 
 @NgModule({
@@ -149,6 +152,7 @@ const COMPONENTS = [
     AlertModule,
     PlaceholderModule,
     ModalModule,
+    CarouselModule,
     NgxSmartModalModule.forRoot(),
     NgSelectModule,
     FormsModule,

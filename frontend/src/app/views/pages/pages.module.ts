@@ -20,7 +20,7 @@ import {CreateCompanyInLoginComponent} from '../pages/login/create-company-in-lo
     Page404Component,
     Page500Component,
     CreateClienteInLoginComponent,
-    CreateCompanyInLoginComponent
+    CreateCompanyInLoginComponent,
 
   ],
   imports: [
