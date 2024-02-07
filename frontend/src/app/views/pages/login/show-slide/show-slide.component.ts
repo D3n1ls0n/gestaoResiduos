@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './show-slide.component.scss'
 })
 export class ShowSlideComponent {
-
+public email = 'limpohorizonte@outlook.com'
   public slides: any[] = new Array(3).fill({id: -1, src: '', title: '', subtitle: ''});
 
   constructor() { }
@@ -19,7 +19,7 @@ export class ShowSlideComponent {
       id: 0,
       src: './assets/img/img2.png',
       title: 'Missão',
-      subtitle: 'Contribuir para um futuro mais limpo e sustentável, conectando de forma inteligente aqueles que geram resíduos disponíveis para aquisição com aqueles que buscam oportunidades de adquirir esses recursos de maneira eficiente.'
+      subtitle: 'contribuir para um ambiente mais limpo e saudável, fornecendo soluções eficientes para a gestão de resíduos.'
     };
     this.slides[1] = {
       id: 1,

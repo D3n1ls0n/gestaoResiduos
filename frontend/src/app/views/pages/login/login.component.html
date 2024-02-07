@@ -1,7 +1,7 @@
-<div class="bg-light min-vh-100 d-flex flex-row align-items-center body-login-cr">
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center body-login-cr p-5">
   <c-container>
     <c-row class="justify-content-center">
-      <c-col md="8">
+      <c-col md="8" style="width: 62%">
         <c-card-group style="margin-bottom: 9rem !important">
           <c-card class="p-4">
             <c-card-body>
@@ -13,27 +13,33 @@
                   <span cInputGroupText>
                     <svg cIcon name="cilUser"></svg>
                   </span>
-                  <input autoComplete="username" cFormControl placeholder="Usuário" formControlName="username"/>
+                  <input autoComplete="username" cFormControl placeholder="Usuário" formControlName="username" />
                 </c-input-group>
                 <c-input-group class="mb-4">
                   <span cInputGroupText>
                     <svg cIcon name="cilLockLocked"></svg>
                   </span>
-                  <input cFormControl placeholder="Senha"
-                  [type]="isPasswordVisible ? 'text' : 'password'" formControlName="password"/>
-                <span cInputGroupText (click)="viewPassword()" type="button">
-                  <svg [class.icon-active]="isPasswordVisible" cIcon
-                    [name]="isPasswordVisible ? 'cilToggleOn' : 'cilToggleOff'"></svg>
-                </span>
+                  <input cFormControl placeholder="Senha" [type]="isPasswordVisible ? 'text' : 'password'"
+                    formControlName="password" />
+                  <span cInputGroupText (click)="viewPassword()" type="button">
+                    <svg [class.icon-active]="isPasswordVisible" cIcon
+                      [name]="isPasswordVisible ? 'cilToggleOn' : 'cilToggleOff'"></svg>
+                  </span>
                 </c-input-group>
                 <c-row>
                   <c-col xs="12" class="d-flex justify-content-end">
-                    <button cButton class="px-4" color="success" (click)="submit()" >
+                    <button cButton class="px-4" color="success" (click)="submit()">
                       Entrar <svg cIcon name="cilAccountLogout" class="ml-1 icon-cr"></svg>
                     </button>
                   </c-col>
-                  <c-col xs="12">
-                    <div class="forgot-password d-flex justify-content-center mt-2" (click)="openCreateClient('createClientModal')">
+                  <c-col>
+                    <div class="forgot-password d-flex justify-content-center mt-2"
+                      [cModalToggle]="staticBackdropModal.id">
+                      <a href="javascript:void(0)">Criar uma conta!</a>
+                    </div>
+                  </c-col>
+                  <!-- <c-col xs="12">
+                    <div class="forgot-password d-flex justify-content-center mt-2" (click)="openCreateClient('createClientModal')" [cModalToggle]="staticBackdropModal.id">
                       <a href="javascript:void(0)">Criar uma conta Cliente</a>
                     </div>
                   </c-col>
@@ -41,7 +47,7 @@
                     <div class="forgot-password d-flex justify-content-center mt-2" (click)="openCreateCompany('createCompanyModal')">
                       <a href="javascript:void(0)">Criar uma conta Empresa</a>
                     </div>
-                  </c-col>
+                  </c-col> -->
                 </c-row>
               </form>
             </c-card-body>
@@ -67,10 +73,36 @@
             <app-create-cliente-in-login></app-create-cliente-in-login>
           </ngx-smart-modal>
 
-  <ngx-smart-modal identifier="createCompanyModal" customClass="md">
-    <app-create-company-in-login></app-create-company-in-login>
-  </ngx-smart-modal>
+          <ngx-smart-modal identifier="createCompanyModal" customClass="md">
+            <app-create-company-in-login></app-create-company-in-login>
+          </ngx-smart-modal>
 
+          <c-modal #staticBackdropModal backdrop="static" id="staticBackdropModal">
+            <c-modal-header>
+              <h5 cModalTitle>Selecione o tipo de conta que deseja criar</h5>
+              <button [cModalToggle]="staticBackdropModal.id" cButtonClose></button>
+            </c-modal-header>
+            <c-modal-body class="d-flex justify-content-center align-items-center">
+              <c-col class="position-relative" [md]="6">
+                <div class="text-center">
+                  <label for="cliente"><svg cIcon name="cilPeople"></svg> Cliente</label>
+                  <input cFormRadio id="cliente" type="radio" name="radioGroup" id="option1" value="option1" style="cursor: pointer;" (click)="openCreateClient('createClientModal')" [cModalToggle]="staticBackdropModal.id"/>
+                </div>
+              </c-col>
+              <c-col class="position-relative" [md]="6">
+                <div class="text-center">
+                  <label><svg cIcon name="cilRoom"></svg> Empresa</label>
+                  <input cFormRadio type="radio" name="radioGroup" id="option2" value="option2" style="cursor: pointer;" (click)="openCreateCompany('createCompanyModal')" [cModalToggle]="staticBackdropModal.id"/>
+                </div>
+              </c-col>
+            </c-modal-body>
+            <!-- <c-modal-footer>
+              <button [cModalToggle]="staticBackdropModal.id" cButton color="secondary">
+                Não
+              </button>
+              <button cButton color="primary">Sim</button>
+            </c-modal-footer> -->
+          </c-modal>
         </c-card-group>
       </c-col>
     </c-row>
