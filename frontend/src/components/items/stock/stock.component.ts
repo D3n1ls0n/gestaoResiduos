@@ -47,9 +47,21 @@ export class StockComponent {
   }
 
   getResiduo() {
+    const clienteId: any = localStorage.getItem('cliente_id');
     this.residuo.listResiduo().subscribe((response: any) => {
-      this.redisuo = response;
+      this.redisuo = response.filter(
+        (residuo: any) => residuo.clienteId == clienteId
+      );
     });
+
+    setTimeout(() => {
+      if (this.redisuo?.length === 0) {
+        this.toast.warning(
+          'Não existem resíduos associados a esse cliente!',
+          'Resíduos'
+        );
+      }
+    }, 500);
   }
 
   submit() {
