@@ -47,7 +47,7 @@
                 </li>
                 <li>
                   <a [routerLink]="[]" cDropdownItem style="display: flex; justify-content: space-between"
-                    (click)="deleteCliente(e.id)">Eliminar <svg cIcon name="cilTrash"></svg>
+                  [cModalToggle]="staticBackdropModal.id" (click)="getEmpresaId(e.id, e.nome)">Eliminar <svg cIcon name="cilTrash"></svg>
                   </a>
                 </li>
               </ul>
@@ -67,6 +67,19 @@
     <app-edit-company></app-edit-company>
   </ngx-smart-modal>
 </div>
+
+<c-modal #staticBackdropModal backdrop="static" id="staticBackdropModal">
+  <c-modal-header>
+    <h5 cModalTitle>Deseja realmente eliminar a empresa {{ clientNome }}?</h5>
+    <button [cModalToggle]="staticBackdropModal.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-footer>
+    <button [cModalToggle]="staticBackdropModal.id" cButton color="secondary">
+      Não
+    </button>
+    <button cButton color="primary" (click)="deleteCliente(clientId)">Sim</button>
+  </c-modal-footer>
+</c-modal>
 <c-container cPlaceholderAnimation="glow" class="bg-white p-5" *ngIf="loading == true">
   <c-row>
     <c-col [md]="1">

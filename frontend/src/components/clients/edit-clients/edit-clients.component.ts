@@ -37,6 +37,7 @@ export class EditClientsComponent {
   public lastClientId: any;
   public clientId: any;
   public userId: any;
+  public username: any
 
   getModalData() {
     this.cliente.clienteData$.subscribe((data) => {
@@ -123,7 +124,7 @@ export class EditClientsComponent {
       { name: 'contribuinte', value: null, required: true },
       { name: 'email', value: null, required: true },
       { name: 'bairroId', value: null, required: true },
-      { name: 'username', value: null, required: true },
+      { name: 'username', value: this.username, required: true },
       { name: 'password', value: null, required: true },
       { name: 'confirmpassword', value: null, required: true }
     );
@@ -161,6 +162,8 @@ export class EditClientsComponent {
   }
 
   ngOnInit() {
+    let nome = localStorage.getItem('username')
+    this.username = nome?.replace(/^"(.*)"$/, '$1')
     this.createFrm();
     this.getModalData();
     this.obterBairros();

@@ -36,6 +36,7 @@ export class EditCompanyComponent {
   public lastCompanyId: any;
   public userId: any;
   public companyId: any;
+  public username: any
 
   getModalData() {
     this.empresa.empresaData$.subscribe((data) => {
@@ -129,7 +130,7 @@ export class EditCompanyComponent {
       { name: 'telefone', value: null, required: true },
       { name: 'email', value: null, required: true },
       { name: 'bairroId', value: null, required: true },
-      { name: 'username', value: null, required: true },
+      { name: 'username', value: this.username, required: true },
       { name: 'password', value: null, required: true },
       { name: 'confirmpassword', value: null, required: true }
     );
@@ -146,8 +147,12 @@ export class EditCompanyComponent {
   }
 
   ngOnInit() {
+    let nome = localStorage.getItem('username')
+    this.username = nome?.replace(/^"(.*)"$/, '$1')
     this.createFrm();
     this.getModalData();
     this.obterBairros();
+
+
   }
 }

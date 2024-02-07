@@ -28,6 +28,7 @@ export class AuthService {
           if (response) {
             localStorage.setItem('user', JSON.stringify(response));
             localStorage.setItem('username', JSON.stringify(response.username));
+            localStorage.setItem('userId', JSON.stringify(response.id));
             localStorage.setItem(
               'cliente_id',
               JSON.stringify(response.cliente_id)
